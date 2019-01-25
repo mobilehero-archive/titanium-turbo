@@ -34,7 +34,7 @@ if (process.env.ALLOY_TESTS && /^win/i.test(os.platform())) {
 // Process command line input
 program
 	.version(module.exports.version, '-v, --version')
-	.description('Alloy command line')
+	.description('Turbo command line')
 	.usage('COMMAND [ARGS] [OPTIONS]')
 	.option('-a, --app <app>', 'Test app folder for running "alloy test"')
 	.option('-A, --apply', 'Applies command changes [extract-i18n]')
@@ -92,7 +92,7 @@ if (!program.noBanner && program.args[0] !== 'info' && (program.config && progra
 
 if (program.args.length === 0) {
 	var help = program.helpInformation();
-	help = help.replace('Usage: alloy COMMAND [ARGS] [OPTIONS]', 'Usage: ' + 'alloy'.blue + ' COMMAND'.white + ' [ARGS] [OPTIONS]'.grey);
+	help = help.replace('Usage: turbo COMMAND [ARGS] [OPTIONS]', 'Usage: ' + 'alloy'.blue + ' COMMAND'.white + ' [ARGS] [OPTIONS]'.grey);
 	help = logger.stripColors ? colors.stripColors(help) : help;
 	console.log(help);
 	process.exit(0);
@@ -115,17 +115,17 @@ if (!_.includes(getCommands(), command)) {
 ////////// FUNCTIONS //////////
 ///////////////////////////////
 function banner() {
-	var str =
-	'       .__  .__                \n' +
-	'_____  |  | |  |   ____ ___.__.\n' +
-	'\\__  \\ |  | |  |  /  _ <   |  |\n' +
-	' / __ \\|  |_|  |_(  <_> )___  |\n' +
-	'(____  /____/____/\\____// ____|\n' +
-	'     \\/                 \\/';
+	const str = `
+     __                __         \n
+    / /_ __  __ _____ / /_   ____ \n
+   / __// / / // ___// __ \\ / __ \\\n
+  / /_ / /_/ // /   / /_/ // /_/ /\n
+  \\__/ \\__,_//_/   /_.___/ \\____/ \n
+                              `
 
 	if (!program.dump) {
 		console.log(logger.stripColors ? str : str.blue);
-		var m = 'Alloy ' + module.exports.version + ' by Appcelerator. The MVC app framework for Titanium.\n'.white;
+		var m = 'Titanium Turbo ' + module.exports.version + ' by Axway.  A mobile framework for Titanium.\n'.white;
 		console.log(logger.stripColors ? colors.stripColors(m) : m);
 	}
 }
