@@ -1,5 +1,5 @@
 var Alloy = require('/alloy'),
-	_ = require('/alloy/underscore')._,
+	_ = require('lodash'),
 	TAP = Ti.App.Properties;
 
 function S4() {
