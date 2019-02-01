@@ -230,6 +230,14 @@ module.exports = function(args, program) {
 		path.join(paths.resources, titaniumFolder, 'alloy', 'backbone.js')
 	);
 
+	// Copy lodash.js
+	U.copyFileSync(
+		path.join(
+			alloyRoot, 'lib', 'alloy', 'lodash', 'lodash.js'
+		),
+		path.join(paths.resources, titaniumFolder, 'node_modules', 'lodash.js')
+	);
+
 	if (restrictionPath === null) {
 		// Generate alloy.js from template
 		var libAlloyJsDest = path.join(paths.resources, titaniumFolder, 'alloy.js');

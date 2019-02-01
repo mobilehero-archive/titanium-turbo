@@ -1,11 +1,9 @@
 var isTitanium = typeof Titanium !== 'undefined';
-var _, generatePlatformArray;
+var generatePlatformArray;
+const _ = require('lodash');
 
-if (isTitanium) {
-	_ = require('/alloy/underscore')._;
-} else {
+if (!isTitanium) {
 	var platforms = require('../../platforms/index');
-	_ = require('../lib/alloy/underscore')._;
 
 	// iterate through supported platforms to create specific constants
 	generatePlatformArray = function(key) {
@@ -46,7 +44,7 @@ exports.WIDGET_OBJECT = 'Widget';
 exports.SKIP_EVENT_HANDLING = ['Ti.UI.ListItem', 'Alloy.Abstract.ItemTemplate'];
 exports.ADAPTERS = ['localStorage', 'properties', 'sql'];
 exports.CONTROLLER_NODES = ['Alloy.Require', 'Alloy.Widget'];
-exports.DEFAULT_BACKBONE_VERSION = '0.9.2';
+exports.DEFAULT_BACKBONE_VERSION = '1.3.3';
 exports.SUPPORTED_BACKBONE_VERSIONS = ['0.9.2', '1.1.2', '1.3.3'];
 
 // property names

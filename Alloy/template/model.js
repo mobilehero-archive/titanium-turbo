@@ -1,5 +1,5 @@
 var Alloy = require('/alloy'),
-    _ = require("/alloy/underscore")._,
+    _ = require('lodash'),
 	model, collection;
 
 <%= modelJs %>

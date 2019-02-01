@@ -1,4 +1,4 @@
-var _ = require('/alloy/underscore')._,
+var _ = require('lodash'),
 	backbone = require('/alloy/backbone');
 
 // The database name used when none is specified in the
