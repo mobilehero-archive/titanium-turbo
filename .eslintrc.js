@@ -5,8 +5,14 @@ var ERROR = 2;
 module.exports = {
 	env: {
 		'node': true,
-		'es6': true
+		'es6': true,
 	},
+
+	ecmaFeatures: {
+        'modules': true,
+        'spread' : true,
+        'restParams' : true,
+    },
 
 	extends: 'eslint:recommended',
 

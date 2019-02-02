@@ -121,7 +121,7 @@ function banner() {
    / __// / / // ___// __ \\ / __ \\\n
   / /_ / /_/ // /   / /_/ // /_/ /\n
   \\__/ \\__,_//_/   /_.___/ \\____/ \n
-                              `
+                              `;
 
 	if (!program.dump) {
 		console.log(logger.stripColors ? str : str.blue);

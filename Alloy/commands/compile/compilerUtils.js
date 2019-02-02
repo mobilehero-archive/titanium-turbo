@@ -800,8 +800,8 @@ exports.createCompileConfig = function(inputPath, outputPath, alloyConfig, build
 	} else if (!_.isArray(configs.adapters)) {
 		configs.adapters = [configs.adapters];
 	}
-
-	logger.debug(JSON.stringify(configs, null, '  ').split(os.EOL));
+	// logger.debug(JSON.stringify(configs, null, '  ').split(os.EOL));
+	logger.debug(JSON.stringify(configs, null, '  '));
 
 	// update implicit namespaces, if possible
 	updateImplicitNamspaces(alloyConfig.platform);
