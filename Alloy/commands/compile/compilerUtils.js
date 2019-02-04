@@ -116,7 +116,7 @@ exports.isNodeForCurrentPlatform = function(node) {
 exports.getParserArgs = function(node, state, opts) {
 	state = state || {};
 	opts = opts || {};
-
+	node.nodeName = _.upperFirst(_.camelCase(node.nodeName));
 	var defaultId = opts.defaultId || undefined,
 		doSetId = opts.doSetId === false ? false : true,
 		name = node.nodeName,
@@ -275,7 +275,7 @@ exports.generateNode = function(node, state, defaultId, isTopLevel, isModelOrCol
 	if (!exports.isNodeForCurrentPlatform(node)) {
 		return '';
 	}
-
+	console.error('you are here → ');
 	var args = exports.getParserArgs(node, state, { defaultId: defaultId }),
 		codeTemplate = 'if (<%= condition %>) {\n<%= content %>}\n',
 		code = {

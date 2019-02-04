@@ -97,9 +97,9 @@ exports.XML = {
 	getAlloyFromFile: function(filename) {
 		var doc = exports.XML.parseFromFile(filename);
 		var docRoot = doc.documentElement;
-
-		// Make sure the markup has a top-level <Alloy> tag
-		if (docRoot.nodeName !== CONST.ROOT_NODE) {
+		console.error('docRoot: ' + JSON.stringify(docRoot.nodeName, null, 2));
+		// Make sure the markup has a top-level <Alloy> or <alloy> tag
+		if (docRoot.nodeName.toLowerCase() !== CONST.ROOT_NODE.toLowerCase()) {
 			exports.die([
 				'Invalid view file "' + filename + '".',
 				'All view markup must have a top-level <Alloy> tag'
