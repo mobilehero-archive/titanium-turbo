@@ -13,7 +13,7 @@
     "html5",
     "appc-client"
   ],
-  "version": "1.13.7-1",
+  "version": "1.13.7-2",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -37,7 +37,9 @@
     "babel-traverse": "^6.23.1",
     "babel-types": "^6.23.0",
     "babylon": "^6.16.1",
+    "chalk": "^2.4.2",
     "chmodr": "^1.0.2",
+    "cli-table3": "^0.5.1",
     "colors": "^1.1.2",
     "commander": "^2.12.2",
     "ejs": "2.5.7",

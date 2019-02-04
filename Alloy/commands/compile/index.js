@@ -68,9 +68,13 @@ module.exports = function(args, program) {
 
 	// construct compiler config from command line config parameters
 	// and print the configuration data
+	logger.debug('');
 	logger.debug('----- CONFIGURATION -----');
+	const Table = require('cli-table3');
+	var table = new Table({
+		head: ['Property', 'Value'], colWidths: [15, 60]
+	});
 	if (program.config && _.isString(program.config)) {
-		logger.debug('raw config = "' + program.config + '"');
 		_.each(program.config.split(','), function(v) {
 			var parts = v.split('=');
 			if (alloyConfig[parts[0]]) {
@@ -78,19 +82,27 @@ module.exports = function(args, program) {
 			} else {
 				alloyConfig[parts[0]] = parts[1];
 			}
-			logger.debug(parts[0] + ' = ' + parts[1]);
+			// logger.debug(parts[0] + ' = ' + parts[1]);
+			table.push([parts[0],  parts[1]]);
 		});
 	}
 	if (program.platform) {
-		logger.debug('platform = ' + program.platform);
+		// logger.debug('platform = ' + program.platform);
+		table.push(['platform',  program.platform]);
 		alloyConfig.platform = program.platform;
 	}
 	if (!alloyConfig.deploytype) {
 		alloyConfig.deploytype = 'development';
-		logger.debug('deploytype = ' + alloyConfig.deploytype);
+		// logger.debug('deploytype = ' + alloyConfig.deploytype);
+		table.push(['deploytype',  alloyConfig.deploytype]);
 	}
-	logger.debug('project path = ' + paths.project);
-	logger.debug('app path = ' + paths.app);
+	// logger.debug('project path = ' + paths.project);
+	table.push(['project path',  paths.project]);
+	// logger.debug('app path = ' + paths.app);
+	table.push(['app path',  paths.app]);
+	logger.debug('');
+	logger.debug(table.toString());
+	logger.debug('raw config = "' + program.config + '"');
 	logger.debug('');
 
 	// make sure a platform was specified
