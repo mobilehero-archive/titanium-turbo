@@ -1,10 +1,10 @@
 var U = require('../../../utils'),
-	babylon = require('babylon'),
-	types = require('babel-types'),
-	generate = require('babel-generator').default,
-	traverse = require('babel-traverse').default;
+	babylon = require('@babel/parser'),
+	types = require('@babel/types'),
+	generate = require('@babel/generator').default,
+	traverse = require('@babel/traverse').default;
 
-const { Hub, NodePath } = traverse;
+const { Hub, NodePath } = require('@babel/traverse');
 
 var isBaseControllerExportExpression = types.buildMatchMemberExpression('exports.baseController');
 
