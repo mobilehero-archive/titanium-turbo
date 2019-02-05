@@ -759,7 +759,8 @@ exports.createCompileConfig = function(inputPath, outputPath, alloyConfig, build
 			home: path.resolve(inputPath),
 			project: path.resolve(outputPath),
 			resources: resources,
-			resourcesAlloy: path.join(resources, 'alloy')
+			resourcesAlloy: path.join(resources, 'alloy'),
+			resourcesPlatform: path.join( resources, alloyConfig.platform === 'ios' ? 'iphone' : alloyConfig.platform ),
 		},
 		buildLog: buildLog
 	};

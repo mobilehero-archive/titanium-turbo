@@ -1182,6 +1182,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 	while ((files = _.difference(getJsFiles(), lastFiles)).length > 0) {
 		_.each(files, function(file) {
 			var options = _.extend(_.clone(sourceMapper.OPTIONS_OUTPUT), {
+					root: compileConfig.dir.resourcesPlatform,
 					plugins: [
 						[require('./ast/builtins-plugin'), compileConfig],
 						[require('./ast/optimizer-plugin'), compileConfig.alloyConfig],

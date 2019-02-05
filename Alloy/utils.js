@@ -97,7 +97,6 @@ exports.XML = {
 	getAlloyFromFile: function(filename) {
 		var doc = exports.XML.parseFromFile(filename);
 		var docRoot = doc.documentElement;
-		console.error('docRoot: ' + JSON.stringify(docRoot.nodeName, null, 2));
 		// Make sure the markup has a top-level <Alloy> or <alloy> tag
 		if (docRoot.nodeName.toLowerCase() !== CONST.ROOT_NODE.toLowerCase()) {
 			exports.die([
@@ -148,7 +147,7 @@ exports.getAndValidateProjectPaths = function(argPath, opts) {
 	paths.assets = path.join(paths.app, 'assets');
 	paths.resources = path.join(paths.project, 'Resources');
 	paths.resourcesAlloy = path.join(paths.resources, 'alloy');
-
+	
 	// validate project and "app" paths
 	if (!fs.existsSync(paths.project)) {
 		exports.die('Titanium project path does not exist at "' + paths.project + '".');
