@@ -22,7 +22,7 @@ exports.OPTIONS_OUTPUT = {
 	minified: false,
 	compact: false,
 	comments: false,
-	babelrc: false,
+	babelrc: true,
 	passPerPreset: false
 };
 
@@ -99,6 +99,7 @@ exports.generateCodeAndSourceMap = function(generator, compileConfig) {
 
 	// create source map and generated code
 	var options = _.extend(_.clone(exports.OPTIONS_OUTPUT), {
+		root: compileConfig.dir.resourcesPlatform,
 		plugins: [
 			[require('./ast/builtins-plugin'), compileConfig],
 			[require('./ast/optimizer-plugin'), compileConfig.alloyConfig]
@@ -187,6 +188,7 @@ exports.generateSourceMap = function(generator, compileConfig) {
 	var origFileName = path.relative(compileConfig.dir.project, generator.origFile.filename),
 		compiledFileName = path.join('Resources', path.basename(generator.origFile.filename));
 	var options = _.extend(_.clone(exports.OPTIONS_OUTPUT), {
+		root: compileConfig.dir.resourcesPlatform,
 		plugins: [
 			[require('./ast/builtins-plugin'), compileConfig],
 			[require('./ast/optimizer-plugin'), compileConfig.alloyConfig]

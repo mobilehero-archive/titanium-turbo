@@ -417,6 +417,14 @@ module.exports = function(args, program) {
 	});
 	logger.debug('');
 
+	_.forEach(['babel.config.js', '.babelrc.js', '.babelrc'], filename => {
+		if (fs.existsSync(path.join(paths.project, filename))) {
+			logger.info(`Copying ${filename} to ${path.join(paths.resources, titaniumFolder, filename)}`);
+			U.copyFileSync(path.join(paths.project, filename), path.join(paths.resources, titaniumFolder, filename));
+			return false;
+		}
+	});
+
 	// trigger our custom compiler makefile
 	if (compilerMakeFile.isActive) {
 		compilerMakeFile.trigger('pre:compile', _.clone(compileConfig));
@@ -504,6 +512,8 @@ module.exports = function(args, program) {
 	if (buildPlatform === 'ios' && tiapp.version.lt('3.2.0')) {
 		U.copyFileSync(path.join(paths.resources, titaniumFolder, 'app.js'), path.join(paths.resources, 'app.js'));
 	}
+
+
 
 	// optimize code
 	logger.info('----- OPTIMIZING -----');
@@ -1182,6 +1192,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 	while ((files = _.difference(getJsFiles(), lastFiles)).length > 0) {
 		_.each(files, function(file) {
 			var options = _.extend(_.clone(sourceMapper.OPTIONS_OUTPUT), {
+					root: compileConfig.dir.resourcesPlatform,
 					plugins: [
 						[require('./ast/builtins-plugin'), compileConfig],
 						[require('./ast/optimizer-plugin'), compileConfig.alloyConfig],
@@ -1191,6 +1202,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 
 			logger.info('- ' + file);
 			try {
+				console.error('fullpath: ' + JSON.stringify(fullpath, null, 2));
 				var result = babel.transformFileSync(fullpath, options);
 				fs.writeFileSync(fullpath, result.code);
 			} catch (e) {
