@@ -13,20 +13,21 @@
     "html5",
     "appc-client"
   ],
-  "version": "1.13.7-4",
+  "version": "1.13.7-5",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
       "name": "Brenton House",
-      "email": "brenton.house@gmail.com"
+      "email": "brenton.house@gmail.com",
+      "url": "https://brenton.house"
     }
   ],
   "bugs": {
-    "url": "https://jira.appcelerator.org/browse/ALOY"
+    "url": "https://github.com/brentonhouse/titanium-turbo/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/brentonhouse/titanium-turbo.git"
+    "url": "github:brentonhouse/titanium-turbo"
   },
   "preferGlobal": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "@babel/parser": "^7.0.0",
     "@babel/traverse": "^7.0.0",
     "@babel/types": "^7.0.0",
+    "@titanium/module-copier": "0.0.5",
     "async": "^2.4.0",
     "chmodr": "^1.0.2",
     "cli-table3": "^0.5.1",
@@ -45,9 +47,9 @@
     "fs-extra": "^5.0.0",
     "global-paths": "^1.0.0",
     "jsonlint": "1.6.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.11",
     "moment": "2.20.1",
-    "node.extend": "2.0.0",
+    "node.extend": "^2.0.2",
     "pkginfo": "0.4.1",
     "resolve": "^1.1.7",
     "source-map": "^0.6.1",
@@ -69,7 +71,7 @@
   },
   "devDependencies": {
     "diff": "^3.4.0",
-    "eslint": "^4.14.0",
+    "eslint": "^4.19.1",
     "jake": "^8.0.12",
     "mkdirp": "^0.5.1"
   }
