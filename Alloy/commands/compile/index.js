@@ -250,6 +250,9 @@ module.exports = function(args, program) {
 		path.join(paths.resources, titaniumFolder, 'node_modules', 'lodash.js')
 	);
 
+	// copy all dependencies from package.json to resourcesPlatform directory
+	require('@titanium/module-copier').execute(paths.project,  path.join(paths.resources, titaniumFolder));
+
 	if (restrictionPath === null) {
 		// Generate alloy.js from template
 		var libAlloyJsDest = path.join(paths.resources, titaniumFolder, 'alloy.js');
@@ -1202,7 +1205,6 @@ function optimizeCompiledCode(alloyConfig, paths) {
 
 			logger.info('- ' + file);
 			try {
-				console.error('fullpath: ' + JSON.stringify(fullpath, null, 2));
 				var result = babel.transformFileSync(fullpath, options);
 				fs.writeFileSync(fullpath, result.code);
 			} catch (e) {
