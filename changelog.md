@@ -1,9 +1,9 @@
 ## Titanium Turbo - Release Notes
 
 
-### Release 1.13.7-100
+### Release 1.13.8-100
 
-> Based on Titanium Alloy 1.13.7
+> Based on Titanium Alloy 1.13.8
 
 - Support for the following XML attributes in views:
   - fontSize
