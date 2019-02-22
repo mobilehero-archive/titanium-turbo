@@ -9,7 +9,8 @@
 
 <!-- ![https://www.npmjs.com/package/@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png) -->
 
-> Turbo is not an official Axway product.  It is an open-source project that is supported exclusively by the Titanium development community._
+> _Turbo is not an official Axway product.  It is an open-source project that is supported exclusively by the Titanium development community._
+
 
 
 - [📝 Description](#-description)
@@ -24,7 +25,7 @@
 
 Titanium Turbo is a fork of `Titanium Alloy` that adds some enhancements and customizations for rapid development.
 
-This version of Titanium Turbo is based on Titanium Alloy 1.13.7
+This version of Titanium Turbo is based on **Titanium Alloy 1.13.8**
 
 ## 🚀 Getting Started
 
@@ -44,6 +45,8 @@ npm install --save-dev @titanium/plugin-turbo
 4. Build or Run app as you would normally.
 
 ## ✨Features
+
+> See `changelog.md` for history of changes
 
 * [x] Supports installing npm packages in root of project for use in mobile
 * [x] - Support for the following XML attributes in `textField`, `label`, and `textArea`:
