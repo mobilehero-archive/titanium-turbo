@@ -1,17 +1,13 @@
-## Titanium Turbo - Release Notes
+# Titanium Turbo - Release Notes
 
+Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
-### Release 1.13.8-100
+## [1.13.8-0] - 2019-02-22 - Initial Release
 
-> Based on Titanium Alloy 1.13.8
-
-- Support for the following XML attributes in views:
-  - fontSize
-  - fontFamily
-  - fontStyle
-  - fontWeight
-  - textStyle
-- Made default backbone version: 1.3.3
+### Added
+- Based on Titanium Alloy 1.13.8
+- Support for the following XML attributes in views:  `fontSize`, `fontFamily`, `fontStyle`, `fontWeight`, `textStyle`
+  - Made default backbone version: 1.3.3
 - Replaced Underscore.js with Lodash 4.17.11
 - Updated babel.js to 7.x
 - Added support for babel config files:  `.babelrc`, `.babelrc.js` and `babel.config.js`
