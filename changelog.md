@@ -2,6 +2,12 @@
 
 Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [Unreleased]
+
+### Added
+- Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`)
+- Added support for xml attributes with dotted notation (e.g. `font.fontSize`)
+
 ## [1.13.8-0] - 2019-02-22 - Initial Release
 
 ### Added
