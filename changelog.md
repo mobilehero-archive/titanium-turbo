@@ -17,6 +17,6 @@ Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and custo
 - Replaced Underscore.js with Lodash 4.17.11
 - Updated babel.js to 7.x
 - Added support for babel config files:  `.babelrc`, `.babelrc.js` and `babel.config.js`
-- Added support for camelCase, snake_case, and kabab-case in XML views
+- Added support for `camelCase`, `snake_case`, and `kabab-case` in XML views
 - Added plugin property `compileConfig.dir.resourcesAlloy`
 - Added ability to use Node.js modules installed in root directory of project
