@@ -58,10 +58,11 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Replaced Underscore.js with Lodash 4.17.11
 * [x] Updated babel.js to 7.x
 * [x] Enhanced support for babel config files:  `.babelrc`, `.babelrc.js` and `babel.config.js`
-* [x] Added support for camelCase, snake_case, and kabab-case in XML views
+* [x] Added support for `camelCase`, `snake_case`, and `kabab-case` in XML views
 * [x] Added plugin property `compileConfig.dir.resourcesAlloy`
 * [x] Made default backbone version: 1.3.3
-
+* [x] Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`)
+* [x] Added support for xml attributes with dotted notation (e.g. `font.fontSize`)
 
 ## 🔗 Related Links
 
