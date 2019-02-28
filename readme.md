@@ -48,22 +48,22 @@ npm install --save-dev @titanium/plugin-turbo
 
 > See `changelog.md` for history of changes
 
-* [x] Supports installing npm packages in root of project for use in mobile
-* [x] - Support for the following XML attributes in `textField`, `label`, and `textArea`:
+* [x] Supports installing npm packages in root of project for use in mobile  [[TIMOB-26352]](https://jira.appcelerator.org/browse/TIMOB-26352)
+* [x] - Support for the following XML attributes in `textField`, `label`, and `textArea`: [[ALOY-1547]](https://jira.appcelerator.org/browse/ALOY-1547)
   - fontSize
   - fontFamily
   - fontStyle
   - fontWeight
   - textStyle
-* [x] Replaced Underscore.js with Lodash 4.17.11
-* [x] Updated babel.js to 7.x
+* [x] Replaced Underscore.js with Lodash 4.17.11  [[ALOY-1168]](https://jira.appcelerator.org/browse/ALOY-1168)
+* [x] Updated babel.js to 7.x  [[ALOY-1629]](https://jira.appcelerator.org/browse/ALOY-1629)
 * [x] Enhanced support for babel config files:  `.babelrc`, `.babelrc.js` and `babel.config.js`
 * [x] Added support for `camelCase`, `snake_case`, and `kabab-case` in XML views
 * [x] Added plugin property `compileConfig.dir.resourcesAlloy`
 * [x] Made default backbone version: 1.3.3
 * [x] Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`)
 * [x] Added support for xml attributes with dotted notation (e.g. `font.fontSize`)
-
+* [x] Added support for using `$.args` in XML views.  [[ALOY-1316]](https://jira.appcelerator.org/browse/ALOY-1316)
 ## 🔗 Related Links
 
 - [Titanium Mobile](https://www.npmjs.com/package/titanium) - Open-source tool for building powerful, cross-platform native apps with JavaScript.
