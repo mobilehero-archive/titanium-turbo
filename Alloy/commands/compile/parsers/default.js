@@ -58,7 +58,7 @@ function parse(node, state, args) {
 	_.forEach(platformAttributes, attribute => {
 		var attributeParts = attribute.split(':');
 		// if this attribute is for this platform, create it without namespace.
-		if ( args.createArgs[attributeParts[0]] === platform ) {
+		if ( attributeParts[0] === platform ) {
 			args.createArgs[attributeParts[1]] = args.createArgs[attribute];
 		} 
 		delete args.createArgs[attribute];
