@@ -527,11 +527,7 @@ exports.generateStyleParams = function(styles, classes, id, apiName, extraStyle,
 	lastObj = deepExtend(true, lastObj, extraStyle || {});
 	
 	// add in any final styles
-	_.each(lastObj, (v, k) => {
-		if (_.isString(v) && v.indexOf('$.args.') === 0) {
-			lastObj[k] = STYLE_EXPR_PREFIX + v;
-		}
-	});
+	_.extend(lastObj, extraStyle || {});
 
 	if (!_.isEmpty(lastObj)) { styleCollection.push({style:lastObj}); }
 
