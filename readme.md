@@ -58,11 +58,11 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Replaced Underscore.js with Lodash 4.17.11  [[ALOY-1168]](https://jira.appcelerator.org/browse/ALOY-1168)
 * [x] Updated babel.js to 7.x  [[ALOY-1629]](https://jira.appcelerator.org/browse/ALOY-1629)
 * [x] Enhanced support for babel config files:  `.babelrc`, `.babelrc.js` and `babel.config.js`
-* [x] Added support for `camelCase`, `snake_case`, and `kabab-case` in XML views
+* [x] Added support for `camelCase`, `snake_case`, and `kabab-case` in XML views.  [[ALOY-1647]](https://jira.appcelerator.org/browse/ALOY-1647)
 * [x] Added plugin property `compileConfig.dir.resourcesAlloy`
 * [x] Made default backbone version: 1.3.3
-* [x] Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`)
-* [x] Added support for xml attributes with dotted notation (e.g. `font.fontSize`)
+* [x] Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`) [[ALOY-1646]](https://jira.appcelerator.org/browse/ALOY-1646)
+* [x] Added support for xml attributes with dotted notation (e.g. `font.fontSize`)  [[ALOY-1363]](https://jira.appcelerator.org/browse/ALOY-1363)
 * [x] Added support for using `$.args` in XML views.  [[ALOY-1316]](https://jira.appcelerator.org/browse/ALOY-1316)
 ## 🔗 Related Links
 
