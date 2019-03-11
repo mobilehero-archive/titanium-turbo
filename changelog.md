@@ -2,6 +2,13 @@
 
 Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.13.8-6] - 2019-03-11
+
+### Added
+- Added support for using `$.*` variables in XML views.  [[[ALOY-1316]](https://jira.appcelerator.org/browse/ALOY-1316)
+- Added support for calling `__init()` function in controllers before rest of user code
+
+
 ## [1.13.8-5] - 2019-03-07
 
 ### Updated
