@@ -53,25 +53,6 @@ function parse(node, state, args) {
 		args.symbol = CU.generateUniqueId();
 	}
 
-	// find platform specific attributes
-	var platformAttributes = _.filter(_.keys(args.createArgs), key => _.includes(key, ':'));
-	_.forEach(platformAttributes, attribute => {
-		var attributeParts = attribute.split(':');
-		// if this attribute is for this platform, create it without namespace.
-		if ( attributeParts[0] === platform ) {
-			args.createArgs[attributeParts[1]] = args.createArgs[attribute];
-		} 
-		delete args.createArgs[attribute];
-	});
-
-	// find attributes using dotted notation
-	var dotAttributes = _.filter(_.keys(args.createArgs), key => _.includes(key, '.'));
-	_.forEach(dotAttributes, attribute => {
-		const value = args.createArgs[attribute];
-		delete args.createArgs[attribute];
-		_.set(args.createArgs, attribute, value);
-	});
-
 	// find any font attributes and create proper font object
 	if (args.createArgs && (args.createArgs.fontSize || args.createArgs.fontStyle || args.createArgs.fontFamily || args.createArgs.fontWeight || args.createArgs.textStyle)) {
 		args.createArgs.font = args.createArgs.font || {};

@@ -2,6 +2,11 @@
 
 Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.13.9-0] - 2019-04-11
+
+### Added
+- Merged in latest changes from Alloy 1.13.9
+
 ## [1.13.8-6] - 2019-03-11
 
 ### Added
