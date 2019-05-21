@@ -22,6 +22,18 @@
 
 [ALOY-1650](https://jira.appcelerator.org/browse/ALOY-1650) Debugger does not hit breakpoints when running Android on Windows
 
+### Release  1.13.10
+
+#### Fixes
+
+[ALOY-1686](https://jira.appcelerator.org/browse/ALOY-1686) Alloy: App crashes due to context used when accessing Ti.Database API
+
+### Release 1.13.9
+
+#### Fixes
+
+[ALOY-1650](https://jira.appcelerator.org/browse/ALOY-1650) Debugger does not hit breakpoints when running Android on Windows
+
 ### Release 1.13.8
 
 #### Fixes
