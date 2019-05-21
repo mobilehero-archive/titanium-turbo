@@ -28,7 +28,7 @@ function Controller() {
 	var exports = {};
 	var __defers = {};
 
-	__init && __init();
+	typeof __init === 'function' && __init();
 
 	// Generated code that must be executed before all UI and/or
 	// controller code. One example is all model and collection
