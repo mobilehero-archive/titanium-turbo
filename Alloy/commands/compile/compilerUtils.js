@@ -116,7 +116,7 @@ exports.isNodeForCurrentPlatform = function(node) {
 exports.getParserArgs = function(node, state, opts) {
 	state = state || {};
 	opts = opts || {};
-
+	node.nodeName = _.upperFirst(_.camelCase(node.nodeName));
 	var defaultId = opts.defaultId || undefined,
 		doSetId = opts.doSetId === false ? false : true,
 		name = node.nodeName,
@@ -212,14 +212,25 @@ exports.getParserArgs = function(node, state, opts) {
 			});
 		} else {
 			var theValue = node.getAttribute(attrName);
-			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG)\.|L\(.+\)\s*$)/.test(theValue)) {
+
+			// find platform specific attributes
+			var attributeParts = attrName.split(':');
+			if ( attributeParts.length === 2 && _.includes(CONST.PLATFORMS, attributeParts[0])) {
+				// if this attribute is for this platform, create it without namespace.
+				if ( attributeParts[0] === compilerConfig.alloyConfig.platform ) {
+					attrName = attributeParts[1];
+				} else {
+					return;
+				}
+			}	
+
+			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG|\$)\.|L\(.+\)\s*$)/.test(theValue)) {
 				var match = theValue.match(/^\s*L\([^'"]+\)\s*$/);
 				if (match !== null) {
 					theValue = theValue.replace(/\(/g, '("').replace(/\)/g, '")');
-				}
+				} 
 				theValue = styler.STYLE_EXPR_PREFIX + theValue;
 			}
-
 
 			if (attrName === 'class') {
 				if (autoStyle) {
@@ -241,7 +252,7 @@ exports.getParserArgs = function(node, state, opts) {
 						}
 					}
 				}
-				createArgs[attrName] = theValue;
+				_.set(createArgs, attrName, theValue );
 			}
 		}
 	});
@@ -275,7 +286,6 @@ exports.generateNode = function(node, state, defaultId, isTopLevel, isModelOrCol
 	if (!exports.isNodeForCurrentPlatform(node)) {
 		return '';
 	}
-
 	var args = exports.getParserArgs(node, state, { defaultId: defaultId }),
 		codeTemplate = 'if (<%= condition %>) {\n<%= content %>}\n',
 		code = {
@@ -600,6 +610,7 @@ exports.copyWidgetResources = function(resources, resourceDir, widgetId, opts) {
 		logger.trace('WIDGET_SRC=' + path.relative(compilerConfig.dir.project, dir));
 		var files = walkSync(dir);
 		_.each(files, function(file) {
+			file = path.normalize(file);
 			var source = path.join(dir, file);
 
 			// make sure the file exists and that it is not filtered
@@ -760,7 +771,8 @@ exports.createCompileConfig = function(inputPath, outputPath, alloyConfig, build
 			home: path.resolve(inputPath),
 			project: path.resolve(outputPath),
 			resources: resources,
-			resourcesAlloy: path.join(resources, 'alloy')
+			resourcesAlloy: path.join(resources, 'alloy'),
+			resourcesPlatform: path.join( resources, alloyConfig.platform === 'ios' ? 'iphone' : alloyConfig.platform ),
 		},
 		buildLog: buildLog
 	};

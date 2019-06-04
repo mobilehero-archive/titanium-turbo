@@ -4,7 +4,7 @@ var ejs = require('ejs'),
 	walkSync = require('walk-sync'),
 	chmodr = require('chmodr'),
 	vm = require('vm'),
-	babel = require('babel-core'),
+	babel = require('@babel/core'),
 	async = require('async'),
 
 	// alloy requires
@@ -250,6 +250,9 @@ module.exports = function(args, program) {
 		path.join(paths.resources, titaniumFolder, 'node_modules', 'lodash.js')
 	);
 
+	// copy all dependencies from package.json to resourcesPlatform directory
+	require('@titanium/module-copier').execute(paths.project,  path.join(paths.resources, titaniumFolder));
+
 	if (restrictionPath === null) {
 		// Generate alloy.js from template
 		var libAlloyJsDest = path.join(paths.resources, titaniumFolder, 'alloy.js');
@@ -417,6 +420,14 @@ module.exports = function(args, program) {
 	});
 	logger.debug('');
 
+	_.forEach(['babel.config.js', '.babelrc.js', '.babelrc'], filename => {
+		if (fs.existsSync(path.join(paths.project, filename))) {
+			logger.info(`Copying ${filename} to ${path.join(paths.resources, titaniumFolder, filename)}`);
+			U.copyFileSync(path.join(paths.project, filename), path.join(paths.resources, titaniumFolder, filename));
+			return false;
+		}
+	});
+
 	// trigger our custom compiler makefile
 	if (compilerMakeFile.isActive) {
 		compilerMakeFile.trigger('pre:compile', _.clone(compileConfig));
@@ -457,6 +468,7 @@ module.exports = function(args, program) {
 		var theViewDir = path.join(collection.dir, CONST.DIR.VIEW);
 		if (fs.existsSync(theViewDir)) {
 			_.each(walkSync(theViewDir), function(view) {
+				view = path.normalize(view);
 				if (viewRegex.test(view) && filterRegex.test(view) && !excludeRegex.test(view)) {
 					// make sure this controller is only generated once
 					var theFile = view.substring(0, view.lastIndexOf('.'));
@@ -478,6 +490,7 @@ module.exports = function(args, program) {
 		var theControllerDir = path.join(collection.dir, CONST.DIR.CONTROLLER);
 		if (fs.existsSync(theControllerDir)) {
 			_.each(walkSync(theControllerDir), function(controller) {
+				controller = path.normalize(controller);
 				if (controllerRegex.test(controller) && filterRegex.test(controller) && !excludeRegex.test(controller)) {
 					// make sure this controller is only generated once
 					var theFile = controller.substring(0, controller.lastIndexOf('.'));
@@ -504,6 +517,8 @@ module.exports = function(args, program) {
 	if (buildPlatform === 'ios' && tiapp.version.lt('3.2.0')) {
 		U.copyFileSync(path.join(paths.resources, titaniumFolder, 'app.js'), path.join(paths.resources, 'app.js'));
 	}
+
+
 
 	// optimize code
 	logger.info('----- OPTIMIZING -----');
@@ -1182,6 +1197,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 	while ((files = _.difference(getJsFiles(), lastFiles)).length > 0) {
 		_.each(files, function(file) {
 			var options = _.extend(_.clone(sourceMapper.OPTIONS_OUTPUT), {
+					root: compileConfig.dir.resourcesPlatform,
 					plugins: [
 						[require('./ast/builtins-plugin'), compileConfig],
 						[require('./ast/optimizer-plugin'), compileConfig.alloyConfig],
@@ -1192,7 +1208,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 			logger.info('- ' + file);
 			try {
 				var result = babel.transformFileSync(fullpath, options);
-				fs.writeFile(fullpath, result.code);
+				fs.writeFileSync(fullpath, result.code);
 			} catch (e) {
 				U.die('Error transforming JS file', e);
 			}

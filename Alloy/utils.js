@@ -17,7 +17,7 @@ var path = require('path'),
 	_ = require('lodash'),
 	CONST = require('./common/constants'),
 	sourceMapper = require('./commands/compile/sourceMapper'),
-	codeFrame = require('babel-code-frame');
+	codeFrameColumns = require('@babel/code-frame').codeFrameColumns;
 
 var NODE_ACS_REGEX = /^ti\.cloud\..+?\.js$/;
 
@@ -97,9 +97,8 @@ exports.XML = {
 	getAlloyFromFile: function(filename) {
 		var doc = exports.XML.parseFromFile(filename);
 		var docRoot = doc.documentElement;
-
-		// Make sure the markup has a top-level <Alloy> tag
-		if (docRoot.nodeName !== CONST.ROOT_NODE) {
+		// Make sure the markup has a top-level <Alloy> or <alloy> tag
+		if (docRoot.nodeName.toLowerCase() !== CONST.ROOT_NODE.toLowerCase()) {
 			exports.die([
 				'Invalid view file "' + filename + '".',
 				'All view markup must have a top-level <Alloy> tag'
@@ -148,7 +147,7 @@ exports.getAndValidateProjectPaths = function(argPath, opts) {
 	paths.assets = path.join(paths.app, 'assets');
 	paths.resources = path.join(paths.project, 'Resources');
 	paths.resourcesAlloy = path.join(paths.resources, 'alloy');
-
+	
 	// validate project and "app" paths
 	if (!fs.existsSync(paths.project)) {
 		exports.die('Titanium project path does not exist at "' + paths.project + '".');
@@ -212,6 +211,7 @@ exports.updateFiles = function(srcDir, dstDir, opts) {
 	var excludeRegex = new RegExp('(?:^|[\\/\\\\])(?:' + CONST.EXCLUDED_FILES.join('|') + ')(?:$|[\\/\\\\])');
 	var ordered = [];
 	_.each(walkSync(srcDir), function(file) {
+		file = path.normalize(file);
 		var src = path.join(srcDir, file);
 		var dst = path.join(dstDir, file);
 
@@ -533,7 +533,11 @@ exports.die = function(msg, e) {
 };
 
 exports.dieWithCodeFrame = function(errorMessage, lineInfo, fileContents, hint) {
-	var frame = codeFrame(fileContents, lineInfo.line, lineInfo.column, { highlightCode: true });
+	var frame = codeFrameColumns(fileContents, {
+		start: lineInfo
+	}, {
+		highlightCode: true
+	});
 	logger.error(errorMessage);
 	// Convert the code frame from a string to an Array so that the logger logs
 	// each line individually to keep the code frame intact

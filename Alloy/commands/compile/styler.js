@@ -523,8 +523,11 @@ exports.generateStyleParams = function(styles, classes, id, apiName, extraStyle,
 		}
 	});
 
-	// add in any final styles
 	// deep merge necessary to properly merge fonts
+	lastObj = deepExtend(true, lastObj, extraStyle || {});
+	
+	// add in any final styles
+	// ALOY-1363: deep merge necessary to properly merge children
 	lastObj = deepExtend(true, lastObj, extraStyle || {});
 	if (!_.isEmpty(lastObj)) { styleCollection.push({style:lastObj}); }
 
