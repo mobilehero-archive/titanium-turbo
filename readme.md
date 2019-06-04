@@ -60,6 +60,7 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Enhanced support for babel config files:  `.babelrc`, `.babelrc.js` and `babel.config.js`
 * [x] Added support for `camelCase`, `snake_case`, and `kabab-case` in XML views.  [[ALOY-1647]](https://jira.appcelerator.org/browse/ALOY-1647)
 * [x] Added plugin property `compileConfig.dir.resourcesAlloy`
+* [x] Updated moment to 2.24.0  [[ALOY-1682]](https://jira.appcelerator.org/browse/ALOY-1682)
 * [x] Added backbone 1.4.0  [[ALOY-1648]](https://jira.appcelerator.org/browse/ALOY-1648)
 * [x] Made default backbone version: 1.4.0
 * [x] Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`) [[ALOY-1646]](https://jira.appcelerator.org/browse/ALOY-1646)  ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
