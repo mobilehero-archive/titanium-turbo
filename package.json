@@ -13,7 +13,7 @@
     "html5",
     "appc-client"
   ],
-  "version": "1.13.10-2",
+  "version": "1.13.10-3",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -48,7 +48,7 @@
     "global-paths": "^1.0.0",
     "jsonlint": "1.6.2",
     "lodash": "^4.17.11",
-    "moment": "2.20.1",
+    "moment": "^2.24.0",
     "node.extend": "^2.0.2",
     "pkginfo": "0.4.1",
     "resolve": "^1.1.7",
