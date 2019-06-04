@@ -15,6 +15,7 @@ docs/
 **/lib/colors.js
 **/underscore.js
 **/backbone.js
+**/lodash.js
 Alloy/grammar
 Alloy/builtins/social.js
 Alloy/builtins/moment

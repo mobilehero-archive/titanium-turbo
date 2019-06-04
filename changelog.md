@@ -2,6 +2,16 @@
 
 Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.13.10-2] - 2019-06-04
+
+### Added
+- Added backbone version: 1.4.0
+- Added underscore.js (1.9.1) for any legacy support
+
+### Updated
+- Made default backbone version: 1.4.0
+
+
 ## [1.13.10-1] - 2019-06-03
 
 ### Updated
