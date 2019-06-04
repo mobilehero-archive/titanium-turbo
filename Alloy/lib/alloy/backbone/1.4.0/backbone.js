@@ -22,7 +22,8 @@
   
 	// Next for Node.js or CommonJS. jQuery may not be needed as a module.
 	} else if (typeof exports !== 'undefined') {
-	  var _ = require('/alloy/underscore'), $;
+	  var $;
+	  var _ = require('lodash');
 	  try { $ = require('jquery'); } catch (e) {}
 	  factory(root, exports, _, $);
   
