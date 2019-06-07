@@ -23,7 +23,7 @@
 
 ## 📝 Description
 
-Titanium Turbo is a fork of **`Titanium Alloy`** that adds some enhancements and customizations for rapid development.
+Titanium Turbo is a variation of **`Titanium Alloy`** that adds some enhancements and customizations for rapid development.
 
 This version of Titanium Turbo is based on **`Titanium Alloy 1.13.10`**
 
