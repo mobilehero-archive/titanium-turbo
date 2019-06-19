@@ -13,19 +13,19 @@
 
 
 
-- [📝 Description](#-description)
-- [🚀 Getting Started](#-getting-started)
-- [✨Features](#features)
-- [🔗 Related Links](#-related-links)
-- [📚Learn More](#learn-more)
-- [📣 Feedback](#-feedback)
-- [©️ Legal](#️-legal)
+- [📝 Description](#-Description)
+- [🚀 Getting Started](#-Getting-Started)
+- [✨Features](#Features)
+- [🔗 Related Links](#-Related-Links)
+- [📚Learn More](#Learn-More)
+- [📣 Feedback](#-Feedback)
+- [©️ Legal](#️-Legal)
 
 ## 📝 Description
 
 Titanium Turbo is a variation of **`Titanium Alloy`** that adds some enhancements and customizations for rapid development.
 
-This version of Titanium Turbo is based on **`Titanium Alloy 1.13.10`**
+This version of Titanium Turbo is based on **`Titanium Alloy 1.14.0-1`**
 
 ## 🚀 Getting Started
 
