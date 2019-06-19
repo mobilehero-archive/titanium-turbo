@@ -80,6 +80,6 @@
     "mkdirp": "^0.5.1"
   },
   "publishConfig": {
-    "tag": "next"
+    "tag": "latest"
   }
 }
