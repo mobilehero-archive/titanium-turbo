@@ -1,6 +1,6 @@
 {
   "name": "@titanium/turbo",
-  "description": "Enhanced Titanium Native Framework",
+  "description": "Enhanced Titanium Native Mobile Framework",
   "keywords": [
     "appcelerator",
     "titanium",
@@ -10,10 +10,11 @@
     "ios",
     "iphone",
     "android",
-    "html5",
-    "appc-client"
+    "appc-client",
+    "turbo",
+    "brentonhouse"
   ],
-  "version": "1.14.0-2",
+  "version": "1.14.0-3",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -37,7 +38,7 @@
     "@babel/parser": "^7.4.5",
     "@babel/traverse": "^7.4.5",
     "@babel/types": "^7.4.4",
-    "@titanium/module-copier": "0.0.6",
+    "@titanium/module-copier": "0.0.7",
     "async": "^2.6.2",
     "chmodr": "^1.2.0",
     "cli-table3": "^0.5.1",
@@ -81,5 +82,8 @@
   },
   "publishConfig": {
     "tag": "latest"
+  },
+  "titanium": {
+    "ignore": true
   }
 }
