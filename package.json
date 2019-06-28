@@ -14,7 +14,7 @@
     "turbo",
     "brentonhouse"
   ],
-  "version": "1.14.0-3",
+  "version": "1.14.0-4",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -38,7 +38,7 @@
     "@babel/parser": "^7.4.5",
     "@babel/traverse": "^7.4.5",
     "@babel/types": "^7.4.4",
-    "@titanium/module-copier": "0.0.7",
+    "@titanium/module-copier": "0.0.8",
     "async": "^2.6.2",
     "chmodr": "^1.2.0",
     "cli-table3": "^0.5.1",
