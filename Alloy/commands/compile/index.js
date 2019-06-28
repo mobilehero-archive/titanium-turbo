@@ -251,7 +251,7 @@ module.exports = function(args, program) {
 	);
 
 	// copy all dependencies from package.json to resourcesPlatform directory
-	require('@titanium/module-copier').execute({ projectPath: paths.project,  targetPath: path.join(paths.resources, titaniumFolder), includeOptional: true });
+	require('@titanium/module-copier').executeSync({ projectPath: paths.project,  targetPath: path.join(paths.resources, titaniumFolder), includeOptional: true });
 
 	if (restrictionPath === null) {
 		// Generate alloy.js from template
