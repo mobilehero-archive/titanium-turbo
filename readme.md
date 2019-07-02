@@ -66,17 +66,19 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`) [[ALOY-1646]](https://jira.appcelerator.org/browse/ALOY-1646)  ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
 * [x] Added support for xml attributes with dotted notation (e.g. `font.fontSize`)  [[ALOY-1363]](https://jira.appcelerator.org/browse/ALOY-1363) ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
 * [x] Added support for using `$.args` in XML views.  [[ALOY-1316]](https://jira.appcelerator.org/browse/ALOY-1316)   ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
+
+
 ## 🔗 Related Links
 
 * [Geek Mobile Toolkit](https://www.npmjs.com/package/@geek/mobile) - Toolkit for creating, building, and managing mobile app projects.
 * [Titanium Turbo Template (Default)](https://www.npmjs.com/package/@titanium/template-turbo-default) - Template for default Turbo app.  Based on the basic Alloy Template + some extra goodies.
 - [Titanium Mobile](https://www.npmjs.com/package/titanium) - Open-source tool for building powerful, cross-platform native apps with JavaScript.
-- [Alloy](https://www.npmjs.com/package/alloy) - MVC framework built on top of Titanium Mobile.
-- [Appcelerator](https://www.npmjs.com/package/appcelerator) - Installer for the Appcelerator Platform tool
+* [Alloy](https://www.npmjs.com/package/alloy) - MVC framework built on top of Titanium Mobile.
+* [Appcelerator](https://www.npmjs.com/package/appcelerator) - Installer for the Appcelerator Platform tool
 
 ## 📚Learn More
 
-- [Axway Developer Portal](https://developer.axway.com)
+* [Axway Developer Portal](https://developer.axway.com)
 
 ## 📣 Feedback
 
