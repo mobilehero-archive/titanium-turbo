@@ -420,12 +420,104 @@ exports.createWidget = function(id, name, args) {
  * @method createController
  * Factory method for instantiating a controller. Creates and returns an instance of the
  * named controller.
+ * MODIFIED to include logic from AlloyXL
  * @param {String} name Name of controller to instantiate.
  * @param {Object} [args] Arguments to pass to the controller.
  * @return {Alloy.Controller} Alloy controller object.
  */
 exports.createController = function(name, args) {
-	return new (require('/alloy/controllers/' + name))(args);
+
+	function cleanUpController(controller) {
+		Alloy.Controllers[controller.id] = null;
+
+		if (controller.__views) {
+			_.each(controller.__views, value => {
+				cleanUpController(value);
+			});
+		}
+
+		if (controller.__iamalloy) {
+			controller.off();
+			controller.destroy();
+		}
+
+		controller = null;
+	}
+
+	var controller = new (require(`alloy/controllers/${name}`))(args);
+
+	if (Object.keys(controller.__views).length > 0) {
+		var view = controller.getView();
+
+		exports.Controllers = exports.Controllers || {};
+
+		var path = name.split('/');
+
+		if (path.length > 0) {
+			name = path[path.length - 1];
+		}
+
+		if (exports.Controllers[name] && !controller.getView().id) {
+			console.warn(`The controller Alloy.Controllers.${name} (${controller.__controllerPath}) exists, and will be overwritten because it's conflicting with another controller already instantiated with the same name. Please add a unique ID on the top parent view within that controller view so you can use this as the controller name in Alloy.Controllers`);
+		}
+
+		if (controller.getView().id) {
+			name = controller.getView().id;
+		}
+
+		exports.Controllers[name] = controller;
+
+		controller.once = function (eventName, callback) {
+			controller.on(eventName, () => {
+				controller.off(eventName);
+				callback();
+			});
+			return controller;
+		};
+
+		if (typeof view.addEventListener === 'function') {
+			if (typeof view.open === 'function') {
+				view.addEventListener('open', function open(e) {
+					view.removeEventListener('open', open);
+					controller.trigger('open', e);
+					if (true) {
+						console.debug(`Controller ${name} was opened`);
+					 }
+				});
+
+				view.addEventListener('close', function close() {
+					view.removeEventListener('close', close);
+					view = null;
+
+					cleanUpController(controller);
+
+					controller = null;
+
+					if (true) {
+						console.debug(`Controller ${name} cleaned up!`);
+					}
+				});
+
+				view.addEventListener('postlayout', function postlayout(e) {
+					view.removeEventListener('postlayout', postlayout);
+					controller.trigger('postlayout', e);
+					if (true) {
+						console.debug(`Controller ${name} layout finished`);
+					}
+				});
+			} else {
+				view.addEventListener('postlayout', function postlayout(e) {
+					view.removeEventListener('postlayout', postlayout);
+					controller.trigger('postlayout', e);
+					if (true) {
+						console.debug(`Controller ${name} layout finished`);
+					}
+				});
+			}
+		}
+	}
+
+	return controller;
 };
 
 /**
@@ -518,10 +610,23 @@ exports.isHandheld = !exports.isTablet;
  * Alloy.Globals can be accessed in other non-controller Javascript files
  * like this:
  *
- *     var theObject = require('alloy').Globals.someGlobalObject;
+ *     var theObject = require('/alloy').Globals.someGlobalObject;
  *
  */
 exports.Globals = {};
+
+/**
+ * @property {Object} Controllers
+ * An object for storing instantiated controllers
+ * Alloy.Controllers is accessible in any controller in your app:
+ *
+ * Alloy.Controllers can be accessed in other non-controller Javascript files
+ * like this:
+ *
+ *     var controllers = require('/alloy').Controllers;
+ *
+ */
+exports.Controllers = {};
 
 /**
  * @property {Object} Models

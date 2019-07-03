@@ -230,6 +230,8 @@ exports.getParserArgs = function(node, state, opts) {
 					theValue = theValue.replace(/\(/g, '("').replace(/\)/g, '")');
 				} 
 				theValue = styler.STYLE_EXPR_PREFIX + theValue;
+			} else if ( /^\s*(turbo)(\..*)$/.test(theValue)) {
+				theValue = theValue.replace(/^\s*(turbo)(\..*)$/, 'require("/turbo")$2');
 			}
 
 			if (attrName === 'class') {
