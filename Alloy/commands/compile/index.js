@@ -1173,7 +1173,8 @@ function optimizeCompiledCode(alloyConfig, paths) {
 			'alloy/backbone.js',
 			'alloy/constants.js',
 			'alloy/underscore.js',
-			'alloy/widget.js'
+			'alloy/widget.js',
+			'turbo.js'
 		].concat(compileConfig.optimizingExceptions || []);
 
 		// widget controllers are already optimized. It should be listed in exceptions.
