@@ -14,7 +14,7 @@
     "turbo",
     "brentonhouse"
   ],
-  "version": "1.14.0-8",
+  "version": "1.14.0-9",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -48,7 +48,7 @@
     "fs-extra": "^5.0.0",
     "global-paths": "^1.0.0",
     "jsonlint": "1.6.2",
-    "lodash": "^4.17.11",
+    "lodash": ">=4.17.12",
     "moment": "^2.24.0",
     "node.extend": "^2.0.2",
     "pkginfo": "0.4.1",
