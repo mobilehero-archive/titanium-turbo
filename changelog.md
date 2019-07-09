@@ -9,11 +9,6 @@ Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and 
 - Added support for `require('/turbo')` as an alternate for Alloy and Alloy.Globals 
 - Added `turbo` as a supported variable for use in Alloy XML views - [See JIRA Ticket](https://jira.appcelerator.org/browse/TIMOB-27206)
 
-## [1.14.0-7] - 2019-07-02
-
-### Updated
- - Updated version of @titanium/module-copier
-
 ## [1.14.0-6] - 2019-07-01
 
 ### Updated
