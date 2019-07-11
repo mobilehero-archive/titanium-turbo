@@ -66,6 +66,9 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for xml namespaced attributes per platform (e.g. `ios:text` or `android:text`) [[ALOY-1646]](https://jira.appcelerator.org/browse/ALOY-1646)  ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
 * [x] Added support for xml attributes with dotted notation (e.g. `font.fontSize`)  [[ALOY-1363]](https://jira.appcelerator.org/browse/ALOY-1363) ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
 * [x] Added support for using `$.args` in XML views.  [[ALOY-1316]](https://jira.appcelerator.org/browse/ALOY-1316)   ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
+* [x] Added support for using `$.*` in XML views. -- Anything that starts with "$." in an Alloy XML View will be used literally and not treated as a string.
+* [x] Added support for using `turbo.*` in XML views. -- Anything that starts with "turbo." in an Alloy XML View will be used literally and not treated as a string.
+
 
 
 ## 🔗 Related Links
