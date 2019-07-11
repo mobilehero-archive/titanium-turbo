@@ -2,6 +2,11 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.0-10] - 2019-07-11
+
+### Added
+- Added support for `$.*` in Alloy Views XML attributes.  Anything that starts with `$.` will not be treated as a string.
+
 ## [1.14.0-9] - 2019-07-09
 
 ### Updated
