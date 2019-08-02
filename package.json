@@ -14,7 +14,7 @@
     "turbo",
     "brentonhouse"
   ],
-  "version": "1.14.0-10",
+  "version": "1.14.0-11",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -33,11 +33,11 @@
   "preferGlobal": true,
   "dependencies": {
     "@babel/code-frame": "^7.0.0",
-    "@babel/core": "^7.4.5",
-    "@babel/generator": "^7.4.4",
+    "@babel/core": "^7.5.5",
+    "@babel/generator": "^7.5.5",
     "@babel/parser": "^7.4.5",
-    "@babel/traverse": "^7.4.5",
-    "@babel/types": "^7.4.4",
+    "@babel/traverse": "^7.5.5",
+    "@babel/types": "^7.5.5",
     "@titanium/module-copier": "0.0.10",
     "async": "^2.6.2",
     "chmodr": "^1.2.0",
@@ -48,7 +48,7 @@
     "fs-extra": "^5.0.0",
     "global-paths": "^1.0.0",
     "jsonlint": "1.6.2",
-    "lodash": ">=4.17.12",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "node.extend": "^2.0.2",
     "pkginfo": "0.4.1",
