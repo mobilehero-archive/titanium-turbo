@@ -1,6 +1,6 @@
 #! groovy
 library 'pipeline-library'
-def nodeVersion = '8.9.0'
+def nodeVersion = '8.16.0'
 def npmVersion = 'latest' // We can change this without any changes to Jenkins. 5.7.1 is minimum to use 'npm ci'
 
 def packageVersion = ''
@@ -86,8 +86,6 @@ timestamps() {
 					// Install only production dependencies
 					ensureNPM(npmVersion)
 					sh 'npm ci --production'
-
-					sh 'npx nsp check --output summary --warn-only'
 
 					sh 'npx retire --exitwith 0'
 
