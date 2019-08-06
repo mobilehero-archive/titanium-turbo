@@ -7,5 +7,9 @@ var Alloy = require('/alloy'),
 	_ = Alloy._,
 	Backbone = Alloy.Backbone;
 
+Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
+Ti.UI.VISIBILITY_HIDDEN = 'hidden';	
+Ti.UI.VISIBILITY_VISIBLE = 'visible';	
+
 __MAPMARKER_ALLOY_JS__
 Alloy.createController('index');

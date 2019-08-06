@@ -1202,6 +1202,9 @@ function optimizeCompiledCode(alloyConfig, paths) {
 					plugins: [
 						[require('./ast/builtins-plugin'), compileConfig],
 						[require('./ast/optimizer-plugin'), compileConfig.alloyConfig],
+						[require('./ast/string-statement-plugin'), compileConfig.alloyConfig],
+
+
 					]
 				}),
 				fullpath = path.join(compileConfig.dir.resources, file);

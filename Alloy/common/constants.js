@@ -47,6 +47,11 @@ exports.CONTROLLER_NODES = ['Alloy.Require', 'Alloy.Widget'];
 exports.DEFAULT_BACKBONE_VERSION = '1.4.0';
 exports.SUPPORTED_BACKBONE_VERSIONS = ['0.9.2', '1.1.2', '1.3.3', '1.4.0'];
 
+// values for visibility property
+exports.VISIBILITY_COLLAPSE = 'collapse';	
+exports.VISIBILITY_HIDDEN = 'hidden';	
+exports.VISIBILITY_VISIBLE = 'visible';	
+
 // property names
 exports.CLASS_PROPERTY = 'classes';
 exports.APINAME_PROPERTY = 'apiName';

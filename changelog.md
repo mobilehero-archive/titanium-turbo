@@ -2,6 +2,15 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.0-12] - 2019-08-06
+
+### Added
+- Added support for visibility property in XML Views with possible values of:  `collapse`, `hidden`, and `visible`.
+- Added constants: `Ti.UI.VISIBILITY_COLLAPSE`, `Ti.UI.VISIBILITY_HIDDEN`, and `Ti.UI.VISIBILITY_VISIBLE`
+- Added support for `model` XML attribute to be used with with `dataCollection` to assign variable name to model
+- Added support for adding code to XML View attributes when surrounded by '~'
+- Added support for `Code` element in XML View.  Add code by body or `src` attribute.
+
 ## [1.14.0-11] - 2019-08-02
 
 ### Updated

@@ -67,8 +67,13 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for xml attributes with dotted notation (e.g. `font.fontSize`)  [[ALOY-1363]](https://jira.appcelerator.org/browse/ALOY-1363) ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
 * [x] Added support for using `$.args` in XML views.  [[ALOY-1316]](https://jira.appcelerator.org/browse/ALOY-1316)   ![Has been merged into Alloy](https://img.shields.io/badge/alloy-merged-blue.png)
 * [x] Added support for using `$.*` in XML views. -- Anything that starts with "$." in an Alloy XML View will be used literally and not treated as a string.
-* [x] Added support for using `turbo.*` in XML views. -- Anything that starts with "turbo." in an Alloy XML View will be used literally and not treated as a string.  **[Necessary for `node_modules` support to LiveView]**
+* [x] Added support for using `turbo.*` in XML views. -- Anything that starts with "turbo." in an Alloy XML View will be used literally and not treated as a string.  **[Required workaround for `node_modules` support to LiveView]**  [[TIMOB-27206]](https://jira.appcelerator.org/browse/TIMOB-27206)
 * [x] Added support for `__init()` function in controller that will be called before view is built. -- Allows `$.*` variables to be created and used in XML views.
+* [x] Added support for `visibility` property in XML Views with possible values of:  `hidden`, `collapse`, and `visible` -- Allows collapsing of view in XML.  [[TIMOB-27307]](https://jira.appcelerator.org/browse/TIMOB-27307)
+* [x] Added constants: `Ti.UI.VISIBILITY_COLLAPSE`, `Ti.UI.VISIBILITY_HIDDEN`, and `Ti.UI.VISIBILITY_VISIBLE`
+* [x] Added support for `model` XML attribute to be used with with `dataCollection` to assign variable name to model
+* [x] Added support for adding code to XML View attributes when surrounded by '~'  [[ALOY-1699]](https://jira.appcelerator.org/browse/ALOY-1699)
+* [x] Added support for `Code` element in XML View.  Add code by body or `src` attribute. [[ALOY-1700]](https://jira.appcelerator.org/browse/ALOY-1700)
 
 
 
@@ -83,6 +88,7 @@ npm install --save-dev @titanium/plugin-turbo
 
 ## 📚Learn More
 
+* [Axway Developer Blog](https://devblog.axway.com)
 * [Axway Developer Portal](https://developer.axway.com)
 
 ## 📣 Feedback

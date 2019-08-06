@@ -71,7 +71,7 @@ function parse(node, state, args) {
 	});
 
 	if (isCollectionBound) {
-		var localModel = CU.generateUniqueId();
+		var localModel = args.createArgs.model || CU.generateUniqueId();
 		var itemCode = '';
 		var itemsVar = CU.generateUniqueId();
 
