@@ -71,6 +71,23 @@ function parse(node, state, args) {
 		delete args.createArgs['textStyle'];
 	}
 
+	if ( args.visibility ) {
+		switch ( args.visibility ) {
+			case CONST.VISIBILITY_COLLAPSE:
+				args.origHeight = args.height;
+				args.origWidth = args.width;
+				args.height = 0;
+				args.width = 0;
+				break;
+			case CONST.VISIBILITY_HIDDEN:
+				args.visible = false;
+				break;
+			case CONST.VISIBILITY_VISIBLE:
+				args.visible = true;
+				break;
+		}
+	}
+
 	// Generate runtime code
 	if (state.isViewTemplate) {
 		var bindId = node.getAttribute('bindId');
@@ -164,7 +181,7 @@ function parse(node, state, args) {
 		}
 
 		if (isCollectionBound && CU.isNodeForCurrentPlatform(node)) {
-			var localModel = CU.generateUniqueId();
+			var localModel = args.createArgs.model || CU.generateUniqueId();
 			var itemCode = '';
 
 			_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {

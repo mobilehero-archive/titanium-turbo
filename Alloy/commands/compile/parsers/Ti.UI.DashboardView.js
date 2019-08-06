@@ -50,7 +50,7 @@ function parse(node, state, args) {
 	code += dashState.code;
 
 	if (isCollectionBound) {
-		var localModel = CU.generateUniqueId();
+		var localModel = args.createArgs.model || CU.generateUniqueId();
 		var itemCode = '';
 		var localArray = 'data';
 

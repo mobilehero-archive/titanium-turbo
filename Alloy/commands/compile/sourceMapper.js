@@ -124,7 +124,8 @@ exports.generateCodeAndSourceMap = function(generator, compileConfig) {
 		root: compileConfig.dir.resourcesPlatform,
 		plugins: [
 			[require('./ast/builtins-plugin'), compileConfig],
-			[require('./ast/optimizer-plugin'), compileConfig.alloyConfig]
+			[require('./ast/optimizer-plugin'), compileConfig.alloyConfig],
+			[require('./ast/string-statement-plugin'), compileConfig.alloyConfig],
 		]
 	});
 	if (compileConfig.sourcemap) {

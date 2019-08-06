@@ -40,7 +40,7 @@ function parse(node, state, args) {
 	code += scrollState.code;
 
 	if (isCollectionBound) {
-		var localModel = CU.generateUniqueId();
+		var localModel = args.createArgs.model || CU.generateUniqueId();
 		var itemCode = '';
 
 		_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
