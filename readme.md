@@ -71,7 +71,8 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for `__init()` function in controller that will be called before view is built. -- Allows `$.*` variables to be created and used in XML views.
 * [x] Added support for `visibility` property in XML Views with possible values of:  `hidden`, `collapse`, and `visible` -- Allows collapsing of view in XML.  [[TIMOB-27307]](https://jira.appcelerator.org/browse/TIMOB-27307)
 * [x] Added constants: `Ti.UI.VISIBILITY_COLLAPSE`, `Ti.UI.VISIBILITY_HIDDEN`, and `Ti.UI.VISIBILITY_VISIBLE`
-* [x] Added support for `model` XML attribute to be used with with `dataCollection` to assign variable name to model
+* [x] Added support for `modelName` XML attribute to be used with with `dataCollection` to assign variable name to current model [Defaults to `__currentModel`]
+* [x] Added support for `dataName` XML attribute to be used with with `dataCollection` to assign variable name to `model.__transform` [Defaults to `$model`] -- Allows developer to reference current model properties like `$model.myproperty` 
 * [x] Added support for adding code to XML View attributes when surrounded by '~'  [[ALOY-1699]](https://jira.appcelerator.org/browse/ALOY-1699)
 * [x] Added support for `Code` element in XML View.  Add code by body or `src` attribute. [[ALOY-1700]](https://jira.appcelerator.org/browse/ALOY-1700)
 

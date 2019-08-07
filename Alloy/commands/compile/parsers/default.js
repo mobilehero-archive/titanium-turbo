@@ -181,8 +181,10 @@ function parse(node, state, args) {
 		}
 
 		if (isCollectionBound && CU.isNodeForCurrentPlatform(node)) {
-			var localModel = args.createArgs.model || CU.generateUniqueId();
+			var localModel = args.createArgs.modelName || '__currentModel';
+			var dataName = args.createArgs.dataName || '$model';
 			var itemCode = '';
+			args.dataName = dataName;
 
 			_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
 				itemCode += CU.generateNodeExtended(child, state, {
@@ -191,7 +193,8 @@ function parse(node, state, args) {
 						symbol: args.symbol
 					},
 					local: true,
-					model: localModel
+					model: localModel,
+					dataName: dataName,
 				});
 			});
 
@@ -207,6 +210,7 @@ function parse(node, state, args) {
 			}
 			code += _.template(CU.generateCollectionBindingTemplate(args))({
 				localModel: localModel,
+				dataName: dataName,
 				pre: pre,
 				items: itemCode,
 				post: ''
@@ -219,6 +223,7 @@ function parse(node, state, args) {
 		isViewTemplate: state.isViewTemplate || false,
 		local: state.local || false,
 		model: state.model || undefined,
+		dataName: state.dataName || undefined,
 		condition: state.condition || undefined,
 		styles: state.styles,
 		code: code

@@ -2,6 +2,12 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.0-13] - 2019-08-07
+
+### Updated
+- Changed the `model` attribute (used with `dataCollection`) to `modelName`  [Defaults to `__currentModel`]
+- Added `dataName` (to be used with `dataCollection`) to assign variable name to the current `model.__transformed` variable [Defaults to `$model`]
+
 ## [1.14.0-12] - 2019-08-06
 
 ### Added
