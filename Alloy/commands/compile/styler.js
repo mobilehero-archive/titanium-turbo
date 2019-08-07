@@ -543,6 +543,7 @@ exports.generateStyleParams = function(styles, classes, id, apiName, extraStyle,
 			}
 
 			var collectionModelVar = theState && theState.model ? theState.model : CONST.BIND_MODEL_VAR;
+			var collectionModelTransformVar = _.get(theState, 'dataName', (theState.model || CONST.BIND_MODEL_VAR) + '.' + CONST.BIND_TRANSFORM_VAR);
 
 			var bindsModels = [];
 			var bindsCollection = false;
@@ -597,7 +598,7 @@ exports.generateStyleParams = function(styles, classes, id, apiName, extraStyle,
 					}
 				} else {
 					// collection binding
-					reference = collectionModelVar + '.' + CONST.BIND_TRANSFORM_VAR + (reference[0] === '[' ? '' : '.') + reference;
+					reference = collectionModelTransformVar + (reference[0] === '[' ? '' : '.') + reference;
 				}
 
 				bindingExpParts.push(reference);
