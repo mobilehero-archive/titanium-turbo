@@ -1012,7 +1012,6 @@ exports.generateCollectionBindingTemplate = function(args) {
 	code += '<%= pre %>';
 	code += '	for (var i = 0; i < len; i++) {';
 	code += '		var <%= localModel %> = models[i];';
-
 	if (!args.isDataBoundMap) {
 		code += '		<% if(dataName) { print("var " + dataName) } else { print(localModel) %>.'  + CONST.BIND_TRANSFORM_VAR + '<% } %> = ' + transformCode + ';';
 
