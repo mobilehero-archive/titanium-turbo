@@ -184,7 +184,6 @@ function parse(node, state, args) {
 			var localModel = args.createArgs.modelName || '__currentModel';
 			var dataName = args.createArgs.dataName || '$model';
 			var itemCode = '';
-			args.dataName = dataName;
 
 			_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
 				itemCode += CU.generateNodeExtended(child, state, {

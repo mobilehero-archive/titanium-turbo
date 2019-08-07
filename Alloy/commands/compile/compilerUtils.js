@@ -1010,7 +1010,7 @@ exports.generateCollectionBindingTemplate = function(args) {
 	code += '	var models = ' + whereCode + ';';
 	code += '	var len = models.length;';
 	code += '<%= pre %>';
-	code += '	for (var i = 0; i < len; i++) {';	
+	code += '	for (var i = 0; i < len; i++) {';
 	code += '		var <%= localModel %> = models[i];';
 
 	if (!args.isDataBoundMap) {

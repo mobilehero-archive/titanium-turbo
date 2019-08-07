@@ -544,7 +544,6 @@ exports.generateStyleParams = function(styles, classes, id, apiName, extraStyle,
 			var collectionModelVar = theState && theState.model ? theState.model : CONST.BIND_MODEL_VAR;
 			var collectionModelTransformVar = _.get(theState, 'dataName', (theState.model || CONST.BIND_MODEL_VAR) + '.' + CONST.BIND_TRANSFORM_VAR);
 
-			console.error('collectionModelTransformVar: ' + JSON.stringify(collectionModelTransformVar, null, 2));
 			var bindsModels = [];
 			var bindsCollection = false;
 
