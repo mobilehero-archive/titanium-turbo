@@ -541,7 +541,7 @@ exports.generateStyleParams = function(styles, classes, id, apiName, extraStyle,
 			if (bindingStrParts.length <= 1) {
 				return;
 			}
-			
+
 			var collectionModelVar = theState && theState.model ? theState.model : CONST.BIND_MODEL_VAR;
 			var collectionModelTransformVar = _.get(theState, 'dataName', (theState.model || CONST.BIND_MODEL_VAR) + '.' + CONST.BIND_TRANSFORM_VAR);
 
