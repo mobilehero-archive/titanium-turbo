@@ -2,7 +2,10 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.1-1] - 2019-08-27
 
+### Added
+- Added support for `controllerId` in event args for events created in controllers.
 
 ## [1.14.1-0] - 2019-08-27
 
