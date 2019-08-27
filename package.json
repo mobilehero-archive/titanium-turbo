@@ -1,7 +1,5 @@
 {
-  "name": "@titanium/turbo",
-  "description": "Enhanced Titanium Native Mobile Framework",
-  "version": "1.14.0-15",
+  "version": "1.14.1-0",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
