@@ -427,7 +427,11 @@ The 'redbg' and 'bigger' classes are shown below:
 				}
 			}
 
-			proxy.addEventListener(type, callback);
+			// proxy.addEventListener(type, callback);
+			proxy.addEventListener(type, _.wrap(callback, (func, e) => {
+				e.controllerId = self.getViewEx({ recurse: true }).id;
+				return func(e);
+			}));
 			this.__events.push({
 				id: proxy.id,
 				view: proxy,
