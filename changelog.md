@@ -2,6 +2,14 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+
+## [1.14.1-2] - 2019-08-30
+
+### Added
+- Added value alias `center` for `Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER` when used with `verticalAlign` XML attribute
+- Added property alias `text` for `Ti.UI.Button.title` when used as XML attribute
+- Added property alias `src` for `Ti.UI.ImageView.image` when used as XML attribute
+
 ## [1.14.1-1] - 2019-08-27
 
 ### Added
