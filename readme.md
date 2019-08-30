@@ -75,6 +75,9 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for `dataName` XML attribute to be used with with `dataCollection` to assign variable name to `model.__transform` [Defaults to `$model`] -- Allows developer to reference current model properties like `$model.myproperty` ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for adding code to XML View attributes when surrounded by '~'  [[ALOY-1699]](https://jira.appcelerator.org/browse/ALOY-1699)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for `Code` element in XML View.  Add code by body or `src` attribute. [[ALOY-1700]](https://jira.appcelerator.org/browse/ALOY-1700)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added value alias `center` for `Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER` when used with `verticalAlign` XML attribute [[ALOY-1703]](https://jira.appcelerator.org/browse/ALOY-1703)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added property alias `text` for `Ti.UI.Button.title` when used as XML attribute  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added property alias `src` for `Ti.UI.ImageView.image` when used as XML attribute  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 
 
 
