@@ -23,7 +23,33 @@
  * For guides on using Alloy, see
  * [Alloy Framework](http://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Framework).
  */
-var _ = Ti.App.Properties.getBool('use-underscore', false) ? require('/alloy/underscore') : require('lodash');
+
+if( Ti.App.Properties.getBool('use-underscore', false) ){
+	var _ = require('/alloy/underscore') : 
+} else {
+	var _ = require('lodash');
+	// include some aliases for backwards compatibility
+	_.all = _.every;
+	_.any = _.some;
+	_.collect = _.map;
+	_.compose = _.flowRight;
+	_.contains = _.includes;
+	_.detect = _.find;
+	_.findWhere = _.find;
+	_.first = _.head;
+	_.foldl = _.reduce;
+	_.foldr = _.reduceRight;
+	_.include = _.includes;
+	_.indexBy = _.keyBy;
+	_.inject = _.reduce;
+	_.object = _.fromPairs;
+	_.pairs = _.toPairs;
+	_.pluck = _.map;
+	_.restArguments = _.rest;
+	_.select = _.filter;
+	_.unique = _.uniq;
+	_.where = _.filter;
+}
 var Backbone = require('/alloy/backbone');
 var CONST = require('/alloy/constants');
 

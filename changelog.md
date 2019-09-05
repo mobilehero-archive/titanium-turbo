@@ -2,10 +2,15 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.1-5] - 2019-09-05
+
+### Added
+- Added some aliases to lodash for backwards compatibility with underscore.js.
+- 
 ## [1.14.1-4] - 2019-09-05
 
 ### Added
-- Added `use-underscore` support in tiapp.xml for using underscore instead of lodash.
+- Added `use-underscore` support in tiapp.xml for using underscore.js instead of lodash.
 
 ## [1.14.1-3] - 2019-09-05
 
