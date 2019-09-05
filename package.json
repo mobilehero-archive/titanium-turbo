@@ -1,6 +1,6 @@
 {
   "name": "@titanium/turbo",
-  "version": "1.14.1-6",
+  "version": "1.14.1-7",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -24,7 +24,7 @@
     "@babel/parser": "^7.4.5",
     "@babel/traverse": "^7.5.5",
     "@babel/types": "^7.5.5",
-    "@titanium/module-copier": "0.0.13",
+    "@titanium/module-copier": "0.0.14",
     "async": "^2.6.2",
     "chmodr": "^1.2.0",
     "cli-table3": "^0.5.1",
