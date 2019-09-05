@@ -23,9 +23,9 @@
  * For guides on using Alloy, see
  * [Alloy Framework](http://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Framework).
  */
-var _ = require('lodash'),
-	Backbone = require('/alloy/backbone'),
-	CONST = require('/alloy/constants');
+var _ = Ti.App.Properties.getBool('use-underscore', false) ? require('/alloy/underscore') : require('lodash');
+var Backbone = require('/alloy/backbone');
+var CONST = require('/alloy/constants');
 
 exports.version = '<%= version %>';
 exports._ = _;
