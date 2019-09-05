@@ -2,11 +2,18 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.1-7] - 2019-09-05
+
+### Updated
+- Updated to latest version of @titanium/module-copier
+  
+
 ## [1.14.1-5] - 2019-09-05
 
 ### Added
 - Added some aliases to lodash for backwards compatibility with underscore.js.
-- 
+  
+
 ## [1.14.1-4] - 2019-09-05
 
 ### Added
