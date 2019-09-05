@@ -2,6 +2,10 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.1-3] - 2019-09-05
+
+### Added
+- Added `allowReturnOutsideFunction` to allow support of some older npm modules
 
 ## [1.14.1-2] - 2019-08-30
 
