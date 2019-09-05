@@ -25,7 +25,7 @@
  */
 
 if( Ti.App.Properties.getBool('use-underscore', false) ){
-	var _ = require('/alloy/underscore') : 
+	var _ = require('/alloy/underscore');
 } else {
 	var _ = require('lodash');
 	// include some aliases for backwards compatibility
