@@ -2,6 +2,8 @@
 
 ### Unreleased items
 
+* [ALOY-1705](https://jira.appcelerator.org/browse/ALOY-1705) - Fix to allow return outside of function
+
 ### Release 1.14.1
 
 #### Improvements
