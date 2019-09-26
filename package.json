@@ -50,7 +50,8 @@
   },
   "scripts": {
     "test": "jake test:all",
-    "lint": "eslint ."
+	"lint": "eslint .",
+	"prepublishOnly": "git pull && bump"
   },
   "main": "./Alloy/alloy",
   "engines": {
