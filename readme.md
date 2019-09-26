@@ -1,3 +1,9 @@
+
+<p align="center">
+  <img src="https://cdn.secure-api.org/images/warning-sign-area51.png" width="90%" />
+  <img src="https://cdn.secure-api.org/images/border-line-3.png" width="80%" height="50" />
+</p>
+
 <p align="center">
   <img src="https://cdn.secure-api.org/images/turbo-title_400.png" /><br>
   <a href="https://www.npmjs.com/package/@titanium/turbo">
@@ -9,7 +15,8 @@
 
 <!-- ![https://www.npmjs.com/package/@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png) -->
 
-> _Turbo is not an official Axway product.  It is an open-source project that is supported exclusively by the Titanium development community._
+> _**Turbo is not an official Axway product.**  
+> It is an experiment by [Brenton House](https://brenton.house) using open-source projects.  You are welcome to try it out but be aware of the risks_
 
 
 
@@ -83,18 +90,18 @@ npm install --save-dev @titanium/plugin-turbo
 
 ## 🔗 Related Links
 
-* [Geek Mobile Toolkit](https://www.npmjs.com/package/@geek/mobile) - Toolkit for creating, building, and managing mobile app projects.
-* [Titanium Turbo Template (Default)](https://www.npmjs.com/package/@titanium/template-turbo-default) - Template for default Turbo app.  Based on the basic Alloy Template + some extra goodies.
-* [Titanium Turbo Template (Next)](https://www.npmjs.com/package/@titanium/template-turbo-next) - Template for Turbo app (with extras).  Based on the default Turbo Template + some extras.
-* [Titanium Mobile](https://www.npmjs.com/package/titanium) - Open-source tool for building powerful, cross-platform native apps with JavaScript.
-* [Alloy](https://www.npmjs.com/package/alloy) - MVC framework built on top of Titanium Mobile.
-* [Appcelerator](https://www.npmjs.com/package/appcelerator) - Installer for the Appcelerator Platform tool
+⭐  [Geek Mobile Toolkit](https://www.npmjs.com/package/@geek/mobile) - Toolkit for creating, building, and managing mobile app projects.   
+⭐  [Titanium Turbo Template (Default)](https://www.npmjs.com/package/@titanium/template-turbo-default) - Template for default Turbo app.  Based on the basic Alloy Template + some extra goodies.   
+⭐  [Titanium Turbo Template (Next)](https://www.npmjs.com/package/@titanium/template-turbo-next) - Template for Turbo app (with extras).  Based on the default Turbo Template + some extras.   
+⭐  [Titanium Mobile](https://www.npmjs.com/package/titanium) - Open-source tool for building powerful, cross-platform native apps with JavaScript.   
+⭐  [Alloy](https://www.npmjs.com/package/alloy) - MVC framework built on top of Titanium Mobile.   
+⭐  [Appcelerator](https://www.npmjs.com/package/appcelerator) - Installer for the Appcelerator Platform tool   
 
 ## 📚Learn More
 
-* [Axway Developer Blog](https://devblog.axway.com)
-* [Axway Developer YouTube Channel](https://youtube.com/axwaydev)
-* [Axway Developer Portal](https://developer.axway.com)
+⭐  [Axway Developer Blog](https://devblog.axway.com)   
+⭐  [Axway Developer YouTube Channel](https://youtube.com/axwaydev)   
+⭐  [Axway Developer Portal](https://developer.axway.com)   
 
 ## 📣 Feedback
 
