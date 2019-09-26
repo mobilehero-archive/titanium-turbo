@@ -1,6 +1,6 @@
 {
   "name": "@titanium/turbo",
-  "version": "1.14.1-9",
+  "version": "1.14.1-10",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
     {
@@ -50,8 +50,8 @@
   },
   "scripts": {
     "test": "jake test:all",
-	"lint": "eslint .",
-	"prepublishOnly": "git pull && bump"
+    "lint": "eslint .",
+    "prepublishOnly": "git pull && bump"
   },
   "main": "./Alloy/alloy",
   "engines": {
