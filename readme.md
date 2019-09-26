@@ -8,7 +8,7 @@
 </a>
 
 <p align="center">
-  <img src="https://cdn.secure-api.org/images/turbo-title_400.png" /><br>
+  <img src="https://cdn.secure-api.org/images/turbo-title_400.png" width="50%" /><br>
   <a href="https://www.npmjs.com/package/@titanium/turbo">
   	<img src="https://img.shields.io/npm/v/@titanium/turbo.png" /> 
   </a>
