@@ -2,25 +2,30 @@
 
 <a href="#-titanium-turbo">
 	<p align="center">
-	<img src="https://cdn.secure-api.org/images/warning-sign-area51.png" width="90%" />
-	<img src="https://cdn.secure-api.org/images/border-line-3.png" width="80%" height="50" />
+	<img src="https://cdn.secure-api.org/images/warning-sign-area51.png" width="80%" />
+	<img src="https://cdn.secure-api.org/images/border-line-3.png" width="70%" height="50" />
 	</p>
 </a>
 
-<p align="center">
-  <img src="https://cdn.secure-api.org/images/turbo-title_400.png" width="50%" /><br>
-  <a href="https://www.npmjs.com/package/@titanium/turbo">
-  	<img src="https://img.shields.io/npm/v/@titanium/turbo.png" /> 
-  </a>
-</p>
-
-# Titanium Turbo
-
-<!-- ![https://www.npmjs.com/package/@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png) -->
+<br/>
+<br/>
 
 > _**Turbo is not an official Axway product.**  
 > It is an experiment by [Brenton House](https://brenton.house) using open-source projects.  You are welcome to try it out but be aware of the risks_
 
+<br/>
+<br/>
+<br/>
+<br/>
+
+<p align="center">
+  <img src="https://cdn.secure-api.org/images/turbo-title_400.png" width="50%" /><br>
+</p>
+
+# Titanium Turbo
+
+[![@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png)](https://www.npmjs.com/package/@titanium/turbo)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/titanium-turbo)](https://dependabot.com)
 
 
 * [📝 Description](#-description)
