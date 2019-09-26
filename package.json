@@ -31,7 +31,7 @@
     "colors": "^1.4.0",
     "commander": "^2.20.0",
     "ejs": "2.5.7",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^8.1.0",
     "global-paths": "^1.0.0",
     "jsonlint": "1.6.2",
     "lodash": "^4.17.15",
@@ -50,7 +50,8 @@
   },
   "scripts": {
     "test": "jake test:all",
-    "lint": "eslint ."
+	"lint": "eslint .",
+	"prepublishOnly": "git pull && bump"
   },
   "main": "./Alloy/alloy",
   "engines": {
