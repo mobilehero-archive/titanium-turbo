@@ -17,7 +17,7 @@
     "type": "git",
     "url": "github:brentonhouse/titanium-turbo"
   },
-  "preferGlobal": true,
+  "preferGlobal": false,
   "dependencies": {
     "@babel/code-frame": "^7.0.0",
     "@babel/core": "^7.5.5",
@@ -52,11 +52,13 @@
   "scripts": {
     "test": "jake test:all",
     "lint": "eslint .",
-    "prepublishOnly": "git pull && bump"
+	"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+	"prep": "npm install --ignore-scripts && npm run list-files",
+	"prepublishOnly": "git pull && bump"
   },
   "main": "./Alloy/alloy",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=8"
   },
   "devDependencies": {
     "@seadub/danger-plugin-dependencies": "^0.1.0",
