@@ -1,6 +1,6 @@
 {
   "name": "@titanium/turbo",
-  "version": "1.14.1-10",
+  "version": "1.14.1-11",
   "description": "Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.",
   "author": "Appcelerator, Inc. <info@appcelerator.com>",
   "maintainers": [
@@ -52,10 +52,10 @@
   "scripts": {
     "test": "jake test:all",
     "lint": "eslint .",
-	"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-	"prep": "npm install --ignore-scripts && npm run list-files",
-	"prepublishOnly": "git pull && bump",
-	"test2": "echo \"no tests\" && exit 0"
+    "list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+    "prep": "npm install --ignore-scripts && npm run list-files",
+    "prepublishOnly": "git pull && bump",
+    "test2": "echo \"no tests\" && exit 0"
   },
   "main": "./Alloy/alloy",
   "engines": {

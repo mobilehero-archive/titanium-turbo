@@ -454,7 +454,7 @@ exports.createWidget = function(id, name, args) {
 exports.createController = function(name, args) {
 
 	function cleanUpController(controller) {
-		Alloy.Controllers[controller.id] = null;
+		exports.Controllers[controller.id] = null;
 
 		if (controller.__views) {
 			_.each(controller.__views, value => {
