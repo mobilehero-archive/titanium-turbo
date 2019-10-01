@@ -2,7 +2,12 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
-## [1.14.1-11] - 2019-10-01
+## [1.14.1-13] - 2019-10-01
+
+### Updated
+- Fixed issue with Alloy View/Controller filenames that contained hyphens [ALOY-1706]
+
+## [1.14.1-12] - 2019-10-01
 
 ### Updated
 - Updated to latest version of Alloy with PR-1633
