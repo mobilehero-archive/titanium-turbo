@@ -54,7 +54,7 @@
     "lint": "eslint .",
     "list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
     "prep": "npm install --ignore-scripts && npm run list-files",
-    "prepublishOnly": "git pull && bump",
+    "prepublishOnly2": "git pull && bump",
     "test2": "echo \"no tests\" && exit 0"
   },
   "main": "./Alloy/alloy",
