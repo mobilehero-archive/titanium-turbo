@@ -2,6 +2,8 @@
 
 ### Unreleased items
 
+* [ALOY-1701](https://jira.appcelerator.org/browse/ALOY-1701) - XML: Unable to use platform namespace restriction on event handlers
+
 ### Release 1.14.1
 
 #### Improvements
