@@ -2,6 +2,11 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.1-14] - 2019-10-03
+
+### Updated
+- Renamed XML View element `code` to `script`
+
 ## [1.14.1-13] - 2019-10-01
 
 ### Updated

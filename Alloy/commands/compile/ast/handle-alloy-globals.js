@@ -1,4 +1,4 @@
-const toCheck = [ 'Alloy', '_', 'Backbone' ];
+const toCheck = [ 'Alloy', '_', 'Backbone', 'turbo' ];
 var template = require('@babel/template').default;
 
 var buildRequire = template(`
@@ -26,6 +26,9 @@ module.exports = function(babel) {
 					case '/alloy/backbone':
 						this.imported.push('Backbone');
 						break;
+					case '/turbo':
+							this.imported.push('turbo');
+							break;						
 				}
 			},
 			ImportDeclaration (path) {
@@ -43,6 +46,9 @@ module.exports = function(babel) {
 					case '/alloy/backbone':
 						this.imported.push('Backbone');
 						break;
+					case '/turbo':
+							this.imported.push('Alloy');
+							break;						
 				}
 			},
 			ReferencedIdentifier(path) {
@@ -68,6 +74,12 @@ module.exports = function(babel) {
 								REQUIRECALL: 'require(\'/alloy/backbone\')'
 							});
 							break;
+						case 'turbo':
+								this.toRequire.push({
+									VARIABLE: 'turbo',
+									REQUIRECALL: 'require(\'/turbo\')'
+								});
+								break;							
 					}
 					
 				}
