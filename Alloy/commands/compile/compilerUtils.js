@@ -224,14 +224,12 @@ exports.getParserArgs = function(node, state, opts) {
 				}
 			}	
 
-			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG|\$)\.|L\(.+\)\s*$)/.test(theValue)) {
+			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG|turbo|\$)\.|L\(.+\)\s*$)/.test(theValue)) {
 				var match = theValue.match(/^\s*L\([^'"]+\)\s*$/);
 				if (match !== null) {
 					theValue = theValue.replace(/\(/g, '("').replace(/\)/g, '")');
 				} 
 				theValue = styler.STYLE_EXPR_PREFIX + theValue;
-			} else if ( /^\s*(turbo)(\..*)$/.test(theValue)) {
-				theValue = theValue.replace(/^\s*(turbo)(\..*)$/, 'require("/turbo")$2');
 			}
 
 			if (attrName === 'class') {
