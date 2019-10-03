@@ -9,3 +9,6 @@ test/apps/testing
 npm-debug.log
 Jenkinsfile
 TEST-*.xml
+
+.github
+.dependabot
