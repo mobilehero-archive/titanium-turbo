@@ -2,6 +2,12 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.1-16] - 2019-10-11
+
+### Added
+
+- Added `open` and `close` functions to Controller for opening/closing Controller views
+
 ## [1.14.1-15] - 2019-10-03
 
 ### Updated

@@ -546,6 +546,30 @@ exports.createController = function(name, args) {
 	return controller;
 };
 
+
+exports.open = function(name, params) {
+	const controller = exports.Controllers[name];
+	if( controller ){
+		const view = controller.getView();
+		if( view && typeof view.open === 'function') {
+			view.open();
+		}
+	} else {
+		exports.createController(name, params).getView().open();
+	}
+}
+
+
+exports.close = function(name) {
+	const controller = exports.Controllers[name];
+	if( controller ){
+		const view = controller.getView();
+		if( view && typeof view.close === 'function') {
+			view.close();
+		}
+	}
+}
+
 /**
  * @method createModel
  * Factory method for instantiating a Backbone Model object. Creates and returns an instance of the
