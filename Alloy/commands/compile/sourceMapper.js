@@ -106,7 +106,8 @@ exports.generateCodeAndSourceMap = function(generator, compileConfig) {
 	try {
 		ast = babylon.parse(genMap.code, {
 			sourceFilename: outfile,
-			sourceType: 'module'
+			sourceType: 'unambiguous',
+			allowReturnOutsideFunction: true
 		});
 	} catch (e) {
 		let filename;
@@ -213,7 +214,7 @@ exports.generateSourceMap = function(generator, compileConfig) {
 	try {
 		ast = babylon.parse(genMap.code, {
 			sourceFilename: genMap.file,
-			sourceType: 'module',
+			sourceType: 'unambiguous',
 			allowReturnOutsideFunction: true,
 		});
 	} catch (e) {

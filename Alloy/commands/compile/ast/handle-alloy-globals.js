@@ -1,7 +1,7 @@
-const toCheck = [ 'Alloy', '_', 'Backbone', 'turbo' ];
-var template = require('@babel/template').default;
+const ALLOY_GLOBALS_TO_CHECK = [ 'Alloy', '_', 'Backbone' ];
+const template = require('@babel/template').default;
 
-var buildRequire = template(`
+const buildRequire = template(`
 	var VARIABLE = REQUIRECALL;
 `);
 module.exports = function(babel) {
@@ -16,46 +16,23 @@ module.exports = function(babel) {
 				if (!node.arguments || !node.arguments[0]) {
 					return;
 				}
-				switch (node.arguments[0].value) {
-					case '/alloy':
-						this.imported.push('Alloy');
-						break;
-					case '/alloy/underscore':
-						this.imported.push('_');
-						break;
-					case '/alloy/backbone':
-						this.imported.push('Backbone');
-						break;
-					case '/turbo':
-							this.imported.push('turbo');
-							break;						
-				}
+				checkStatement(node.arguments[0].value, state);
 			},
 			ImportDeclaration (path) {
 				const node = path.node;
 				if (!node.source || !node.source.value) {
 					return;
-				} 
-				switch (node.source.value) {
-					case '/alloy':
-						this.imported.push('Alloy');
-						break;
-					case '/alloy/underscore':
-						this.imported.push('_');
-						break;
-					case '/alloy/backbone':
-						this.imported.push('Backbone');
-						break;
-					case '/turbo':
-							this.imported.push('Alloy');
-							break;						
 				}
+				checkStatement(node.source.value, state);
 			},
 			ReferencedIdentifier(path) {
-				const node = path.node;
-				if (toCheck.includes(node.name) && !this.required.includes(node.name) && !this.imported.includes(node.name) && !path.scope.hasBinding(node.name)) {
-					this.required.push(node.name);
-					switch (node.name) {
+				const name = path.name;
+				if (ALLOY_GLOBALS_TO_CHECK.includes(name) // Is this identifier one of the special 3
+					&& !this.required.includes(name) // Have we already imported it
+					&& !path.scope.hasBinding(name) // Does this binding already exist in the scope? (e.g user might import lodash as _ which we don't want to override)
+				) {
+					this.required.push(name);
+					switch (name) {
 						case 'Alloy':
 							this.toRequire.push({
 								VARIABLE: 'Alloy',
@@ -86,7 +63,6 @@ module.exports = function(babel) {
 			},
 			Program: {
 				enter() {
-					this.imported = [];
 					this.toRequire = [];
 					this.required = [];
 				},
@@ -104,3 +80,30 @@ module.exports = function(babel) {
 		}
 	};
 };
+
+/**
+ *
+ * @param {String} moduleName - Module name in the import or require statement
+ * @param {Object} state - Babel state object
+ */
+function checkStatement(moduleName, state) {
+	switch (moduleName) {
+		case 'alloy':
+		case '/alloy':
+			state.required.push('Alloy');
+			break;
+		case 'alloy/underscore':
+		case '/alloy/underscore':
+			state.required.push('_');
+			break;
+		case 'alloy/backbone':
+		case '/alloy/backbone':
+			state.required.push('Backbone');
+			break;
+		case 'turbo':
+		case '/turbo':
+				case '/turbo':
+					state.required.push('turbo');
+					break;
+	}
+}
