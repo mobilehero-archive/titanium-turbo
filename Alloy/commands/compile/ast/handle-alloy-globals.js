@@ -51,6 +51,12 @@ module.exports = function(babel) {
 								REQUIRECALL: 'require(\'/alloy/backbone\')'
 							});
 							break;
+						case 'turbo':
+								this.toRequire.push({
+									VARIABLE: 'turbo',
+									REQUIRECALL: 'require(\'/turbo\')'
+								});
+								break;							
 					}
 					
 				}
@@ -94,5 +100,10 @@ function checkStatement(moduleName, state) {
 		case '/alloy/backbone':
 			state.required.push('Backbone');
 			break;
+		case 'turbo':
+		case '/turbo':
+				case '/turbo':
+					state.required.push('turbo');
+					break;
 	}
 }
