@@ -77,11 +77,13 @@ function parse(node, state, args) {
 
 			// set up data bound items
 			if (isDataBound) {
-				localModel = localModel || CU.generateUniqueId();
+				localModel = args.createArgs.modelName || '__currentModel';
+				var dataName = args.createArgs.dataName || '$model';
 				itemCode += CU.generateNodeExtended(child, state, {
 					parent: {},
 					local: true,
 					model: localModel,
+					dataName: dataName,
 					post: function(node, state, args) {
 						controllerSymbol = state.controller;
 						return itemsVar + '.push(' + state.parent.symbol + ');';
@@ -147,7 +149,8 @@ function parse(node, state, args) {
 
 	// finally, fill in any model-view binding code, if present
 	if (isDataBound) {
-		localModel = localModel || CU.generateUniqueId();
+		localModel = args.createArgs.modelName || '__currentModel';
+		var dataName = args.createArgs.dataName || '$model';
 		var sps = sectionState.parent.symbol;
 
 		if (state.parentFormFactor || node.hasAttribute('formFactor')) {
@@ -157,6 +160,7 @@ function parse(node, state, args) {
 		}
 		code += _.template(CU.generateCollectionBindingTemplate(args))({
 			localModel: localModel,
+			dataName: dataName,
 			pre: 'var ' + itemsVar + '=[];',
 			items: itemCode,
 			post: 'opts.animation ? ' +

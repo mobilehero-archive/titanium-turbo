@@ -452,7 +452,7 @@ exports.createWidget = function(id, name, args) {
  * @return {Alloy.Controller} Alloy controller object.
  */
 exports.createController = function(name, args) {
-
+	
 	function cleanUpController(controller) {
 		exports.Controllers[controller.id] = null;
 
@@ -495,8 +495,11 @@ exports.createController = function(name, args) {
 
 		controller.once = function (eventName, callback) {
 			controller.on(eventName, () => {
-				controller.off(eventName);
-				callback();
+				if( controller ){
+					controller.off(eventName);
+					callback();					
+				}
+
 			});
 			return controller;
 		};
@@ -525,16 +528,16 @@ exports.createController = function(name, args) {
 				});
 
 				view.addEventListener('postlayout', function postlayout(e) {
-					view.removeEventListener('postlayout', postlayout);
-					controller.trigger('postlayout', e);
+					view && view.removeEventListener('postlayout', postlayout);
+					controller && controller.trigger('postlayout', e);
 					if (true) {
 						console.debug(`Controller ${name} layout finished`);
 					}
 				});
 			} else {
 				view.addEventListener('postlayout', function postlayout(e) {
-					view.removeEventListener('postlayout', postlayout);
-					controller.trigger('postlayout', e);
+					view && view.removeEventListener('postlayout', postlayout);
+					controller && controller.trigger('postlayout', e);
 					if (true) {
 						console.debug(`Controller ${name} layout finished`);
 					}
@@ -548,6 +551,7 @@ exports.createController = function(name, args) {
 
 
 exports.open = function(name, params) {
+	console.debug(`inside alloy.open(${name})`);
 	const controller = exports.Controllers[name];
 	if( controller ){
 		const view = controller.getView();
