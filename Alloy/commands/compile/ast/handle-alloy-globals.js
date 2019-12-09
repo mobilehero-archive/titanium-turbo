@@ -1,4 +1,4 @@
-const ALLOY_GLOBALS_TO_CHECK = [ 'Alloy', '_', 'Backbone' ];
+const ALLOY_GLOBALS_TO_CHECK = [ 'Alloy', '_', 'Backbone', 'turbo' ];
 const template = require('@babel/template').default;
 
 const buildRequire = template(`
@@ -18,7 +18,7 @@ module.exports = function(babel) {
 				}
 				checkStatement(node.arguments[0].value, state);
 			},
-			ImportDeclaration (path) {
+			ImportDeclaration (path, state) {
 				const node = path.node;
 				if (!node.source || !node.source.value) {
 					return;
@@ -26,7 +26,7 @@ module.exports = function(babel) {
 				checkStatement(node.source.value, state);
 			},
 			ReferencedIdentifier(path) {
-				const name = path.name;
+				const name = path.node.name;
 				if (ALLOY_GLOBALS_TO_CHECK.includes(name) // Is this identifier one of the special 3
 					&& !this.required.includes(name) // Have we already imported it
 					&& !path.scope.hasBinding(name) // Does this binding already exist in the scope? (e.g user might import lodash as _ which we don't want to override)
@@ -52,13 +52,13 @@ module.exports = function(babel) {
 							});
 							break;
 						case 'turbo':
-								this.toRequire.push({
-									VARIABLE: 'turbo',
-									REQUIRECALL: 'require(\'/turbo\')'
-								});
-								break;							
+							this.toRequire.push({
+								VARIABLE: 'turbo',
+								REQUIRECALL: 'require(\'/turbo\')'
+							});
+							break;								
 					}
-					
+
 				}
 			},
 			Program: {
@@ -102,8 +102,7 @@ function checkStatement(moduleName, state) {
 			break;
 		case 'turbo':
 		case '/turbo':
-				case '/turbo':
-					state.required.push('turbo');
-					break;
+			state.required.push('turbo');
+			break;			
 	}
 }

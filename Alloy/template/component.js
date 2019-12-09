@@ -1,6 +1,7 @@
-var Alloy = require('/alloy'),
-	Backbone = Alloy.Backbone,
-	_ = Alloy._;
+var Alloy = require('/alloy');
+var _ = Alloy._;
+var Backbone = Alloy.Backbone;
+var turbo = require('/turbo');
 
 <%= ES6Mod %>
 <%= WPATH %>
