@@ -39,7 +39,7 @@
 		"moment": "^2.24.0",
 		"node.extend": "^2.0.2",
 		"pkginfo": "0.4.1",
-		"resolve": "^1.12.2",
+		"resolve": "^1.13.1",
 		"source-map": "^0.7.3",
 		"walk-sync": "^2.0.2",
 		"xml2tss": "0.0.5",
