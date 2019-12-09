@@ -140,10 +140,12 @@ function parse(node, state, args) {
 			// generate data binding code
 			if (isDataBound) {
 				localModel = localModel || CU.generateUniqueId();
+				var dataName = args.createArgs.dataName || '$model';
 				itemCode += CU.generateNodeExtended(child, state, {
 					parent: {},
 					local: true,
 					model: localModel,
+					dataName: dataName,
 					post: function(node, state, args) {
 						controllerSymbol = state.controller;
 						return 'rows.push(' + state.parent.symbol + ');\n';
@@ -209,10 +211,12 @@ function parse(node, state, args) {
 	// finally, fill in any model-view binding code, if present
 	if (isDataBound) {
 		localModel = localModel || CU.generateUniqueId();
+		var dataName = args.createArgs.dataName || '$model';
 		code += _.template(CU.generateCollectionBindingTemplate(args))({
 			localModel: localModel,
 			pre: 'var rows=[];',
 			items: itemCode,
+			dataName: dataName,
 			post: tableState.parent.symbol + '.setData(rows);'
 		});
 	}
