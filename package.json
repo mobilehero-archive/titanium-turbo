@@ -1,95 +1,95 @@
 {
-  "name": "@titanium/turbo",
-  "version": "1.14.4-0",
-  "description": "Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.",
-  "author": "Appcelerator, Inc. <info@appcelerator.com>",
-  "maintainers": [
-    {
-      "name": "Brenton House",
-      "email": "brenton.house@gmail.com",
-      "url": "https://brenton.house"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/brentonhouse/titanium-turbo/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "github:brentonhouse/titanium-turbo"
-  },
-  "preferGlobal": false,
-  "dependencies": {
-    "@babel/code-frame": "^7.5.5",
-    "@babel/core": "^7.6.4",
-    "@babel/generator": "^7.6.4",
-    "@babel/parser": "^7.6.4",
-    "@babel/traverse": "^7.6.3",
-    "@babel/types": "^7.7.4",
-    "@titanium/module-copier": "0.0.18",
-    "async": "^2.6.3",
-    "chmodr": "^1.2.0",
-    "cli-table3": "^0.5.1",
-    "colors": "^1.4.0",
-    "commander": "^2.20.0",
-    "ejs": "2.7.4",
-    "fs-extra": "^8.1.0",
-    "global-paths": "^1.0.0",
-    "jsonlint": "1.6.3",
-    "lodash": "^4.17.15",
-    "moment": "^2.24.0",
-    "node.extend": "^2.0.2",
-    "pkginfo": "0.4.1",
-    "resolve": "^1.12.2",
-    "source-map": "^0.7.3",
-    "walk-sync": "^2.0.2",
-    "xml2tss": "0.0.5",
-    "xmldom": "^0.1.27"
-  },
-  "license": "Apache-2.0",
-  "bin": {
-    "turbo": "./bin/turbo"
-  },
-  "scripts": {
-    "test": "jake test:all",
-    "lint": "eslint .",
-    "list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-    "prep": "npm install --ignore-scripts && npm run list-files",
-    "prepublishOnly2": "git pull && bump",
-    "test2": "echo \"no tests\" && exit 0"
-  },
-  "main": "./Alloy/alloy",
-  "engines": {
-    "node": ">=8"
-  },
-  "devDependencies": {
-    "@seadub/danger-plugin-dependencies": "^0.1.0",
-    "@seadub/danger-plugin-eslint": "^1.0.1",
-    "@seadub/danger-plugin-junit": "^0.1.2",
-    "danger": "^7.1.4",
-    "diff": "^4.0.1",
-    "eslint": "^6.7.1",
-    "jake": "^8.1.1",
-    "mkdirp": "^0.5.1"
-  },
-  "publishConfig": {
-    "tag": "latest"
-  },
-  "keywords": [
-    "appcelerator",
-    "titanium",
-    "native",
-    "alloy",
-    "mobile",
-    "axway",
-    "native",
-    "ios",
-    "iphone",
-    "android",
-    "appc-client",
-    "turbo",
-    "brenton-house"
-  ],
-  "titanium": {
-    "ignore": true
-  }
+	"name": "@titanium/turbo",
+	"version": "1.14.5-0",
+	"description": "Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.",
+	"author": "Appcelerator, Inc. <info@appcelerator.com>",
+	"maintainers": [
+		{
+			"name": "Brenton House",
+			"email": "brenton.house@gmail.com",
+			"url": "https://brenton.house"
+		}
+	],
+	"bugs": {
+		"url": "https://github.com/brentonhouse/titanium-turbo/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "github:brentonhouse/titanium-turbo"
+	},
+	"preferGlobal": false,
+	"dependencies": {
+		"@babel/code-frame": "^7.5.5",
+		"@babel/core": "^7.6.4",
+		"@babel/generator": "^7.6.4",
+		"@babel/parser": "^7.6.4",
+		"@babel/traverse": "^7.6.3",
+		"@babel/types": "^7.7.4",
+		"@titanium/module-copier": "0.0.18",
+		"async": "^2.6.3",
+		"chmodr": "^1.2.0",
+		"cli-table3": "^0.5.1",
+		"colors": "^1.4.0",
+		"commander": "^2.20.0",
+		"ejs": "2.7.4",
+		"fs-extra": "^8.1.0",
+		"global-paths": "^1.0.0",
+		"jsonlint": "1.6.3",
+		"lodash": "^4.17.15",
+		"moment": "^2.24.0",
+		"node.extend": "^2.0.2",
+		"pkginfo": "0.4.1",
+		"resolve": "^1.12.2",
+		"source-map": "^0.7.3",
+		"walk-sync": "^2.0.2",
+		"xml2tss": "0.0.5",
+		"xmldom": "^0.1.27"
+	},
+	"license": "Apache-2.0",
+	"bin": {
+		"turbo": "./bin/turbo"
+	},
+	"scripts": {
+		"test": "jake test:all",
+		"lint": "eslint .",
+		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+		"prep": "npm install --ignore-scripts && npm run list-files",
+		"prepublishOnly2": "git pull && bump",
+		"test2": "echo \"no tests\" && exit 0"
+	},
+	"main": "./Alloy/alloy",
+	"engines": {
+		"node": ">=8"
+	},
+	"devDependencies": {
+		"@seadub/danger-plugin-dependencies": "^0.1.0",
+		"@seadub/danger-plugin-eslint": "^1.0.1",
+		"@seadub/danger-plugin-junit": "^0.1.2",
+		"danger": "^7.1.4",
+		"diff": "^4.0.1",
+		"eslint": "^6.7.1",
+		"jake": "^8.1.1",
+		"mkdirp": "^0.5.1"
+	},
+	"publishConfig": {
+		"tag": "latest"
+	},
+	"keywords": [
+		"appcelerator",
+		"titanium",
+		"native",
+		"alloy",
+		"mobile",
+		"axway",
+		"native",
+		"ios",
+		"iphone",
+		"android",
+		"appc-client",
+		"turbo",
+		"brenton-house"
+	],
+	"titanium": {
+		"ignore": true
+	}
 }
