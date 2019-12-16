@@ -552,14 +552,17 @@ exports.createController = function(name, args) {
 
 exports.open = function(name, params) {
 	console.debug(`inside alloy.open(${name})`);
-	const controller = exports.Controllers[name];
+	let controller = exports.Controllers[name];
+	let view;
 	if( controller ){
-		const view = controller.getView();
-		if( view && typeof view.open === 'function') {
-			view.open();
-		}
+		view = controller.getViewEx();
 	} else {
-		exports.createController(name, params).getView().open();
+		// exports.createController(name, params).getView().open();
+		controller = exports.createController(name, params);
+		view = controller.getViewEx();
+	}
+	if( view && typeof view.open === 'function') {
+		view.open();
 	}
 }
 
