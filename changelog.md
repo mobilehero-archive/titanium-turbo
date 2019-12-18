@@ -2,6 +2,23 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.5-1] - 2019-12-17
+
+### Added
+
+- Added lots of widget goodies!
+- Added support for installing widgets via npm (without naming restrictions)
+- Added support for using widgets as primary control in xml view
+- Added support for using WPATH in xml view attributes
+- Added support for using ~/ shortcut instead of WPATH in xml view attributes
+  
+
+## [1.14.5-0] - 2019-12-9
+
+### Updated
+
+- Updated to latest version of Alloy
+
 ## [1.14.1-18] - 2019-11-25
 
 ### Updated
