@@ -415,8 +415,11 @@ exports.getWidgetDirectories = function(appDir) {
 		walkWidgetDependencies(id);
 	}
 
-	const npm_widgets = fs.readJsonSync(path.join(appDir, '..', 'build', 'widgets.json'));
-	dirs = dirs.concat(npm_widgets);
+	const widgetsJson = path.join(appDir, '..', 'build', 'widgets.json');
+	if ( fs.existsSync(widgetsJson)) {
+		const npm_widgets = fs.readJsonSync(widgetsJson);
+		dirs = dirs.concat(npm_widgets);		
+	}
 
 	// if there are missing widgets, abort and tell the developer which ones
 	if (!!notFound.length) { // eslint-disable-line no-extra-boolean-cast

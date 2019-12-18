@@ -97,6 +97,7 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for installing widgets via npm (without naming restrictions)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using `WPATH()` in xml view attributes: [[ALOY-1253]](https://jira.appcelerator.org/browse/ALOY-1253)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using `~/` as a shortcut for WPATH() in xml view attributes: [[ALOY-1253]](https://jira.appcelerator.org/browse/ALOY-1253)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for using widget as primary control in xml view: [[ALOY-1256]](https://jira.appcelerator.org/browse/ALOY-1256)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 
 
 ## 🔗 Related Links
