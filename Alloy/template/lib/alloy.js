@@ -142,6 +142,43 @@ if (OS_IOS) {
 	});
 }
 
+exports.WIDGET_PATHS = {};
+
+try {
+	const ti_files_resource = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '_index_.json');
+	let ti_files = JSON.parse(ti_files_resource.read().text);
+	if (ti_files) {
+		ti_files = _.map(ti_files, (value, key) => {
+			const filename = key.substring(9, key.length);
+			const regex1 = /\/alloy\/widgets\/(.*)\/controllers(\/)(.*).js/;
+			const regex2 = /\/alloy\/widgets\/(.*)\/controllers\/?(.*)\/widget.js/
+			if( regex1.test(filename)){
+				const widgetShortcut1 = filename.replace(regex1,'$1$2$3');
+				exports.WIDGET_PATHS[widgetShortcut1] = filename;
+				console.debug('Adding widget shortcut: ' + widgetShortcut1 + ' → ' + filename);
+				if( regex2.test(filename)){
+					const widgetShortcut2 = filename.replace(regex2,'$1$2');
+					exports.WIDGET_PATHS[widgetShortcut2] = filename;
+					console.debug('Adding widget shortcut: ' + widgetShortcut2 + ' → ' + filename);
+				} else {
+					const widgetShortcut3 = filename.replace(regex1,'$3');
+					if( exports.WIDGET_PATHS[widgetShortcut3] ){
+						console.warn("Overriding existing widget shortcut: " + widgetShortcut3 + 'that was pointed to: ' + exports.WIDGET_PATHS[widgetShortcut3]);
+					}
+					exports.WIDGET_PATHS[widgetShortcut3] = filename;
+					console.debug('Adding widget shortcut: ' + widgetShortcut3 + ' → ' + filename);
+				}
+			}
+			return filename;
+		});
+
+		exports.TI_FILES = ti_files;
+	}
+} catch( err ){
+	console.error(err);
+	console.debug(`Error processing _index_.json: ${JSON.stringify(err, null, 2)}`);
+}
+
 function ucfirst(text) {
 	if (!text) { return text; }
 	return text[0].toUpperCase() + text.substr(1);
@@ -470,28 +507,24 @@ exports.createController = function(name, args) {
 		controller = null;
 	}
 
-	var controller = new (require(`alloy/controllers/${name}`))(args);
+	let controller;
+	if( exports.TI_FILES.includes(`/alloy/controllers/${name}.js`)){
+		controller = new (require(`/alloy/controllers/${name}`))(args);
+	} else if( exports.WIDGET_PATHS[name] ){
+		controller = new (require(exports.WIDGET_PATHS[name]))(args);
+	} else {
+		console.debug(`name: ${JSON.stringify(name, null, 2)}`);
+		throw new Error('Alloy controller not found: ' + name);
+	}
+
+	controller.resource_path = name;
 
 	if (Object.keys(controller.__views).length > 0) {
-		var view = controller.getView();
+		var view = controller.getViewEx({ recurse: true});
 
 		exports.Controllers = exports.Controllers || {};
 
-		var path = name.split('/');
-
-		if (path.length > 0) {
-			name = path[path.length - 1];
-		}
-
-		if (exports.Controllers[name] && !controller.getView().id) {
-			console.warn(`The controller Alloy.Controllers.${name} (${controller.__controllerPath}) exists, and will be overwritten because it's conflicting with another controller already instantiated with the same name. Please add a unique ID on the top parent view within that controller view so you can use this as the controller name in Alloy.Controllers`);
-		}
-
-		if (controller.getView().id) {
-			name = controller.getView().id;
-		}
-
-		exports.Controllers[name] = controller;
+		exports.Controllers[controller.resource_path] = controller;
 
 		controller.once = function (eventName, callback) {
 			controller.on(eventName, () => {

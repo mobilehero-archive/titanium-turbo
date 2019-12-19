@@ -50,6 +50,7 @@ var Controller = function() {
 			}
 		},
 		addTopLevelView: function(view) {
+			debugger;
 			roots.push(view);
 		},
 		addProxyProperty: function(key, value) {
