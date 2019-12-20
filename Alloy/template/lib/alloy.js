@@ -142,42 +142,48 @@ if (OS_IOS) {
 	});
 }
 
-exports.WIDGET_PATHS = {};
 
-try {
-	const ti_files_resource = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '_index_.json');
-	let ti_files = JSON.parse(ti_files_resource.read().text);
-	if (ti_files) {
-		ti_files = _.map(ti_files, (value, key) => {
-			const filename = key.substring(9, key.length);
-			const regex1 = /\/alloy\/widgets\/(.*)\/controllers(\/)(.*).js/;
-			const regex2 = /\/alloy\/widgets\/(.*)\/controllers\/?(.*)\/widget.js/
-			if( regex1.test(filename)){
-				const widgetShortcut1 = filename.replace(regex1,'$1$2$3');
-				exports.WIDGET_PATHS[widgetShortcut1] = filename;
-				console.debug('Adding widget shortcut: ' + widgetShortcut1 + ' → ' + filename);
-				if( regex2.test(filename)){
-					const widgetShortcut2 = filename.replace(regex2,'$1$2');
-					exports.WIDGET_PATHS[widgetShortcut2] = filename;
-					console.debug('Adding widget shortcut: ' + widgetShortcut2 + ' → ' + filename);
-				} else {
-					const widgetShortcut3 = filename.replace(regex1,'$3');
-					if( exports.WIDGET_PATHS[widgetShortcut3] ){
-						console.warn("Overriding existing widget shortcut: " + widgetShortcut3 + 'that was pointed to: ' + exports.WIDGET_PATHS[widgetShortcut3]);
-					}
-					exports.WIDGET_PATHS[widgetShortcut3] = filename;
-					console.debug('Adding widget shortcut: ' + widgetShortcut3 + ' → ' + filename);
-				}
-			}
-			return filename;
-		});
 
-		exports.TI_FILES = ti_files;
-	}
-} catch( err ){
-	console.error(err);
-	console.debug(`Error processing _index_.json: ${JSON.stringify(err, null, 2)}`);
-}
+exports.__files = require('/__files')
+exports.__widgets = require('/__widgets')
+
+// console.error(`Directory Listing: ${JSON.stringify(Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory).getDirectoryListing(), null, 2)}`);
+
+// try {
+// 	const ti_files_resource = Titanium.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '_index_.json');
+// 	let ti_files = JSON.parse(ti_files_resource.read().text);
+// 	console.debug(`ti_files: ${JSON.stringify(ti_files, null, 2)}`);
+// 	if (ti_files) {
+// 		ti_files = _.map(ti_files, (value, key) => {
+// 			const filename = key.substring(9, key.length);
+// 			const regex1 = /\/alloy\/widgets\/(.*)\/controllers(\/)(.*).js/;
+// 			const regex2 = /\/alloy\/widgets\/(.*)\/controllers\/?(.*)\/widget.js/
+// 			if( regex1.test(filename)){
+// 				const widgetShortcut1 = filename.replace(regex1,'$1$2$3');
+// 				exports.WIDGET_PATHS[widgetShortcut1] = filename;
+// 				console.debug('Adding widget shortcut: ' + widgetShortcut1 + ' → ' + filename);
+// 				if( regex2.test(filename)){
+// 					const widgetShortcut2 = filename.replace(regex2,'$1$2');
+// 					exports.WIDGET_PATHS[widgetShortcut2] = filename;
+// 					console.debug('Adding widget shortcut: ' + widgetShortcut2 + ' → ' + filename);
+// 				} else {
+// 					const widgetShortcut3 = filename.replace(regex1,'$3');
+// 					if( exports.WIDGET_PATHS[widgetShortcut3] ){
+// 						console.warn("Overriding existing widget shortcut: " + widgetShortcut3 + 'that was pointed to: ' + exports.WIDGET_PATHS[widgetShortcut3]);
+// 					}
+// 					exports.WIDGET_PATHS[widgetShortcut3] = filename;
+// 					console.debug('Adding widget shortcut: ' + widgetShortcut3 + ' → ' + filename);
+// 				}
+// 			}
+// 			return filename;
+// 		});
+
+// 		exports.TI_FILES = ti_files;
+// 	}
+// } catch( err ){
+// 	console.error(err);
+// 	console.debug(`Error processing _index_.json: ${JSON.stringify(err, null, 2)}`);
+// }
 
 function ucfirst(text) {
 	if (!text) { return text; }
@@ -508,10 +514,10 @@ exports.createController = function(name, args) {
 	}
 
 	let controller;
-	if( exports.TI_FILES.includes(`/alloy/controllers/${name}.js`)){
+	if( exports.__files.includes(`/alloy/controllers/${name}.js`)){
 		controller = new (require(`/alloy/controllers/${name}`))(args);
-	} else if( exports.WIDGET_PATHS[name] ){
-		controller = new (require(exports.WIDGET_PATHS[name]))(args);
+	} else if( exports.__widgets[name] ){
+		controller = new (require(exports.__widgets[name]))(args);
 	} else {
 		console.debug(`name: ${JSON.stringify(name, null, 2)}`);
 		throw new Error('Alloy controller not found: ' + name);
