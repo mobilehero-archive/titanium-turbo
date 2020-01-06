@@ -113,6 +113,8 @@ module.exports = function(args, program) {
 			'  Ex. "alloy compile --config platform=ios"'
 		]);
 	}
+	console.debug(`buildPlatform: ${JSON.stringify(buildPlatform, null, 2)}`);
+	console.debug(`platforms: ${JSON.stringify(platforms, null, 2)}`);
 	titaniumFolder = platforms[buildPlatform].titaniumFolder;
 	otherPlatforms = _.without(CONST.PLATFORM_FOLDERS, titaniumFolder);
 
@@ -553,9 +555,9 @@ module.exports = function(args, program) {
 		});
 	}(path.join(paths.resources, titaniumFolder)));
 
-	index.push('/__files.json');
-	index.push('/__widgets.json');
-	fs.writeJsonSync(path.join(resourcePath, '__files.json'), index, { spaces: '\t'});
+	index.push('/__file_registry.json');
+	index.push('/__widget_registry.json');
+	fs.writeJsonSync(path.join(resourcePath, '__file_registry.json'), index, { spaces: '\t'});
 
 	const widget_index = {};
 	index.forEach( filename => {
@@ -580,7 +582,7 @@ module.exports = function(args, program) {
 		}
 	});
 
-	fs.writeJsonSync(path.join(resourcePath, '__widgets.json'), widget_index, { spaces: '\t'});
+	fs.writeJsonSync(path.join(resourcePath, '__widget_registry.json'), widget_index, { spaces: '\t'});
 
 	// write out the log for this build
 	buildLog.write();
