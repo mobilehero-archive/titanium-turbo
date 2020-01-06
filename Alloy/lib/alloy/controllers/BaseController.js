@@ -183,7 +183,7 @@ var Controller = function() {
 		},
 
 		// getViewEx for advanced parsing and element traversal
-		getViewEx: function(opts) {
+		getViewEx: function(opts = {}) {
 			var recurse = opts.recurse || false;
 			if (recurse) {
 				var view = this.getView();
@@ -200,7 +200,7 @@ var Controller = function() {
 		},
 
 		// getProxyPropertyEx for advanced parsing and element traversal
-		getProxyPropertyEx: function(name, opts) {
+		getProxyPropertyEx: function(name, opts = {}) {
 			var recurse = opts.recurse || false;
 			if (recurse) {
 				var view = this.getProxyProperty(name);

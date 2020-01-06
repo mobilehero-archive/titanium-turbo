@@ -529,10 +529,56 @@ module.exports = function(args, program) {
 		optimizeCompiledCode(alloyConfig, paths);
 	}
 
+	logger.debug('----- post:compile -----');
+
 	// trigger our custom compiler makefile
 	if (compilerMakeFile.isActive) {
 		compilerMakeFile.trigger('post:compile', _.clone(compileConfig));
 	}
+
+	const index = [];
+	const resourcePath = path.join(paths.resources, titaniumFolder);
+	(function walk(dir) {
+		fs.readdirSync(dir).forEach(filename => {
+			const file = path.join(dir, filename);
+			if (fs.existsSync(file)) {
+				if (fs.statSync(file).isDirectory()) {
+					walk(file);
+				} else if (/\.js(on)?$/.test(filename)) {
+					index.push(file.replace(resourcePath, ''));
+				}
+			}
+		});
+	}(path.join(paths.resources, titaniumFolder)));
+
+	index.push('/__file_registry.json');
+	index.push('/__widget_registry.json');
+	fs.writeJsonSync(path.join(resourcePath, '__file_registry.json'), index, { spaces: '\t'});
+
+	const widget_index = {};
+	index.forEach( filename => {
+		const regex1 = /\/alloy\/widgets\/(.*)\/controllers(\/)(.*).js/;
+		const regex2 = /\/alloy\/widgets\/(.*)\/controllers\/?(.*)\/widget.js/;
+		if ( regex1.test(filename)) {
+			const widgetShortcut1 = filename.replace(regex1, '$1$2$3');
+			widget_index[widgetShortcut1] = filename;
+			logger.debug('Adding widget shortcut: ' + widgetShortcut1 + ' → ' + filename);
+			if ( regex2.test(filename)) {
+				const widgetShortcut2 = filename.replace(regex2, '$1$2');
+				widget_index[widgetShortcut2] = filename;
+				logger.debug('Adding widget shortcut: ' + widgetShortcut2 + ' → ' + filename);
+			} else {
+				const widgetShortcut3 = filename.replace(regex1, '$3');
+				if ( widget_index[widgetShortcut3] ) {
+					logger.warn('Overriding existing widget shortcut: ' + widgetShortcut3 + 'that was pointed to: ' + widget_index[widgetShortcut3]);
+				}
+				widget_index[widgetShortcut3] = filename;
+				logger.debug('Adding widget shortcut: ' + widgetShortcut3 + ' → ' + filename);
+			}
+		}
+	});
+
+	fs.writeJsonSync(path.join(resourcePath, '__widget_registry.json'), widget_index, { spaces: '\t'});
 
 	// write out the log for this build
 	buildLog.write();

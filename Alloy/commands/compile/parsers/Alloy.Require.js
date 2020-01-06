@@ -122,23 +122,27 @@ function parse(node, state, args) {
 	// Generate runtime code
 	code += (state.local ? 'var ' : '') + args.symbol + ' = Alloy.' + method + "('" + src +
 		"'," + extraArgs + styler.generateStyleParams(
-			state.styles,
-			args.classes,
-			args.id,
-			type === 'widget' ? 'Alloy.Widget' : 'Alloy.Require',
-			args.createArgs,
-			state
-		) + ');\n';
+		state.styles,
+		args.classes,
+		args.id,
+		type === 'widget' ? 'Alloy.Widget' : 'Alloy.Require',
+		args.createArgs,
+		state
+	) + ')';
+	let parent = { symbol: args.symbol };
 	if (args.parent.symbol && !state.templateObject && !state.androidMenu) {
-		code += args.symbol + '.setParent(' + args.parent.symbol + ');\n';
+		code += ';\n' + args.symbol + '.setParent(' + args.parent.symbol + ');\n';
+		parent = {
+			symbol: args.symbol + '.getViewEx({recurse:true})'
+		};
+	} else {
+		code += '.getViewEx({recurse:true});\n';
 	}
 
 	return {
-		parent: {
-			symbol: args.symbol + '.getViewEx({recurse:true})'
-		},
+		parent: parent,
 		controller: args.symbol,
 		styles: state.styles,
 		code: code
-	};
+		};
 }

@@ -142,6 +142,13 @@ if (OS_IOS) {
 	});
 }
 
+const file_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__file_registry.json');
+exports.file_registry = JSON.parse(file_registry_resource.read().text);
+
+const widget_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__widget_registry.json');
+exports.widget_registry = JSON.parse(widget_registry_resource.read().text);
+
+
 function ucfirst(text) {
 	if (!text) { return text; }
 	return text[0].toUpperCase() + text.substr(1);
@@ -453,8 +460,17 @@ exports.createWidget = function(id, name, args) {
  */
 exports.createController = function(name, args) {
 	
+	if( _.isNil(name)){
+		throw new Error('Parameter "name" is required for Alloy.createController');
+	}
+
 	function cleanUpController(controller) {
-		exports.Controllers[controller.id] = null;
+		if( controller.resource_name ){
+			exports.Controllers[controller.resource_name] = null;
+		}
+		if( controller.resource_alias ){
+			exports.Controllers[controller.resource_alias] = null;
+		}
 
 		if (controller.__views) {
 			_.each(controller.__views, value => {
@@ -470,28 +486,26 @@ exports.createController = function(name, args) {
 		controller = null;
 	}
 
-	var controller = new (require(`alloy/controllers/${name}`))(args);
+	let controller;
+	if( exports.file_registry.includes(`/alloy/controllers/${name}.js`)){
+		controller = new (require(`/alloy/controllers/${name}`))(args);
+	} else if( exports.widget_registry[name] ){
+		controller = new (require(exports.widget_registry[name]))(args);
+	} else {
+		throw new Error('Alloy controller not found: ' + name);
+	}
+
+	controller.resource_name = name;
+	exports.Controllers = exports.Controllers || {};
+	exports.Controllers[controller.resource_name] = controller;
 
 	if (Object.keys(controller.__views).length > 0) {
-		var view = controller.getView();
+		var view = controller.getViewEx({ recurse: true});
 
-		exports.Controllers = exports.Controllers || {};
-
-		var path = name.split('/');
-
-		if (path.length > 0) {
-			name = path[path.length - 1];
+		if( view.alias ){
+			controller.resource_alias = view.alias;
+			exports.Controllers[controller.resource_alias] = controller;
 		}
-
-		if (exports.Controllers[name] && !controller.getView().id) {
-			console.warn(`The controller Alloy.Controllers.${name} (${controller.__controllerPath}) exists, and will be overwritten because it's conflicting with another controller already instantiated with the same name. Please add a unique ID on the top parent view within that controller view so you can use this as the controller name in Alloy.Controllers`);
-		}
-
-		if (controller.getView().id) {
-			name = controller.getView().id;
-		}
-
-		exports.Controllers[name] = controller;
 
 		controller.once = function (eventName, callback) {
 			controller.on(eventName, () => {
@@ -552,14 +566,16 @@ exports.createController = function(name, args) {
 
 exports.open = function(name, params) {
 	console.debug(`inside alloy.open(${name})`);
-	const controller = exports.Controllers[name];
+	let controller = exports.Controllers[name];
+	let view;
 	if( controller ){
-		const view = controller.getView();
-		if( view && typeof view.open === 'function') {
-			view.open();
-		}
+		view = controller.getViewEx();
 	} else {
-		exports.createController(name, params).getView().open();
+		controller = exports.createController(name, params);
+		view = controller.getViewEx();
+	}
+	if( view && typeof view.open === 'function') {
+		view.open();
 	}
 }
 
