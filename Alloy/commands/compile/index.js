@@ -113,8 +113,6 @@ module.exports = function(args, program) {
 			'  Ex. "alloy compile --config platform=ios"'
 		]);
 	}
-	console.debug(`buildPlatform: ${JSON.stringify(buildPlatform, null, 2)}`);
-	console.debug(`platforms: ${JSON.stringify(platforms, null, 2)}`);
 	titaniumFolder = platforms[buildPlatform].titaniumFolder;
 	otherPlatforms = _.without(CONST.PLATFORM_FOLDERS, titaniumFolder);
 
@@ -531,12 +529,12 @@ module.exports = function(args, program) {
 		optimizeCompiledCode(alloyConfig, paths);
 	}
 
+	logger.debug('----- post:compile -----');
+
 	// trigger our custom compiler makefile
 	if (compilerMakeFile.isActive) {
 		compilerMakeFile.trigger('post:compile', _.clone(compileConfig));
 	}
-
-	logger.debug('****************** post:compile ******************');
 
 	const index = [];
 	const resourcePath = path.join(paths.resources, titaniumFolder);
@@ -547,8 +545,6 @@ module.exports = function(args, program) {
 				if (fs.statSync(file).isDirectory()) {
 					walk(file);
 				} else if (/\.js(on)?$/.test(filename)) {
-					// index[file.replace(/\\/g, '/').replace(binAssetsDir + '/', 'Resources/')] = 1; // 1 for exists on disk
-					
 					index.push(file.replace(resourcePath, ''));
 				}
 			}

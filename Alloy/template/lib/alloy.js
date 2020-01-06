@@ -571,7 +571,6 @@ exports.open = function(name, params) {
 	if( controller ){
 		view = controller.getViewEx();
 	} else {
-		// exports.createController(name, params).getView().open();
 		controller = exports.createController(name, params);
 		view = controller.getViewEx();
 	}
