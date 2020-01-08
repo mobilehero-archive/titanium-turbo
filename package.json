@@ -23,7 +23,7 @@
 		"@babel/core": "^7.7.7",
 		"@babel/generator": "^7.6.4",
 		"@babel/parser": "^7.6.4",
-		"@babel/traverse": "^7.6.3",
+		"@babel/traverse": "^7.7.4",
 		"@babel/types": "^7.7.4",
 		"@titanium/module-copier": "0.0.25",
 		"async": "^2.6.3",
