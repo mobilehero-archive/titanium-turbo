@@ -96,7 +96,7 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for using underscore (instead of lodash) with this tiapp.xml property:  `<property name="use-underscore"type="bool">true</property>`  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for installing widgets via npm (without naming restrictions) [[ALOY-1704]](https://jira.appcelerator.org/browse/ALOY-1704) ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using `WPATH()` in xml view attributes: [[ALOY-1253]](https://jira.appcelerator.org/browse/ALOY-1253)  [[Alloy PR]](https://github.com/appcelerator/alloy/pull/948)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
-* [x] Added support for using `~/` as a shortcut for WPATH() in xml view attributes: [[ALOY-1253]](https://jira.appcelerator.org/browse/ALOY-1253)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for using `~/` as a shortcut for WPATH() in xml view attributes: [[ALOY-1714]](https://jira.appcelerator.org/browse/ALOY-1714) [[Alloy PR]](https://github.com/appcelerator/alloy/pull/951)   ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using widget as primary control in xml view: [[ALOY-1256]](https://jira.appcelerator.org/browse/ALOY-1256) [[Alloy PR]](https://github.com/appcelerator/alloy/pull/949)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 
 
