@@ -98,6 +98,11 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for using `WPATH()` in xml view attributes: [[ALOY-1253]](https://jira.appcelerator.org/browse/ALOY-1253)  [[Alloy PR]](https://github.com/appcelerator/alloy/pull/948)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using `~/` as a shortcut for WPATH() in xml view attributes: [[ALOY-1714]](https://jira.appcelerator.org/browse/ALOY-1714) [[Alloy PR]](https://github.com/appcelerator/alloy/pull/951)   ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using widget as primary control in xml view: [[ALOY-1256]](https://jira.appcelerator.org/browse/ALOY-1256) [[Alloy PR]](https://github.com/appcelerator/alloy/pull/949)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for StackLayout element (with shortcut alias of `stack` and orientation property that defaults to `vertical`) in xml views:  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for VerticalLayout element (with shortcut alias of `vertical`) in xml views:  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for HorizontalLayout element (with shortcut alias of `horizontal`) in xml views:  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for AbsoluteLayout element (with shortcut alias of `absolute`) in xml views:  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+
 
 
 ## 🔗 Related Links
