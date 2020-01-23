@@ -2,6 +2,16 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.5-2] - 2020-01-23
+
+### Added
+
+- Added support for StackLayout element (with shortcut alias of `stack` and orientation property that defaults to `vertical`) in xml views
+- Added support for VerticalLayout element (with shortcut alias of `vertical`) in xml views
+- Added support for HorizontalLayout element (with shortcut alias of `horizontal`) in xml views
+- Added support for AbsoluteLayout element (with shortcut alias of `absolute`) in xml views
+
+
 ## [1.14.5-1] - 2020-01-06
 
 ### Added
@@ -19,11 +29,13 @@ Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and 
 
 - Updated to latest version of Alloy
 
+
 ## [1.14.1-18] - 2019-11-25
 
 ### Updated
 
 - Bug fixes for databinding
+
 
 ## [1.14.1-17] - 2019-10-24
 
