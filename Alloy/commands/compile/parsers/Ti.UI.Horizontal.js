@@ -1,2 +1,11 @@
-// This is an alias for Ti.UI.HorizontalLayout
-module.exports = require('./Ti.UI.HorizontalLayout');
+exports.parse = function(node, state) {
+	return require('./base').parse(node, state, parse);
+};
+
+function parse(node, state, args) {
+
+	node.nodeName = 'HorizontalLayout';
+
+	// Generate runtime code using default
+	return require('./default').parse(node, state);
+}

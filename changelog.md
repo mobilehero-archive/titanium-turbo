@@ -2,6 +2,18 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.5-4] - 2020-01-30
+
+### Added
+
+- Added support for StackLayout control (with shortcut alias of `stack` and orientation property that defaults to `vertical`) in JavaScript and xml views
+- Added support for VerticalLayout control (with shortcut alias of `vertical`) in JavaScript and xml views
+- Added support for HorizontalLayout control (with shortcut alias of `horizontal`) in JavaScript and xml views
+- Added support for AbsoluteLayout control (with shortcut alias of `absolute`) in JavaScript and xml views
+- Added alias support for ImageView and Image to JavaScript and xml views
+- Added support for defining the primary entry point for the application (defaults to `index`).  Currently search order: `Alloy.main` → `Alloy.CFG.main` → Titanium Property: `app.main`. 
+
+
 ## [1.14.5-2] - 2020-01-23
 
 ### Added

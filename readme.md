@@ -97,11 +97,12 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for installing widgets via npm (without naming restrictions) [[ALOY-1704]](https://jira.appcelerator.org/browse/ALOY-1704) ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using `WPATH()` in xml view attributes: [[ALOY-1253]](https://jira.appcelerator.org/browse/ALOY-1253)  [[Alloy PR]](https://github.com/appcelerator/alloy/pull/948)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for using `~/` as a shortcut for WPATH() in xml view attributes: [[ALOY-1714]](https://jira.appcelerator.org/browse/ALOY-1714) [[Alloy PR]](https://github.com/appcelerator/alloy/pull/951)   ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
-* [x] Added support for using widget as primary control in xml view: [[ALOY-1256]](https://jira.appcelerator.org/browse/ALOY-1256) [[Alloy PR]](https://github.com/appcelerator/alloy/pull/949)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
-* [x] Added support for StackLayout element (with shortcut alias of `stack` and orientation property that defaults to `vertical`) in xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
-* [x] Added support for VerticalLayout element (with shortcut alias of `vertical`) in xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
-* [x] Added support for HorizontalLayout element (with shortcut alias of `horizontal`) in xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
-* [x] Added support for AbsoluteLayout element (with shortcut alias of `absolute`) in xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for using widget as primary control in xml view [[ALOY-1256]](https://jira.appcelerator.org/browse/ALOY-1256) [[Alloy PR]](https://github.com/appcelerator/alloy/pull/949)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for StackLayout control (with shortcut alias of `stack` and orientation property that defaults to `vertical`) in JavaScript and xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for VerticalLayout control (with shortcut alias of `vertical`) in JavaScript and xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for HorizontalLayout control (with shortcut alias of `horizontal`) in JavaScript and xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for AbsoluteLayout control (with shortcut alias of `absolute`) in JavaScript and xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for defining the primary entry point for the application (defaults to `index`).  Currently search order: `Alloy.main` → `Alloy.CFG.main` → Titanium Property: `app.main`. [[ALOY-1549]](https://jira.appcelerator.org/browse/ALOY-1549)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 
 
 
