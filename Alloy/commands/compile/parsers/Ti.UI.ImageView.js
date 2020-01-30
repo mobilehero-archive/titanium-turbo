@@ -1,4 +1,5 @@
 exports.parse = function(node, state) {
+	node.nodeName = 'ImageView';		
 	return require('./base').parse(node, state, parse);
 };
 
