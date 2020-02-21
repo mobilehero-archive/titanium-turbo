@@ -464,6 +464,10 @@ exports.createController = function(name, args) {
 		throw new Error('Parameter "name" is required for Alloy.createController');
 	}
 
+	if( name.startsWith('/') ){
+		name = name.substring(1, name.length);
+	}
+
 	function cleanUpController(controller) {
 		if( controller.resource_name ){
 			exports.Controllers[controller.resource_name] = null;
