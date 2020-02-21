@@ -1247,7 +1247,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 					root: compileConfig.dir.resourcesPlatform,
 					plugins: [
 						[require('./ast/builtins-plugin'), compileConfig],
-						[require('./ast/handle-alloy-globals')],
+						// [require('./ast/handle-alloy-globals')],
 						[require('./ast/optimizer-plugin'), compileConfig.alloyConfig],
 						[require('./ast/string-statement-plugin'), compileConfig.alloyConfig],
 
