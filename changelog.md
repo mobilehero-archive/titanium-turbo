@@ -2,6 +2,11 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.6-2] - 2012-02-28
+
+### Updated
+
+- Fixed issue if file skipped due to being ignored by babel config (still needs fix in SDK though)
 
 ## [1.14.6-1] - 2012-02-21
 
