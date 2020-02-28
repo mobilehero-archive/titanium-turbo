@@ -40,7 +40,7 @@
 
 Titanium Turbo is a variation of **`Titanium Alloy`** that adds some enhancements and customizations for rapid development.
 
-This version of Titanium Turbo is based on **`Titanium Alloy 1.14.1`**
+This version of Titanium Turbo is based on **`Titanium Alloy 1.14.6`**
 
 ## 🚀 Getting Started
 
