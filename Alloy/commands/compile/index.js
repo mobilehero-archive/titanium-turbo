@@ -1259,7 +1259,11 @@ function optimizeCompiledCode(alloyConfig, paths) {
 			logger.info('- ' + file);
 			try {
 				var result = babel.transformFileSync(fullpath, options);
-				fs.writeFileSync(fullpath, result.code);
+				if ( !result || !result.code ) {
+					logger.info('Skipping optimize due to file restriction.');
+				} else {
+					fs.writeFileSync(fullpath, result.code);
+				}
 			} catch (e) {
 				U.die('Error transforming JS file', e);
 			}
