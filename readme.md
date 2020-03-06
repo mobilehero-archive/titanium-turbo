@@ -1,23 +1,3 @@
-
-
-<a href="#-titanium-turbo">
-	<p align="center">
-	<img src="https://cdn.secure-api.org/images/warning-sign-area51.png" width="80%" />
-	<img src="https://cdn.secure-api.org/images/border-line-3.png" width="70%" height="50" />
-	</p>
-</a>
-
-<br/>
-<br/>
-
-> _**Turbo is not an official Axway product.**  
-> It is an experiment by [Brenton House](https://brenton.house) using open-source projects.  You are welcome to try it out but be aware of the risks_
-
-<br/>
-<br/>
-<br/>
-<br/>
-
 <p align="center">
   <img src="https://cdn.secure-api.org/images/turbo-title_400.png" width="50%" /><br>
 </p>
@@ -26,6 +6,9 @@
 
 [![@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png)](https://www.npmjs.com/package/@titanium/turbo)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/titanium-turbo)](https://dependabot.com)
+
+> _**Turbo is not an official Axway product.**  
+> It is an experiment by [Brenton House](https://brenton.house) using open-source projects.  You are welcome to try it out and [leave feedback](https://github.com/brentonhouse/titanium-turbo/issues)!_
 
 
 * [📝 Description](#-description)
@@ -38,7 +21,7 @@
 
 ## 📝 Description
 
-Titanium Turbo is a variation of **`Titanium Alloy`** that adds some enhancements and customizations for rapid development.
+Titanium Turbo is a fork of **`Titanium Alloy`** that adds a lot of enhancements and customizations for rapid development.
 
 This version of Titanium Turbo is based on **`Titanium Alloy 1.14.6`**
 
