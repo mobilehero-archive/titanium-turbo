@@ -2,6 +2,12 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.14.6-3] - 2020-03-06
+
+### Added
+
+- Added initial support for Alloy now being able to be required `require('Turbo')` - more awesomeness to come!
+
 ## [1.14.6-2] - 2012-02-28
 
 ### Updated
