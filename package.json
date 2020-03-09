@@ -47,7 +47,7 @@
 	},
 	"license": "Apache-2.0",
 	"bin": {
-		"turbo": "./bin/turbo"
+		"turbo2": "./bin/alloy"
 	},
 	"scripts": {
 		"test": "jake test:all",
