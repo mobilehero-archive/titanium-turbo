@@ -86,14 +86,15 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for HorizontalLayout control (with shortcut alias of `horizontal`) in JavaScript and xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for AbsoluteLayout control (with shortcut alias of `absolute`) in JavaScript and xml views  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for defining the primary entry point for the application (defaults to `index`).  Currently search order: `Alloy.main` → `Alloy.CFG.main` → Titanium Property: `app.main`. [[ALOY-1549]](https://jira.appcelerator.org/browse/ALOY-1549)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
-
+* [x] Added support for `<style>` tag in XML views.  Also supports the `src` attribute (like the `<script>` tag) which allows users to reference a widget-wide `app.tss` file! [[ALOY-1729]](https://jira.appcelerator.org/browse/ALOY-1729)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 
 
 ## 🔗 Related Links
 
 ⭐  [Geek Mobile Toolkit](https://www.npmjs.com/package/@geek/mobile) - Toolkit for creating, building, and managing mobile app projects.   
 ⭐  [Titanium Turbo Template (Default)](https://www.npmjs.com/package/@titanium/template-turbo-default) - Template for default Turbo app.  Based on the basic Alloy Template + some extra goodies.   
-⭐  [Titanium Turbo Template (Next)](https://www.npmjs.com/package/@titanium/template-turbo-next) - Template for Turbo app (with extras).  Based on the default Turbo Template + some extras.   
+⭐  [Titanium Turbo Template (Next)](https://www.npmjs.com/package/@titanium/template-turbo-next) - Template for Titanium Turbo app (with extras).  Based on the default Turbo Template + some extras.   
+⭐  [Titanium Turbo Template (Fully Loaded)](https://www.npmjs.com/package/@titanium/template-turbo-fully-loaded) - Template for Titanium Turbo app with all the bells and whistles!    
 ⭐  [Titanium Mobile](https://www.npmjs.com/package/titanium) - Open-source tool for building powerful, cross-platform native apps with JavaScript.   
 ⭐  [Alloy](https://www.npmjs.com/package/alloy) - MVC framework built on top of Titanium Mobile.   
 ⭐  [Appcelerator](https://www.npmjs.com/package/appcelerator) - Installer for the Appcelerator Platform tool   

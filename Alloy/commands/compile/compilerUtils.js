@@ -288,7 +288,7 @@ exports.generateNodeExtended = function(node, state, newState) {
 	return exports.generateNode(node, _.extend(_.clone(state), newState));
 };
 
-exports.generateNode = function(node, state, defaultId, isTopLevel, isModelOrCollection) {
+exports.generateNode = function(node, state, defaultId, isTopLevel = false, isModelOrCollection = false, masterState = {}) {
 	if (node.nodeType != 1) return '';
 	if (!exports.isNodeForCurrentPlatform(node)) {
 		return '';
@@ -343,6 +343,10 @@ exports.generateNode = function(node, state, defaultId, isTopLevel, isModelOrCol
 		parserRequire = args.fullname + '.js';
 	}
 
+	if ( ['Ti.UI.Script', 'Ti.UI.Style'].includes(args.fullname)) {
+		isTopLevel = false;
+	}
+
 	// Execute the appropriate tag parser and append code
 	var isLocal = state.local;
 	// [ALOY-787] keeping track of widget id
@@ -350,6 +354,9 @@ exports.generateNode = function(node, state, defaultId, isTopLevel, isModelOrCol
 	state = require('./parsers/' + parserRequire).parse(node, state) || { parent: {} };
 	code.content += state.code;
 	state.widgetId = widgetId;
+	if ( state.addedStyles ) {
+		masterState.styles = state.addedStyles;
+	}
 
 	// Use local variable if given
 	if (isLocal && state.parent) { args.symbol = state.parent.symbol || args.symbol; }

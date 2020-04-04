@@ -2,6 +2,13 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+
+## [1.14.6-5] - 2020-04-04
+
+### Added
+
+- Support for `<style>` tag in XML views!  Also supports the `src` element which then allows using a widget-wide `app.tss` file.
+
 ## [1.14.6-3] - 2020-03-06
 
 ### Added

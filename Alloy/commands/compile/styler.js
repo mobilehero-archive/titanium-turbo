@@ -259,20 +259,24 @@ exports.sortStyles = function(style, opts) {
 	return _.sortBy(theArray, 'priority');
 };
 
-exports.loadStyle = function(tssFile) {
-	if (path.existsSync(tssFile)) {
+exports.loadStyle = function(tssFile, isXmlStyle = false) {
+	if (isXmlStyle || path.existsSync(tssFile)) {
 		// read the style file
 		var contents;
 		var originalContents;
 		var addedBraces;
-		try {
-			contents = fs.readFileSync(tssFile, 'utf8');
-			// Store the originalContents in case we hit a parse error,
-			// this allows us to show the correct contents of the .tss file
-			originalContents = contents;
-		} catch (e) {
-			U.die('Failed to read style file "' + tssFile + '"', e);
-		}
+		if ( isXmlStyle ) {
+			contents = tssFile;
+		} else {
+			try {
+				contents = fs.readFileSync(tssFile, 'utf8');
+				// Store the originalContents in case we hit a parse error,
+				// this allows us to show the correct contents of the .tss file
+				originalContents = contents;
+			} catch (e) {
+				U.die('Failed to read style file "' + tssFile + '"', e);
+			}
+		} 
 
 		// skip if the file is empty
 		if (/^\s*$/gi.test(contents)) {
@@ -293,6 +297,8 @@ exports.loadStyle = function(tssFile) {
 			json = grammar.parse(contents);
 			optimizer.optimizeStyle(json);
 		} catch (e) {
+			console.error(e);
+			
 			// If we added braces to the contents then the actual line number
 			// on the original contents is one less than the error reports
 			if (addedBraces) {
@@ -312,8 +318,8 @@ exports.loadStyle = function(tssFile) {
 	return {};
 };
 
-exports.loadAndSortStyle = function(tssFile, opts) {
-	return exports.sortStyles(exports.loadStyle(tssFile), opts);
+exports.loadAndSortStyle = function(tssFile, opts, isXmlStyle = false) {
+	return exports.sortStyles(exports.loadStyle(tssFile, isXmlStyle), opts);
 };
 
 exports.createVariableStyle = function(keyValuePairs, value) {
