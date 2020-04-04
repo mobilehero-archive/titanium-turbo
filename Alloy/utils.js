@@ -538,18 +538,24 @@ exports.die = function(msg, e) {
 };
 
 exports.dieWithCodeFrame = function(errorMessage, lineInfo, fileContents, hint) {
-	var frame = codeFrameColumns(fileContents, {
-		start: lineInfo
-	}, {
-		highlightCode: true
-	});
 	logger.error(errorMessage);
-	// Convert the code frame from a string to an Array so that the logger logs
-	// each line individually to keep the code frame intact
-	logger.error(frame.split('\n'));
-	if (hint) {
-		logger.info(hint);
+
+	if ( fileContents ) {
+		
+		var frame = codeFrameColumns(fileContents, {
+			start: lineInfo
+		}, {
+			highlightCode: true
+		});
+
+		// Convert the code frame from a string to an Array so that the logger logs
+		// each line individually to keep the code frame intact
+		logger.error(frame.split('\n'));
+		if (hint) {
+			logger.info(hint);
+		}		
 	}
+
 	process.exit(1);
 };
 

@@ -808,8 +808,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 		// Load view from file into an XML document root node
 		var docRoot;
 		try {
-			logger.info('  view:       "' +
-				path.relative(path.join(dir, CONST.DIR.VIEW), files.VIEW) + '"');
+			logger.info('  view:       "' + path.relative(path.join(dir, CONST.DIR.VIEW), files.VIEW) + '"');
 			docRoot = U.XML.getAlloyFromFile(files.VIEW);
 		} catch (e) {
 			U.die([
@@ -902,8 +901,9 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 				parent:{},
 				styles:state.styles,
 				widgetId: manifest ? manifest.id : undefined,
+				filepath: files.VIEW,
 				parentFormFactor: node.hasAttribute('formFactor') ? node.getAttribute('formFactor') : undefined
-			}, defaultId, true);
+			}, defaultId, true, false, state);
 		});
 	}
 
