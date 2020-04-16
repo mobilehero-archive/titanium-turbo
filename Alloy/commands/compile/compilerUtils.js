@@ -94,9 +94,12 @@ exports.generateUniqueId = function() {
 };
 
 exports.getNodeFullname = function(node) {
-	var name = node.nodeName,
-		ns = node.getAttribute('ns') || CONST.IMPLICIT_NAMESPACES[name] || CONST.NAMESPACE_DEFAULT,
-		fullname = ns + '.' + name;
+	// Fix naming to support camelCase, kebab-case, snake_case elements 
+	// https://jira.appcelerator.org/browse/ALOY-1647
+	node.nodeName = _.upperFirst(_.camelCase(node.nodeName));
+	const name = node.nodeName;
+	const	ns = node.getAttribute('ns') || CONST.IMPLICIT_NAMESPACES[name] || CONST.NAMESPACE_DEFAULT;
+	const fullname = ns + '.' + name;
 
 	return fullname;
 };
@@ -401,9 +404,25 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 				},
 				postCode;
 
+			// console.debug(`eventObj: ${JSON.stringify(eventObj, null, 2)}`);
+
+
+			// const regex = (/^~([^~]+)~$/);
+			// // const regex = regex.test(eventObj.cb));
+			// // console.debug(`test: ${JSON.stringify(test, null, 2)}`);
+
+
+			// if ( regex.test(eventObj.cb) ) {
+			// 	eventObj.cb = eventObj.cb.replace(regex, '$1')
+			// }
+
+			// console.debug(`eventObj.cb: ${JSON.stringify(eventObj.cb, null, 2)}`);
+				
 			if (_.includes(['Alloy.Widget', 'Alloy.Require'], args.fullname)) {
 				eventObj.obj = state.controller;
 			}
+
+			
 
 			// create templates for immediate and deferred event handler creation
 			var theDefer = _.template("__defers['<%= obj %>!<%= ev %>!<%= escapedCb %>']")(eventObj);
@@ -415,11 +434,24 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 			}
 			var deferTemplate = theDefer + ' && ' + theEvent + ';';
 			var immediateTemplate;
+
+			console.debug(`eventObj.cb: ${JSON.stringify(eventObj.cb, null, 2)}`);
+
+	
+	
 			if (/[\.\[]/.test(eventObj.cb)) {
 				immediateTemplate = 'try{' + theEvent + ';}catch(e){' + theDefer + '=true;}';
 			} else {
 				immediateTemplate = '<%= cb %>?' + theEvent + ':' + theDefer + '=true;';
 			}
+
+			// console.debug(`immediateTemplate: ${JSON.stringify(immediateTemplate, null, 2)}`);
+
+			// const aaa = _.template(immediateTemplate)(eventObj);
+			// console.debug(`aaa: ${JSON.stringify(aaa, null, 2)}`);
+
+			// zzz();
+
 
 			// add the generated code to the view code and post-controller code respectively
 			code.content += _.template(immediateTemplate)(eventObj);
@@ -968,6 +1000,7 @@ exports.validateNodeName = function(node, names) {
 	var ret = null;
 	if (!_.isArray(names)) { names = [names]; }
 
+	console.debug(`fullname: ${JSON.stringify(fullname, null, 2)}`);
 	// Is the node name in the given list of valid names?
 	ret = _.find(names, function(name) { return name === fullname; });
 	if (ret) { return ret; }

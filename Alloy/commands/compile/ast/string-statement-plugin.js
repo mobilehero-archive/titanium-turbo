@@ -12,7 +12,7 @@ module.exports = function (_ref) {
 			Property: function (path, state) {
 				if (types.isStringLiteral(path.node.value)) {
 					const regex1 = /^`([^`]+)`$/;
-					const regex2 = /^~([^`]+)~$/;
+					const regex2 = /^~([^~]+)~$/;
 					if ( regex1.test(path.node.value.value) ) {
 						path.replaceWith(types.ObjectProperty(types.identifier(path.node.key.name), types.Identifier(path.node.value.value)));
 					} else if ( regex2.test(path.node.value.value) ) {

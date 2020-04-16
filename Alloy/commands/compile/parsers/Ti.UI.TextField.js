@@ -17,6 +17,7 @@ var AUTOCAPITALIZATION_TYPES = [
 ];
 
 exports.parse = function(node, state) {
+	node.nodeName = 'TextField';
 	return require('./base').parse(node, state, parse);
 };
 

@@ -24,7 +24,7 @@
  * [Alloy Framework](http://docs.appcelerator.com/platform/latest/#!/guide/Alloy_Framework).
  */
 
-if( Ti.App.Properties.getBool('use-underscore', false) ){
+if (Ti.App.Properties.getBool('use-underscore', false)) {
 	var _ = require('/alloy/underscore');
 } else {
 	var _ = require('lodash');
@@ -60,7 +60,11 @@ exports.Backbone = Backbone;
 var DEFAULT_WIDGET = 'widget';
 var TI_VERSION = Ti.version;
 var MW320_CHECK = OS_MOBILEWEB && TI_VERSION >= '3.2.0';
-var IDENTITY_TRANSFORM = OS_ANDROID ? (Ti.version >= '8.0.0' ? Ti.UI.createMatrix2D() : Ti.UI.create2DMatrix()) : undefined;
+var IDENTITY_TRANSFORM = OS_ANDROID
+	? Ti.version >= '8.0.0'
+		? Ti.UI.createMatrix2D()
+		: Ti.UI.create2DMatrix()
+	: undefined;
 var RESET = {
 	bottom: null,
 	left: null,
@@ -123,13 +127,13 @@ var RESET = {
 	borderRadius: OS_IOS ? 0 : null,
 
 	// https://jira.appcelerator.org/browse/TIMOB-14574
-	borderWidth: OS_IOS ? 0 : null
+	borderWidth: OS_IOS ? 0 : null,
 };
 
 if (OS_IOS) {
 	RESET = _.extend(RESET, {
 		backgroundLeftCap: 0,
-		backgroundTopCap: 0
+		backgroundTopCap: 0,
 	});
 } else if (OS_ANDROID) {
 	RESET = _.extend(RESET, {
@@ -138,25 +142,28 @@ if (OS_IOS) {
 		backgroundFocusedColor: null,
 		backgroundFocusedImage: null,
 		focusable: false,
-		keepScreenOn: false
+		keepScreenOn: false,
 	});
 }
 
 const file_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__file_registry.json');
 exports.file_registry = JSON.parse(file_registry_resource.read().text);
 
-const widget_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__widget_registry.json');
+const widget_registry_resource = Ti.Filesystem.getFile(
+	Titanium.Filesystem.resourcesDirectory,
+	'__widget_registry.json',
+);
 exports.widget_registry = JSON.parse(widget_registry_resource.read().text);
 
-
 function ucfirst(text) {
-	if (!text) { return text; }
+	if (!text) {
+		return text;
+	}
 	return text[0].toUpperCase() + text.substr(1);
 }
 
 function addNamespace(apiName) {
-	return (CONST.IMPLICIT_NAMESPACES[apiName] || CONST.NAMESPACE_DEFAULT) +
-		'.' + apiName;
+	return (CONST.IMPLICIT_NAMESPACES[apiName] || CONST.NAMESPACE_DEFAULT) + '.' + apiName;
 }
 
 exports.M = function(name, modelDesc, migrations) {
@@ -180,7 +187,9 @@ exports.M = function(name, modelDesc, migrations) {
 	extendObj.defaults = config.defaults;
 
 	// construct the model based on the current adapter type
-	if (migrations) { extendClass.migrations = migrations; }
+	if (migrations) {
+		extendClass.migrations = migrations;
+	}
 
 	// Run the pre model creation code, if any
 	if (mod && _.isFunction(mod.beforeModelCreate)) {
@@ -205,7 +214,7 @@ exports.M = function(name, modelDesc, migrations) {
 };
 
 exports.C = function(name, modelDesc, model) {
-	var extendObj = { model: model };
+	var extendObj = {model: model};
 	var config = (model ? model.prototype.config : {}) || {};
 	var mod;
 
@@ -249,9 +258,9 @@ exports.UI.create = function(controller, apiName, opts) {
 		ns = opts.ns || CONST.IMPLICIT_NAMESPACES[baseName] || CONST.NAMESPACE_DEFAULT;
 	} else if (parts.length > 1) {
 		baseName = parts[parts.length - 1];
-		ns = parts.slice(0,parts.length - 1).join('.');
+		ns = parts.slice(0, parts.length - 1).join('.');
 	} else {
-		throw ('Alloy.UI.create() failed: No API name was given in the second parameter');
+		throw 'Alloy.UI.create() failed: No API name was given in the second parameter';
 	}
 	opts.apiName = ns + '.' + baseName;
 	baseName = baseName[0].toUpperCase() + baseName.substr(1);
@@ -268,7 +277,9 @@ exports.createStyle = function(controller, opts, defaults) {
 
 	// If there's no opts, there's no reason to load the style module. Just
 	// return an empty object.
-	if (!opts) { return {}; }
+	if (!opts) {
+		return {};
+	}
 
 	// make opts.classes an array if it isn't already
 	if (_.isArray(opts.classes)) {
@@ -290,8 +301,7 @@ exports.createStyle = function(controller, opts, defaults) {
 	// Load the runtime style for the given controller
 	var styleArray;
 	if (controller && _.isObject(controller)) {
-		styleArray = require('/alloy/widgets/' + controller.widgetId +
-			'/styles/' + controller.name);
+		styleArray = require('/alloy/widgets/' + controller.widgetId + '/styles/' + controller.name);
 	} else {
 		styleArray = require('/alloy/styles/' + controller);
 	}
@@ -305,35 +315,36 @@ exports.createStyle = function(controller, opts, defaults) {
 		// give the apiName a namespace if necessary
 		var styleApi = style.key;
 		if (style.isApi && styleApi.indexOf('.') === -1) {
-			styleApi = (CONST.IMPLICIT_NAMESPACES[styleApi] ||
-				CONST.NAMESPACE_DEFAULT) + '.' + styleApi;
+			styleApi = (CONST.IMPLICIT_NAMESPACES[styleApi] || CONST.NAMESPACE_DEFAULT) + '.' + styleApi;
 		}
 
 		// does this style match the given opts?
-		if ((style.isId && opts.id && style.key === opts.id) ||
-			(style.isClass && _.contains(classes, style.key))) {
+		if ((style.isId && opts.id && style.key === opts.id) || (style.isClass && _.contains(classes, style.key))) {
 			// do nothing here, keep on processing
 		} else if (style.isApi) {
 			if (style.key.indexOf('.') === -1) {
 				style.key = addNamespace(style.key);
 			}
-			if (style.key !== apiName) { continue; }
+			if (style.key !== apiName) {
+				continue;
+			}
 		} else {
 			// no matches, skip this style
 			continue;
 		}
 
 		// can we clear out any form factor queries?
-		if (style.queries && style.queries.formFactor &&
-			!exports[style.queries.formFactor]) {
+		if (style.queries && style.queries.formFactor && !exports[style.queries.formFactor]) {
 			continue;
 		}
 
 		// process runtime custom queries
-		if (style.queries && style.queries.if &&
+		if (
+			style.queries &&
+			style.queries.if &&
 			(style.queries.if.trim().toLowerCase() === 'false' ||
-			(style.queries.if.indexOf('Alloy.Globals') !== -1 &&
-			exports.Globals[style.queries.if.split('.')[2]] === false))) {
+				(style.queries.if.indexOf('Alloy.Globals') !== -1 && exports.Globals[style.queries.if.split('.')[2]] === false))
+		) {
 			continue;
 		}
 
@@ -344,15 +355,14 @@ exports.createStyle = function(controller, opts, defaults) {
 	// TODO: cache the style based on the opts and controller
 
 	// Merge remaining extra style properties from opts, if any
-	var extraStyle = _.omit(opts, [
-		CONST.CLASS_PROPERTY,
-		CONST.APINAME_PROPERTY
-	]);
+	var extraStyle = _.omit(opts, [CONST.CLASS_PROPERTY, CONST.APINAME_PROPERTY]);
 	exports.deepExtend(true, styleFinal, extraStyle);
 	styleFinal[CONST.CLASS_PROPERTY] = classes;
 	styleFinal[CONST.APINAME_PROPERTY] = apiName;
 
-	if (MW320_CHECK) { delete styleFinal[CONST.APINAME_PROPERTY]; }
+	if (MW320_CHECK) {
+		delete styleFinal[CONST.APINAME_PROPERTY];
+	}
 
 	return defaults ? _.defaults(styleFinal, defaults) : styleFinal;
 };
@@ -360,18 +370,25 @@ exports.createStyle = function(controller, opts, defaults) {
 function processStyle(controller, proxy, classes, opts, defaults) {
 	opts = opts || {};
 	opts.classes = classes;
-	if (proxy.apiName) { opts.apiName = proxy.apiName; }
-	if (proxy.id) { opts.id = proxy.id; }
+	if (proxy.apiName) {
+		opts.apiName = proxy.apiName;
+	}
+	if (proxy.id) {
+		opts.id = proxy.id;
+	}
 	proxy.applyProperties(exports.createStyle(controller, opts, defaults));
-	if (OS_ANDROID) { proxy.classes = classes; }
+	if (OS_ANDROID) {
+		proxy.classes = classes;
+	}
 }
 
 exports.addClass = function(controller, proxy, classes, opts) {
-
 	// make sure we actually have classes to add
 	if (!classes) {
 		if (opts) {
-			if (MW320_CHECK) { delete opts.apiName; }
+			if (MW320_CHECK) {
+				delete opts.apiName;
+			}
 			proxy.applyProperties(opts);
 		}
 		return;
@@ -385,7 +402,9 @@ exports.addClass = function(controller, proxy, classes, opts) {
 		// make sure we actually added classes before processing styles
 		if (beforeLen === newClasses.length) {
 			if (opts) {
-				if (MW320_CHECK) { delete opts.apiName; }
+				if (MW320_CHECK) {
+					delete opts.apiName;
+				}
 				proxy.applyProperties(opts);
 			}
 			return;
@@ -403,7 +422,9 @@ exports.removeClass = function(controller, proxy, classes, opts) {
 	// make sure there's classes to remove before processing
 	if (!beforeLen || !classes.length) {
 		if (opts) {
-			if (MW320_CHECK) { delete opts.apiName; }
+			if (MW320_CHECK) {
+				delete opts.apiName;
+			}
 			proxy.applyProperties(opts);
 		}
 		return;
@@ -415,7 +436,9 @@ exports.removeClass = function(controller, proxy, classes, opts) {
 		// make sure there was actually a difference before processing
 		if (beforeLen === newClasses.length) {
 			if (opts) {
-				if (MW320_CHECK) { delete opts.apiName; }
+				if (MW320_CHECK) {
+					delete opts.apiName;
+				}
 				proxy.applyProperties(opts);
 			}
 			return;
@@ -441,8 +464,7 @@ exports.resetClass = function(controller, proxy, classes, opts) {
  * @return {Alloy.Controller} Alloy widget controller object.
  */
 exports.createWidget = function(id, name, args) {
-	if (typeof name !== 'undefined' && name !== null &&
-		_.isObject(name) && !_.isString(name)) {
+	if (typeof name !== 'undefined' && name !== null && _.isObject(name) && !_.isString(name)) {
 		args = name;
 		name = DEFAULT_WIDGET;
 	}
@@ -459,20 +481,19 @@ exports.createWidget = function(id, name, args) {
  * @return {Alloy.Controller} Alloy controller object.
  */
 exports.createController = function(name, args) {
-	
-	if( _.isNil(name)){
+	if (_.isNil(name)) {
 		throw new Error('Parameter "name" is required for Alloy.createController');
 	}
 
-	if( name.startsWith('/') ){
+	if (name.startsWith('/')) {
 		name = name.substring(1, name.length);
 	}
 
 	function cleanUpController(controller) {
-		if( controller.resource_name ){
+		if (controller.resource_name) {
 			exports.Controllers[controller.resource_name] = null;
 		}
-		if( controller.resource_alias ){
+		if (controller.resource_alias) {
 			exports.Controllers[controller.resource_alias] = null;
 		}
 
@@ -487,13 +508,16 @@ exports.createController = function(name, args) {
 			controller.destroy();
 		}
 
+		if( exports.Controllers.current === controller){
+			exports.Controllers.current = null;
+		}
 		controller = null;
 	}
 
 	let controller;
-	if( exports.file_registry.includes(`/alloy/controllers/${name}.js`)){
+	if (exports.file_registry.includes(`/alloy/controllers/${name}.js`)) {
 		controller = new (require(`/alloy/controllers/${name}`))(args);
-	} else if( exports.widget_registry[name] ){
+	} else if (exports.widget_registry[name]) {
 		controller = new (require(exports.widget_registry[name]))(args);
 	} else {
 		throw new Error('Alloy controller not found: ' + name);
@@ -504,20 +528,19 @@ exports.createController = function(name, args) {
 	exports.Controllers[controller.resource_name] = controller;
 
 	if (Object.keys(controller.__views).length > 0) {
-		var view = controller.getViewEx({ recurse: true});
+		var view = controller.getViewEx({recurse: true});
 
-		if( view.alias ){
+		if (view.alias) {
 			controller.resource_alias = view.alias;
 			exports.Controllers[controller.resource_alias] = controller;
 		}
 
-		controller.once = function (eventName, callback) {
+		controller.once = function(eventName, callback) {
 			controller.on(eventName, () => {
-				if( controller ){
+				if (controller) {
 					controller.off(eventName);
-					callback();					
+					callback();
 				}
-
 			});
 			return controller;
 		};
@@ -526,10 +549,9 @@ exports.createController = function(name, args) {
 			if (typeof view.open === 'function') {
 				view.addEventListener('open', function open(e) {
 					view.removeEventListener('open', open);
+					exports.Controllers.current = controller;
 					controller.trigger('open', e);
-					if (true) {
-						console.debug(`Controller ${name} was opened`);
-					 }
+					console.debug(`Controller ${name} was opened`);
 				});
 
 				view.addEventListener('close', function close() {
@@ -567,32 +589,41 @@ exports.createController = function(name, args) {
 	return controller;
 };
 
-
 exports.open = function(name, params) {
 	console.debug(`inside alloy.open(${name})`);
-	let controller = exports.Controllers[name];
-	let view;
-	if( controller ){
-		view = controller.getViewEx();
-	} else {
-		controller = exports.createController(name, params);
-		view = controller.getViewEx();
-	}
-	if( view && typeof view.open === 'function') {
-		view.open();
-	}
-}
-
+	const promise = new Promise((resolve, reject) => {
+		let controller = exports.Controllers[name];
+		let view;
+		if (controller) {
+			view = controller.getViewEx();
+		} else {
+			controller = exports.createController(name, params);
+			view = controller.getViewEx();
+		}
+		if (view && typeof view.open === 'function') {
+			if (typeof view.addEventListener === 'function') {
+				view.addEventListener('open', function open(e) {
+					view.removeEventListener('open', open);
+					controller.trigger('open', e);
+					console.debug(`Controller ${name} was opened`);
+					resolve({controller, view});
+				});
+			}
+			view.open();
+		}
+	});
+	return promise;
+};
 
 exports.close = function(name) {
 	const controller = exports.Controllers[name];
-	if( controller ){
+	if (controller) {
 		const view = controller.getView();
-		if( view && typeof view.close === 'function') {
+		if (view && typeof view.close === 'function') {
 			view.close();
 		}
 	}
-}
+};
 
 /**
  * @method createModel
@@ -626,10 +657,7 @@ exports.createCollection = function(name, args) {
 };
 
 function isTabletFallback() {
-	return Math.min(
-		Ti.Platform.displayCaps.platformHeight,
-		Ti.Platform.displayCaps.platformWidth
-	) >= 700;
+	return Math.min(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 700;
 }
 
 /**
@@ -642,25 +670,21 @@ exports.isTablet = (function() {
 		return Ti.Platform.osname === 'ipad';
 	} else if (OS_ANDROID) {
 		var psc = Ti.Platform.Android.physicalSizeCategory;
-		return psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_LARGE ||
-			psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_XLARGE;
+		return (
+			psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_LARGE ||
+			psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_XLARGE
+		);
 	} else if (OS_MOBILEWEB) {
-		return Math.min(
-			Ti.Platform.displayCaps.platformHeight,
-			Ti.Platform.displayCaps.platformWidth
-		) >= 400;
-	// } else if (OS_BLACKBERRY) {
-	// 	// Tablets not currently supported by BB TiSDK
-	// 	// https://jira.appcelerator.org/browse/TIMOB-13225
-	// 	return false;
+		return Math.min(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 400;
+		// } else if (OS_BLACKBERRY) {
+		// 	// Tablets not currently supported by BB TiSDK
+		// 	// https://jira.appcelerator.org/browse/TIMOB-13225
+		// 	return false;
 	} else if (OS_WINDOWS) {
 		// per http://www.extremetech.com/computing/139768-windows-8-smartphones-and-windows-phone-8-tablets
 		// tablets should be >= 1024x768 and phones could be lower, though current phones are running at
 		// the 1280x720 range and higher
-		return Math.max(
-			Ti.Platform.displayCaps.platformHeight,
-			Ti.Platform.displayCaps.platformWidth
-		) >= 1024;
+		return Math.max(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 1024;
 	} else {
 		return isTabletFallback();
 	}
@@ -785,7 +809,20 @@ exports.CFG = require('/alloy/CFG');
 
 if (OS_ANDROID) {
 	exports.Android = {};
-	exports.Android.menuItemCreateArgs = ['itemId', 'groupId', 'title', 'order', 'actionView', 'checkable', 'checked', 'enabled', 'icon', 'showAsAction', 'titleCondensed', 'visible'];
+	exports.Android.menuItemCreateArgs = [
+		'itemId',
+		'groupId',
+		'title',
+		'order',
+		'actionView',
+		'checkable',
+		'checked',
+		'enabled',
+		'icon',
+		'showAsAction',
+		'titleCondensed',
+		'visible',
+	];
 }
 
 /*
@@ -838,7 +875,13 @@ exports.deepExtend = function() {
 					continue;
 				}
 
-				if (deep && copy && !_.isFunction(copy) && _.isObject(copy) && ((copy_is_array = _.isArray(copy)) || !_.has(copy, 'apiName'))) {
+				if (
+					deep &&
+					copy &&
+					!_.isFunction(copy) &&
+					_.isObject(copy) &&
+					((copy_is_array = _.isArray(copy)) || !_.has(copy, 'apiName'))
+				) {
 					// Recurse if we're merging plain objects or arrays
 					if (copy_is_array) {
 						copy_is_array = false;

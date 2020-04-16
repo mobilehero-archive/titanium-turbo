@@ -507,7 +507,21 @@ The 'redbg' and 'bigger' classes are shown below:
 				}
 			});
 			return this;
+		},
+
+		hideKeyboard: function(e) {
+			var parent_name = e.source.parent;
+			if (parent_name) {
+				const parent = self.__views[parent_name];
+				parent.blur();
+				parent.keyboardToolbar.visible = false;
+			}
+		},
+
+		showKeyboard: function(e) {
+			e.source.keyboardToolbar.visible = true;
 		}
+
 	});
 };
 module.exports = Controller;

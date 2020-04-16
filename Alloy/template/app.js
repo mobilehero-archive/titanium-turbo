@@ -58,6 +58,11 @@ Ti.UI.createImageView = (params = {}) => {
 	return view;
 }
 
+Ti.UI.createInput =  (params = {})  => {
+	const view = Ti.UI.createTextField( params );
+	return view;
+}
+
 __MAPMARKER_ALLOY_JS__
 // }
 
