@@ -419,6 +419,7 @@ The 'redbg' and 'bigger' classes are shown below:
 		 * @since 1.7.0
 		 */
 		addListener: function(proxy, type, callback) {
+
 			if (!proxy.id) {
 				proxy.id = _.uniqueId('__trackId');
 
@@ -426,6 +427,10 @@ The 'redbg' and 'bigger' classes are shown below:
 					Ti.API.error('$.addListener: ' + proxy.id + ' was conflict.');
 					return;
 				}
+			}
+
+			if ( typeof callback !== 'function' ) {
+				throw new Error(`Callback for ${proxy.id}.${type} is not a function.`);
 			}
 
 			// proxy.addEventListener(type, callback);
