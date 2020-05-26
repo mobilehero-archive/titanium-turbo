@@ -173,5 +173,11 @@ __MAPMARKER_ALLOY_JS__
 // }
 
 Alloy.main = Alloy.main || Alloy.CFG.main || Titanium.App.Properties.getString('app.main','index');
-Alloy.open(Alloy.main);
+// 
+if( Alloy.BYPASS_AUTO_OPEN ){
+	Alloy.createController(Alloy.main);
+} else {
+	Alloy.open(Alloy.main);
+}
+
 
