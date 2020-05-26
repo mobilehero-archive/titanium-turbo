@@ -152,7 +152,7 @@ Ti.UI.createTextField =  (params = {})  => {
 Ti.UI.createIcon =  (params = {})  => {
 	params.font = params.font || {};
 	const heightInt = _.toInteger(params.height);
-	params.font.fontSize = params.font.size || params.size || (heightInt > 0) ? heightInt : undefined;
+	params.font.fontSize = params.size || params.font.size || params.font.fontSize || ((heightInt > 0) ? heightInt : undefined);
 	if( params.type ){
 		params.font.fontFamily = 'FontAwesome-' + _.capitalize(params.type);
 	}
