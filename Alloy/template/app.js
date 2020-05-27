@@ -51,18 +51,6 @@ Ti.UI.createVerticalLayout =  (params = {})  => {
 	return view;
 }
 
-Ti.UI.createVerticalLayout =  (params = {})  => {
-	params.layout = params.orientation = 'vertical';
-	_.defaults(params, {
-		height: 'size',
-	});
-	if( params.debugColor && turbo.DEBUG_MODE ){
-		params.backgroundColor = params.debugColor;
-	}
-	const view = Ti.UI.createView( params );
-	return view;
-}
-
 Ti.UI.createHorizontalLayout =  (params = {})  => {
 	params.layout = params.orientation = 'horizontal';
 	_.defaults(params, {
@@ -74,7 +62,6 @@ Ti.UI.createHorizontalLayout =  (params = {})  => {
 	const view = Ti.UI.createView( params );
 	return view;
 }
-
 
 const createImageView = Ti.UI.createImageView;
 Ti.UI.createImageView = (params = {}) => {
@@ -109,7 +96,6 @@ const AUTOCAPITALIZATION_TYPES = {
 	words: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,  // 2
 	all: Ti.UI.TEXT_AUTOCAPITALIZATION_ALL,  // 3
 }
-
 const AUTOFILL_TYPES = {
 	address: Ti.UI.AUTOFILL_TYPE_ADDRESS, 
 	phone: Ti.UI.AUTOFILL_TYPE_PHONE,  
@@ -147,7 +133,6 @@ Ti.UI.createTextField =  (params = {})  => {
 	const view = createTextField( params );
 	return view;
 }
-
 
 Ti.UI.createIcon =  (params = {})  => {
 	params.font = params.font || {};

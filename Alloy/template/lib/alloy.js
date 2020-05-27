@@ -557,7 +557,7 @@ exports.createController = function(name, args) {
 				view.addEventListener('close', function close() {
 					view.removeEventListener('close', close);
 					view = null;
-
+					controller.trigger('close');
 					cleanUpController(controller);
 
 					controller = null;
@@ -605,7 +605,7 @@ exports.open = function(name, params) {
 				view.addEventListener('open', function open(e) {
 					view.removeEventListener('open', open);
 					controller.trigger('open', e);
-					console.debug(`Controller ${name} was opened`);
+					console.debug(`Resolving promise to open ${name}`);
 					resolve({controller, view});
 				});
 			}
