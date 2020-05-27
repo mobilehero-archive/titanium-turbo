@@ -616,13 +616,26 @@ exports.open = function(name, params) {
 };
 
 exports.close = function(name) {
-	const controller = exports.Controllers[name];
-	if (controller) {
-		const view = controller.getView();
-		if (view && typeof view.close === 'function') {
-			view.close();
+	console.debug(`inside alloy.close(${name})`);
+	const promise = new Promise((resolve, reject) => {
+		const controller = exports.Controllers[name];
+		if (controller) {
+			const view = controller.getView();
+			if (view && typeof view.close === 'function') {
+				view.addEventListener('close', function onClose(e) {
+					view.removeEventListener('close', onClose);
+					console.debug(`Resolving promise to close: ${name}`);
+					resolve();
+				});
+				view.close();
+			} else {
+				resolve();
+			}
+		} else {
+			resolve();
 		}
-	}
+	});
+	return promise;
 };
 
 /**
