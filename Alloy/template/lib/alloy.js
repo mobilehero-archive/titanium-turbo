@@ -643,7 +643,7 @@ exports.close = function(name) {
 				if (typeof view.addEventListener === 'function') {
 				view.addEventListener('close', function onClose(e) {
 					view.removeEventListener('close', onClose);
-					console.debug(`Resolving promise to close: ${name}`);
+					console.debug(`💡  Resolving promise to close:  ${name}`);
 					resolve();
 				});
 			} else {
