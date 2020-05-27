@@ -4,6 +4,7 @@ const _turbo = {
 	globals: {},
 	fonts: {},
 	DEBUG_MODE: false,
+	DEBUG_UI: false,
 };
 module.exports = observable(_turbo);
 // module.exports = _turbo;

@@ -32,7 +32,7 @@ Ti.UI.createAbsoluteLayout =  (params = {})  => {
 	_.defaults(params, {
 		height: 'size',
 	});
-	if( params.debugColor && turbo.DEBUG_MODE ){
+	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI){
 		params.backgroundColor = params.debugColor;
 	}
 	const view = Ti.UI.createView( params );
@@ -44,7 +44,7 @@ Ti.UI.createVerticalLayout =  (params = {})  => {
 	_.defaults(params, {
 		height: 'size',
 	});
-	if( params.debugColor && turbo.DEBUG_MODE ){
+	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
 		params.backgroundColor = params.debugColor;
 	}
 	const view = Ti.UI.createView( params );
@@ -56,7 +56,7 @@ Ti.UI.createHorizontalLayout =  (params = {})  => {
 	_.defaults(params, {
 		height: 'size',
 	});
-	if( params.debugColor && turbo.DEBUG_MODE ){
+	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
 		params.backgroundColor = params.debugColor;
 	}
 	const view = Ti.UI.createView( params );
@@ -72,7 +72,7 @@ Ti.UI.createImageView = (params = {}) => {
 
 const createLabel = Ti.UI.createLabel;
 Ti.UI.createLabel =  (params = {})  => {
-	if( params.debugColor && turbo.DEBUG_MODE ){
+	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
 		params.backgroundColor = params.debugColor;
 	}
 	const view = createLabel( params );
@@ -114,7 +114,7 @@ const AUTOFILL_TYPES = {
 
 const createTextField = Ti.UI.createTextField;
 Ti.UI.createTextField =  (params = {})  => {
-	if( params.debugColor && turbo.DEBUG_MODE ){
+	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
 		params.backgroundColor = params.debugColor;
 	}
 
