@@ -491,10 +491,12 @@ exports.createController = function(name, args) {
 
 	function cleanUpController(controller) {
 		if (controller.resource_name) {
-			exports.Controllers[controller.resource_name] = null;
+			// exports.Controllers[controller.resource_name] = null;
+			delete exports.Controllers[controller.resource_name];
 		}
 		if (controller.resource_alias) {
-			exports.Controllers[controller.resource_alias] = null;
+			// exports.Controllers[controller.resource_alias] = null;
+			delete exports.Controllers[controller.resource_alias];
 		}
 
 		if (controller.__views) {
@@ -547,15 +549,16 @@ exports.createController = function(name, args) {
 
 		if (typeof view.addEventListener === 'function') {
 			if (typeof view.open === 'function') {
-				view.addEventListener('open', function open(e) {
-					view.removeEventListener('open', open);
+				view.addEventListener('open', function onOpen(e) {
+					view.removeEventListener('open', onOpen);
+					controller.isOpen = true;
 					exports.Controllers.current = controller;
 					controller.trigger('open', e);
 					console.debug(`Controller ${name} was opened`);
 				});
 
-				view.addEventListener('close', function close() {
-					view.removeEventListener('close', close);
+				view.addEventListener('close', function onClose() {
+					view.removeEventListener('close', onClose);
 					view = null;
 					controller.trigger('close');
 					cleanUpController(controller);
@@ -595,21 +598,44 @@ exports.open = function(name, params) {
 		let controller = exports.Controllers[name];
 		let view;
 		if (controller) {
+			// DEBUG: controller.isOpen
+			console.debug(`🦠  controller.isOpen: ${JSON.stringify(controller.isOpen, null, 2)}`);
+			if( controller.isOpen ){
+				console.debug(`🔹  Controller is already open: ${name}`);
+				console.debug(`💡  Resolving promise to open:  ${name}`);
+				return resolve();
+			}
 			view = controller.getViewEx();
 		} else {
 			controller = exports.createController(name, params);
+			controller.isOpen = false;
 			view = controller.getViewEx();
 		}
+		console.debug('📌  you are here → 1');
 		if (view && typeof view.open === 'function') {
+			console.debug('📌  you are here → 2');
 			if (typeof view.addEventListener === 'function') {
-				view.addEventListener('open', function open(e) {
-					view.removeEventListener('open', open);
+				console.debug('📌  you are here → 3');
+				view.addEventListener('open', function onOpen(e) {
+					console.debug('📌  you are here → 4');
+					view.removeEventListener('open', onOpen);
+					controller.isOpen = true;
+					console.debug('📌  you are here → 5');
 					controller.trigger('open', e);
-					console.debug(`Resolving promise to open ${name}`);
-					resolve({controller, view});
+					console.debug('📌  you are here → 6');
+					console.debug(`💡  Resolving promise to open:  ${name}`);
+					return resolve({controller, view});
 				});
+			} else {
+				console.debug('📌  you are here → 7');
+				view.open();
+				console.debug('📌  you are here → 8');
+				return resolve();
 			}
 			view.open();
+			return;
+		} else {
+			return resolve();
 		}
 	});
 	return promise;
@@ -622,12 +648,17 @@ exports.close = function(name) {
 		if (controller) {
 			const view = controller.getView();
 			if (view && typeof view.close === 'function') {
+				if (typeof view.addEventListener === 'function') {
 				view.addEventListener('close', function onClose(e) {
 					view.removeEventListener('close', onClose);
 					console.debug(`Resolving promise to close: ${name}`);
 					resolve();
 				});
+			} else {
 				view.close();
+				resolve();
+			}
+			view.close();
 			} else {
 				resolve();
 			}
