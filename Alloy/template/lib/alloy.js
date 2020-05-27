@@ -611,25 +611,17 @@ exports.open = function(name, params) {
 			controller.isOpen = false;
 			view = controller.getViewEx();
 		}
-		console.debug('📌  you are here → 1');
 		if (view && typeof view.open === 'function') {
-			console.debug('📌  you are here → 2');
 			if (typeof view.addEventListener === 'function') {
-				console.debug('📌  you are here → 3');
 				view.addEventListener('open', function onOpen(e) {
-					console.debug('📌  you are here → 4');
 					view.removeEventListener('open', onOpen);
 					controller.isOpen = true;
-					console.debug('📌  you are here → 5');
 					controller.trigger('open', e);
-					console.debug('📌  you are here → 6');
 					console.debug(`💡  Resolving promise to open:  ${name}`);
 					return resolve({controller, view});
 				});
 			} else {
-				console.debug('📌  you are here → 7');
 				view.open();
-				console.debug('📌  you are here → 8');
 				return resolve();
 			}
 			view.open();
