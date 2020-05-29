@@ -518,13 +518,18 @@ exports.createController = function(name, args) {
 
 	let controller;
 	if (exports.file_registry.includes(`/alloy/controllers/${name}.js`)) {
-		controller = new (require(`/alloy/controllers/${name}`))(args);
+		try{
+			controller = new (require(`/alloy/controllers/${name}`))(args);
+		} catch (error){
+			console.error(error);
+		}
+		
 	} else if (exports.widget_registry[name]) {
 		controller = new (require(exports.widget_registry[name]))(args);
 	} else {
+		console.error('Alloy controller not found: ' + name);
 		throw new Error('Alloy controller not found: ' + name);
 	}
-
 	controller.resource_name = name;
 	exports.Controllers = exports.Controllers || {};
 	exports.Controllers[controller.resource_name] = controller;
@@ -554,7 +559,7 @@ exports.createController = function(name, args) {
 					controller.isOpen = true;
 					exports.Controllers.current = controller;
 					controller.trigger('open', e);
-					console.debug(`Controller ${name} was opened`);
+					turbo.trace(`📌  you are here → Alloy controller ${name} was opened.`);
 				});
 
 				view.addEventListener('close', function onClose() {
@@ -566,7 +571,7 @@ exports.createController = function(name, args) {
 					controller = null;
 
 					if (true) {
-						console.debug(`Controller ${name} cleaned up!`);
+						turbo.trace(`📌  you are here → Alloy controller ${name} was cleaned up.`);
 					}
 				});
 
@@ -574,7 +579,7 @@ exports.createController = function(name, args) {
 					view && view.removeEventListener('postlayout', postlayout);
 					controller && controller.trigger('postlayout', e);
 					if (true) {
-						console.debug(`Controller ${name} layout finished`);
+						turbo.trace(`📌  you are here → Alloy controller ${name} postlayout`);
 					}
 				});
 			} else {
@@ -582,7 +587,7 @@ exports.createController = function(name, args) {
 					view && view.removeEventListener('postlayout', postlayout);
 					controller && controller.trigger('postlayout', e);
 					if (true) {
-						console.debug(`Controller ${name} layout finished`);
+						turbo.trace(`📌  you are here → Alloy controller ${name} postlayout`);
 					}
 				});
 			}
@@ -593,16 +598,14 @@ exports.createController = function(name, args) {
 };
 
 exports.open = function(name, params) {
-	console.debug(`inside alloy.open(${name})`);
+	turbo.trace(`📌  you are here → Alloy.open(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		let controller = exports.Controllers[name];
 		let view;
 		if (controller) {
-			// DEBUG: controller.isOpen
-			console.debug(`🦠  controller.isOpen: ${JSON.stringify(controller.isOpen, null, 2)}`);
 			if( controller.isOpen ){
-				console.debug(`🔹  Controller is already open: ${name}`);
-				console.debug(`💡  Resolving promise to open:  ${name}`);
+				turbo.debug(`🔹  Controller is already open: ${name}`);
+				turbo.trace(`💡  Resolving promise to open:  ${name}`);
 				return resolve();
 			}
 			view = controller.getViewEx();
@@ -617,7 +620,7 @@ exports.open = function(name, params) {
 					view.removeEventListener('open', onOpen);
 					controller.isOpen = true;
 					controller.trigger('open', e);
-					console.debug(`💡  Resolving promise to open:  ${name}`);
+					turbo.trace(`💡  Resolving promise to open:  ${name}`);
 					return resolve({controller, view});
 				});
 			} else {
@@ -634,7 +637,7 @@ exports.open = function(name, params) {
 };
 
 exports.close = function(name) {
-	console.debug(`inside alloy.close(${name})`);
+	turbo.trace(`📌  you are here → Alloy.close(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		const controller = exports.Controllers[name];
 		if (controller) {
@@ -643,7 +646,7 @@ exports.close = function(name) {
 				if (typeof view.addEventListener === 'function') {
 				view.addEventListener('close', function onClose(e) {
 					view.removeEventListener('close', onClose);
-					console.debug(`💡  Resolving promise to close:  ${name}`);
+					turbo.trace(`💡  Resolving promise to close:  ${name}`);
 					resolve();
 				});
 			} else {

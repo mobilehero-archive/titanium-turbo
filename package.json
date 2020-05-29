@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "1.14.6-17",
+	"version": "1.14.6-21",
 	"description": "Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development.",
 	"author": "Appcelerator, Inc. <info@appcelerator.com>",
 	"maintainers": [
@@ -25,7 +25,7 @@
 		"@babel/parser": "^7.7.7",
 		"@babel/traverse": "^7.7.4",
 		"@babel/types": "^7.7.4",
-		"@titanium/module-copier": "0.0.25",
+		"@titanium/module-copier": "0.0.27",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
 		"cli-table3": "^0.5.1",
@@ -60,7 +60,7 @@
 	},
 	"main": "./Alloy/alloy",
 	"engines": {
-		"node": ">=8"
+		"node": ">=10"
 	},
 	"devDependencies": {
 		"@seadub/danger-plugin-dependencies": "^0.1.0",

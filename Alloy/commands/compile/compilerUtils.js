@@ -131,16 +131,19 @@ exports.getParserArgs = function(node, state, opts) {
 		tssIf = node.getAttribute('if'),
 		platformObj;
 
+	const allowedNonIdNodes = ['Alloy', 'alloy', 'Turbo', 'turbo'];
 	// make sure we're not reusing the default ID for the first top level element
 	if (id === exports.currentDefaultId &&
-		(node.parentNode && node.parentNode.nodeName !== 'Alloy') &&
+		(node.parentNode && ! allowedNonIdNodes.includes(node.parentNode.nodeName)) &&
 		!node.__idWarningHandled) {
+
 		logger.warn([
 			'<' + name + '> at line ' + node.lineNumber +
 			' is using this view\'s default ID "' + id + '". ' +
 			'Only a top-level element in a view should use the default ID'
 		]);
 		node.__idWarningHandled = true;
+
 	}
 
 	// handle binding arguments
@@ -1075,4 +1078,9 @@ exports.generateCollectionBindingTemplate = function(args) {
 		colVar + ".off('" + COLLECTION_BINDING_EVENTS + "'," + handlerFunc + ');';
 
 	return code;
+};
+
+
+exports.addNamespace = (apiName) => {
+	return (CONST.IMPLICIT_NAMESPACES[apiName] || CONST.NAMESPACE_DEFAULT) + '.' + apiName;
 };

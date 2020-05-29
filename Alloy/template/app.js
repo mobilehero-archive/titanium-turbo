@@ -17,7 +17,16 @@ Ti.UI.VISIBILITY_COLLAPSE = 'collapse';
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	
 Ti.UI.VISIBILITY_VISIBLE = 'visible';	
 
-Ti.UI.createStackLayout = (params = {}) => {
+// if( OS_ANDROID ){
+// 	Ti.UI.iOS = {
+// 		LARGE_TITLE_DISPLAY_MODE_ALWAYS: 0,
+// 		LARGE_TITLE_DISPLAY_MODE_AUTOMATIC: 0,
+// 		LARGE_TITLE_DISPLAY_MODE_NEVER: 0,
+// 	};
+// }
+
+
+turbo.createStackLayout = (params = {}) => {
 	const orientation = params.orientation || params.layout || 'vertical';
 	params.layout = params.orientation = orientation;
 	_.defaults(params, {
@@ -27,7 +36,7 @@ Ti.UI.createStackLayout = (params = {}) => {
 	return view;
 }
 
-Ti.UI.createAbsoluteLayout =  (params = {})  => {
+turbo.createAbsoluteLayout =  (params = {})  => {
 	params.layout = params.orientation = 'composite';
 	_.defaults(params, {
 		height: 'size',
@@ -39,7 +48,7 @@ Ti.UI.createAbsoluteLayout =  (params = {})  => {
 	return view;
 }
 
-Ti.UI.createVerticalLayout =  (params = {})  => {
+turbo.createVerticalLayout =  (params = {})  => {
 	params.layout = params.orientation = 'vertical';
 	_.defaults(params, {
 		height: 'size',
@@ -51,7 +60,7 @@ Ti.UI.createVerticalLayout =  (params = {})  => {
 	return view;
 }
 
-Ti.UI.createHorizontalLayout =  (params = {})  => {
+turbo.createHorizontalLayout =  (params = {})  => {
 	params.layout = params.orientation = 'horizontal';
 	_.defaults(params, {
 		height: 'size',
@@ -63,19 +72,37 @@ Ti.UI.createHorizontalLayout =  (params = {})  => {
 	return view;
 }
 
-const createImageView = Ti.UI.createImageView;
-Ti.UI.createImageView = (params = {}) => {
+turbo.createImageView = (params = {}) => {
 	params.image = params.image || params.src;
-	const view = createImageView( params );
+	const view = Ti.UI.createImageView( params );
 	return view;
 }
 
-const createLabel = Ti.UI.createLabel;
-Ti.UI.createLabel =  (params = {})  => {
+turbo.createLabel =  (params = {})  => {
 	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
 		params.backgroundColor = params.debugColor;
 	}
-	const view = createLabel( params );
+	const view = Ti.UI.createLabel( params );
+	return view;
+}
+
+turbo.createView =  (params = {})  => {
+	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
+		params.backgroundColor = params.debugColor;
+	}
+	const view = Ti.UI.createView( params );
+	return view;
+}
+
+turbo.createWindow =  (params = {})  => {
+	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
+		params.backgroundColor = params.debugColor;
+	}
+	if( OS_ANDROID ){
+		delete params.largeTitleEnabled;
+		delete params.largeTitleDisplayMode;
+	}
+	const view = Ti.UI.createWindow( params );
 	return view;
 }
 
@@ -112,8 +139,7 @@ const AUTOFILL_TYPES = {
 	email: Ti.UI.AUTOFILL_TYPE_EMAIL,  
 }
 
-const createTextField = Ti.UI.createTextField;
-Ti.UI.createTextField =  (params = {})  => {
+turbo.createTextField =  (params = {})  => {
 	if( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ){
 		params.backgroundColor = params.debugColor;
 	}
@@ -130,11 +156,11 @@ Ti.UI.createTextField =  (params = {})  => {
 		params.autofillType = _.get(AUTOFILL_TYPES, params.autofillType, params.autofillType);
 	}
 
-	const view = createTextField( params );
+	const view = Ti.UI.createTextField( params );
 	return view;
 }
 
-Ti.UI.createIcon =  (params = {})  => {
+turbo.createIcon =  (params = {})  => {
 	params.font = params.font || {};
 	const heightInt = _.toInteger(params.height);
 	params.font.fontSize = params.size || params.font.size || params.font.fontSize || ((heightInt > 0) ? heightInt : undefined);
@@ -145,14 +171,20 @@ Ti.UI.createIcon =  (params = {})  => {
 	params.font.fontFamily = params.font.fontFamily || 'FontAwesome-Regular';
 	params.text = _.get(turbo, ['fonts', params.font.fontFamily, params.name], '');
 	params.textAlign = params.textAlign || Ti.UI.TEXT_ALIGNMENT_CENTER;
+
+	delete params.type;
+	delete params.size;
+
 	const view = Ti.UI.createLabel( params );
 	return view;
 }
 
-Ti.UI.createInput =  (params = {})  => {
+turbo.createInput =  (params = {})  => {
 	const view = Ti.UI.createTextField( params );
 	return view;
 }
+
+
 
 __MAPMARKER_ALLOY_JS__
 // }
