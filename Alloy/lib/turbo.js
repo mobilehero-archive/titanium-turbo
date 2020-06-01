@@ -110,7 +110,7 @@ const KEYBOARD_TYPES = {
 	url: Ti.UI.KEYBOARD_TYPE_URL,  // 2
 	number: Ti.UI.KEYBOARD_TYPE_NUMBER_PAD,  // 3
 	phone: Ti.UI.KEYBOARD_TYPE_PHONE_PAD,  // 4
-	email: Ti.UI.EMAIL,  // 5
+	email: Ti.UI.KEYBOARD_TYPE_EMAIL,  // 5
 	name_phone: Ti.UI.KEYBOARD_TYPE_NAMEPHONE_PAD,  // 6
 	default: Ti.UI.KEYBOARD_TYPE_DEFAULT,  // 7
 	decimal: Ti.UI.KEYBOARD_TYPE_DECIMAL_PAD,  // 8
