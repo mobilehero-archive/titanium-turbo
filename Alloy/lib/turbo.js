@@ -104,7 +104,7 @@ _turbo.createWindow =  (params = {})  => {
 	return view;
 };
 
-const KEYBOARD_TYPES = {
+_turbo.KEYBOARD_TYPES = {
 	ascii: Ti.UI.KEYBOARD_TYPE_ASCII,  // 0
 	numbers_punctuation: Ti.UI.KEYBOARD_TYPE_NUMBERS_PUNCTUATION,  // 1
 	url: Ti.UI.KEYBOARD_TYPE_URL,  // 2
@@ -115,13 +115,15 @@ const KEYBOARD_TYPES = {
 	default: Ti.UI.KEYBOARD_TYPE_DEFAULT,  // 7
 	decimal: Ti.UI.KEYBOARD_TYPE_DECIMAL_PAD,  // 8
 };
-const AUTOCAPITALIZATION_TYPES = {
+
+_turbo.AUTOCAPITALIZATION_TYPES = {
 	none: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,  // 0
 	sentences: Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES,  // 1
 	words: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,  // 2
 	all: Ti.UI.TEXT_AUTOCAPITALIZATION_ALL,  // 3
 };
-const AUTOFILL_TYPES = {
+
+_turbo.AUTOFILL_TYPES = {
 	address: Ti.UI.AUTOFILL_TYPE_ADDRESS, 
 	phone: Ti.UI.AUTOFILL_TYPE_PHONE,  
 	name: Ti.UI.AUTOFILL_TYPE_NAME,  
@@ -138,21 +140,21 @@ const AUTOFILL_TYPES = {
 };
 
 _turbo.createTextField =  (params = {})  => {
-	if ( params.debugColor && turbo.DEBUG_MODE && turbo.DEBUG_UI ) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
 		params.backgroundColor = params.debugColor;
 	}
 
 	
 	if ( ! _.isNil(params.keyboardType)) {
-		params.keyboardType = _.get(KEYBOARD_TYPES, params.keyboardType, params.keyboardType);
+		params.keyboardType = _.get(_turbo.KEYBOARD_TYPES, params.keyboardType, params.keyboardType);
 	}
 
 	if ( ! _.isNil(params.autocapitalization)) {
-		params.autocapitalization = _.get(AUTOCAPITALIZATION_TYPES, params.autocapitalization, params.autocapitalization);
+		params.autocapitalization = _.get(_turbo.AUTOCAPITALIZATION_TYPES, params.autocapitalization, params.autocapitalization);
 	}
 
 	if ( ! _.isNil(params.autofillType)) {
-		params.autofillType = _.get(AUTOFILL_TYPES, params.autofillType, params.autofillType);
+		params.autofillType = _.get(_turbo.AUTOFILL_TYPES, params.autofillType, params.autofillType);
 	}
 
 	const view = Ti.UI.createTextField( params );
