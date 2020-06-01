@@ -113,7 +113,7 @@ function parse(node, state, args) {
 	}
 	var autocapitalization = node.getAttribute('autocapitalization');
 	if (_.includes(AUTOCAPITALIZATION_TYPES, autocapitalization.toUpperCase())) {
-		node.setAttribute('autocapitalization', 'Ti.UI.TEXT_AUTOCAPITALIZATION_TYPE_' + autocapitalization.toUpperCase());
+		node.setAttribute('autocapitalization', 'Ti.UI.TEXT_AUTOCAPITALIZATION_' + autocapitalization.toUpperCase());
 	}
 
 

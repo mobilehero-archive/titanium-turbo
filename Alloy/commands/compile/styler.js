@@ -414,7 +414,7 @@ exports.processStyle = function(_style, _state) {
 								code += prefix + 'Ti.UI.RETURNKEY_TYPE_' + value.toUpperCase() + ',';
 							}
 							if (sn === KEYBOARD_PROPERTIES[2] && _.includes(AUTOCAPITALIZATION_TYPES, value.toUpperCase())) {
-								code += prefix + 'Ti.UI.TEXT_AUTOCAPITALIZATION_TYPE_' + value.toUpperCase() + ',';
+								code += prefix + 'Ti.UI.TEXT_AUTOCAPITALIZATION_' + value.toUpperCase() + ',';
 							}
 						}
 					}
