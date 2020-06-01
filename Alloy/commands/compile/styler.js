@@ -408,13 +408,13 @@ exports.processStyle = function(_style, _state) {
 							// keyboard type shortcuts for TextField, TextArea
 							// support shortcuts for keyboard type, return key type, and autocapitalization
 							if (sn === KEYBOARD_PROPERTIES[0] && _.includes(KEYBOARD_TYPES, value.toUpperCase())) {
-								code += prefix + 'Ti.UI.KEYBOARD_' + value.toUpperCase() + ',';
+								code += prefix + 'Ti.UI.KEYBOARD_TYPE_' + value.toUpperCase() + ',';
 							}
 							if (sn === KEYBOARD_PROPERTIES[1] && _.includes(RETURN_KEY_TYPES, value.toUpperCase())) {
-								code += prefix + 'Ti.UI.RETURNKEY_' + value.toUpperCase() + ',';
+								code += prefix + 'Ti.UI.RETURNKEY_TYPE_' + value.toUpperCase() + ',';
 							}
 							if (sn === KEYBOARD_PROPERTIES[2] && _.includes(AUTOCAPITALIZATION_TYPES, value.toUpperCase())) {
-								code += prefix + 'Ti.UI.TEXT_AUTOCAPITALIZATION_' + value.toUpperCase() + ',';
+								code += prefix + 'Ti.UI.TEXT_AUTOCAPITALIZATION_TYPE_' + value.toUpperCase() + ',';
 							}
 						}
 					}
