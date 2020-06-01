@@ -30,7 +30,7 @@ _turbo.createStackLayout = (params = {}) => {
 	_.defaults(params, {
 		height: 'size',
 	});
-	const view = Ti.UI.createView( params );
+	const view = _turbo.createView( params );
 	return view;
 };
 
@@ -54,7 +54,7 @@ _turbo.createVerticalLayout =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
 		params.backgroundColor = params.debugColor;
 	}
-	const view = Ti.UI.createView( params );
+	const view = _turbo.createView( params );
 	return view;
 };
 
@@ -66,7 +66,7 @@ _turbo.createHorizontalLayout =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
 		params.backgroundColor = params.debugColor;
 	}
-	const view = Ti.UI.createView( params );
+	const view = _turbo.createView( params );
 	return view;
 };
 
@@ -142,6 +142,7 @@ _turbo.createTextField =  (params = {})  => {
 		params.backgroundColor = params.debugColor;
 	}
 
+	
 	if ( ! _.isNil(params.keyboardType)) {
 		params.keyboardType = _.get(KEYBOARD_TYPES, params.keyboardType, params.keyboardType);
 	}
@@ -178,7 +179,7 @@ _turbo.createIcon =  (params = {})  => {
 };
 
 _turbo.createInput =  (params = {})  => {
-	const view = Ti.UI.createTextField( params );
+	const view = _turbo.createTextField( params );
 	return view;
 };
 
