@@ -180,8 +180,6 @@ _turbo.createIcon =  (params = {})  => {
 };
 
 _turbo.createInput =  (params = {})  => {
-	// DEBUG: params
-	console.error(`🦠  params: ${JSON.stringify(params, null, 2)}`);
 	const view = _turbo.createTextField( params );
 	return view;
 };
