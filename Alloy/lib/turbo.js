@@ -143,7 +143,6 @@ _turbo.createTextField =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
 		params.backgroundColor = params.debugColor;
 	}
-
 	
 	if ( ! _.isNil(params.keyboardType)) {
 		params.keyboardType = _.get(_turbo.KEYBOARD_TYPES, params.keyboardType, params.keyboardType);
@@ -181,6 +180,8 @@ _turbo.createIcon =  (params = {})  => {
 };
 
 _turbo.createInput =  (params = {})  => {
+	// DEBUG: params
+	console.error(`🦠  params: ${JSON.stringify(params, null, 2)}`);
 	const view = _turbo.createTextField( params );
 	return view;
 };
