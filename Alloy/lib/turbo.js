@@ -9,6 +9,7 @@ const _turbo = {
 	TRACE_MODE: false,
 	VERBOSE_MODE: false,
 	DEBUG_UI: false,
+	version: Alloy.version,
 };
 
 _turbo.debug = (...args) => {
