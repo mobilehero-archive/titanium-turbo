@@ -1,4 +1,6 @@
 const { observable } = require('@titanium/observer');
+const Alloy = require('/alloy');
+
 const _turbo = { 
 	data: {},
 	globals: {},
