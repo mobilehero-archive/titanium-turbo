@@ -83,6 +83,11 @@ _turbo.createLabel =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
 		params.backgroundColor = params.debugColor;
 	}
+
+	if ( ! _.isNil(params.verticalAlign)) {
+		params.verticalAlign = _.get(_turbo.TEXT_VERTICAL_ALIGNMENTS, params.verticalAlign, params.verticalAlign);
+	}
+
 	const view = Ti.UI.createLabel( params );
 	return view;
 };
@@ -117,6 +122,12 @@ _turbo.KEYBOARD_TYPES = {
 	name_phone: Ti.UI.KEYBOARD_TYPE_NAMEPHONE_PAD,  // 6
 	default: Ti.UI.KEYBOARD_TYPE_DEFAULT,  // 7
 	decimal: Ti.UI.KEYBOARD_TYPE_DECIMAL_PAD,  // 8
+};
+
+_turbo.TEXT_VERTICAL_ALIGNMENTS = {
+	bottom: Ti.UI.TEXT_VERTICAL_ALIGNMENT_BOTTOM,
+	center: Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER,
+	top: Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP,  
 };
 
 _turbo.AUTOCAPITALIZATION_TYPES = {
@@ -174,6 +185,7 @@ _turbo.createIcon =  (params = {})  => {
 	params.font.fontFamily = params.font.fontFamily || 'FontAwesome-Regular';
 	params.text = _.get(turbo, ['fonts', params.font.fontFamily, params.name], '');
 	params.textAlign = params.textAlign || Ti.UI.TEXT_ALIGNMENT_CENTER;
+	params.verticalAlign = params.verticalAlign || Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER;
 
 	delete params.type;
 	delete params.size;
