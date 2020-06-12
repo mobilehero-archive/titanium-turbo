@@ -471,6 +471,34 @@ exports.createWidget = function(id, name, args) {
 	return new (require('/alloy/widgets/' + id + '/controllers/' + (name || DEFAULT_WIDGET)))(args);
 };
 
+
+exports.cleanUpController = function(controller) {
+	if (controller.resource_name) {
+		// exports.Controllers[controller.resource_name] = null;
+		delete exports.Controllers[controller.resource_name];
+	}
+	if (controller.resource_alias) {
+		// exports.Controllers[controller.resource_alias] = null;
+		delete exports.Controllers[controller.resource_alias];
+	}
+
+	if (controller.__views) {
+		_.each(controller.__views, value => {
+			exports.cleanUpController(value);
+		});
+	}
+
+	if (controller.__iamalloy) {
+		controller.off();
+		controller.destroy();
+	}
+
+	if( exports.Controllers.current === controller){
+		exports.Controllers.current = null;
+	}
+	controller = null;
+}
+
 /**
  * @method createController
  * Factory method for instantiating a controller. Creates and returns an instance of the
@@ -489,32 +517,32 @@ exports.createController = function(name, args) {
 		name = name.substring(1, name.length);
 	}
 
-	function cleanUpController(controller) {
-		if (controller.resource_name) {
-			// exports.Controllers[controller.resource_name] = null;
-			delete exports.Controllers[controller.resource_name];
-		}
-		if (controller.resource_alias) {
-			// exports.Controllers[controller.resource_alias] = null;
-			delete exports.Controllers[controller.resource_alias];
-		}
+	// function cleanUpController(controller) {
+	// 	if (controller.resource_name) {
+	// 		// exports.Controllers[controller.resource_name] = null;
+	// 		delete exports.Controllers[controller.resource_name];
+	// 	}
+	// 	if (controller.resource_alias) {
+	// 		// exports.Controllers[controller.resource_alias] = null;
+	// 		delete exports.Controllers[controller.resource_alias];
+	// 	}
 
-		if (controller.__views) {
-			_.each(controller.__views, value => {
-				cleanUpController(value);
-			});
-		}
+	// 	if (controller.__views) {
+	// 		_.each(controller.__views, value => {
+	// 			cleanUpController(value);
+	// 		});
+	// 	}
 
-		if (controller.__iamalloy) {
-			controller.off();
-			controller.destroy();
-		}
+	// 	if (controller.__iamalloy) {
+	// 		controller.off();
+	// 		controller.destroy();
+	// 	}
 
-		if( exports.Controllers.current === controller){
-			exports.Controllers.current = null;
-		}
-		controller = null;
-	}
+	// 	if( exports.Controllers.current === controller){
+	// 		exports.Controllers.current = null;
+	// 	}
+	// 	controller = null;
+	// }
 
 	let controller;
 	if (exports.file_registry.includes(`/alloy/controllers/${name}.js`)) {
@@ -566,7 +594,7 @@ exports.createController = function(name, args) {
 					view.removeEventListener('close', onClose);
 					view = null;
 					controller.trigger('close');
-					cleanUpController(controller);
+					exports.cleanUpController(controller);
 
 					controller = null;
 
