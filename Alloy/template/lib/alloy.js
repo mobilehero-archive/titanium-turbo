@@ -624,12 +624,14 @@ exports.open = function(name, params) {
 					return resolve({controller, view});
 				});
 			} else {
+				turbo.trace(`💡  view.addEventListener is not a function:  ${name}`);
 				view.open();
 				return resolve();
 			}
 			view.open();
 			return;
 		} else {
+			turbo.trace(`💡  view.open is not a function:  ${name}`);
 			return resolve();
 		}
 	});
@@ -650,11 +652,13 @@ exports.close = function(name) {
 					resolve();
 				});
 			} else {
+				turbo.trace(`💡  view.addEventListener is not a function:  ${name}`);
 				view.close();
 				resolve();
 			}
 			view.close();
 			} else {
+				turbo.trace(`💡  view.close is not a function:  ${name}`);
 				resolve();
 			}
 		} else {

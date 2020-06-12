@@ -79,6 +79,27 @@ _turbo.createImageView = (params = {}) => {
 	return view;
 };
 
+const processFontParameters =  params => {
+	if (params && (params.fontSize || params.fontStyle || params.fontFamily || params.fontWeight || params.textStyle)) {
+
+		params.font = params.font || {};
+
+		_.defaults(params.font, {
+			fontSize: params.font.fontSize || params.fontSize,
+			fontStyle: params.font.fontStyle || params.fontStyle,
+			fontFamily: params.font.fontFamily || params.fontFamily,
+			fontWeight: params.font.fontWeight || params.fontWeight,
+			textStyle: params.font.textStyle || params.textStyle
+		});
+
+		delete params['fontSize'];
+		delete params['fontStyle'];
+		delete params['fontFamily'];
+		delete params['fontWeight'];
+		delete params['textStyle'];
+	}
+};
+
 _turbo.createLabel =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
 		params.backgroundColor = params.debugColor;
@@ -87,6 +108,8 @@ _turbo.createLabel =  (params = {})  => {
 	if ( ! _.isNil(params.verticalAlign)) {
 		params.verticalAlign = _.get(_turbo.TEXT_VERTICAL_ALIGNMENTS, params.verticalAlign, params.verticalAlign);
 	}
+
+	processFontParameters(params);
 
 	const view = Ti.UI.createLabel( params );
 	return view;
@@ -169,6 +192,8 @@ _turbo.createTextField =  (params = {})  => {
 	if ( ! _.isNil(params.autofillType)) {
 		params.autofillType = _.get(_turbo.AUTOFILL_TYPES, params.autofillType, params.autofillType);
 	}
+
+	processFontParameters(params);
 
 	const view = Ti.UI.createTextField( params );
 	return view;

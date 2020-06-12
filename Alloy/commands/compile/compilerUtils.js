@@ -438,7 +438,7 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 			var deferTemplate = theDefer + ' && ' + theEvent + ';';
 			var immediateTemplate;
 
-			console.debug(`eventObj.cb: ${JSON.stringify(eventObj.cb, null, 2)}`);
+			// console.debug(`eventObj.cb: ${JSON.stringify(eventObj.cb, null, 2)}`);
 
 	
 	
