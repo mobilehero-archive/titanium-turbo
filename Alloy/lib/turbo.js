@@ -27,7 +27,7 @@ _turbo.verbose = (...args) => {
 };
 
 
-_turbo.createStackLayout = (params = {}) => {
+_turbo.createStack = _turbo.createStackLayout = (params = {}) => {
 	const orientation = params.orientation || params.layout || 'vertical';
 	params.layout = params.orientation = orientation;
 	_.defaults(params, {
@@ -37,7 +37,7 @@ _turbo.createStackLayout = (params = {}) => {
 	return view;
 };
 
-_turbo.createAbsoluteLayout =  (params = {})  => {
+_turbo.createAbsolute = _turbo.createAbsoluteLayout =  (params = {})  => {
 	params.layout = params.orientation = 'composite';
 	_.defaults(params, {
 		height: 'size',
@@ -49,7 +49,7 @@ _turbo.createAbsoluteLayout =  (params = {})  => {
 	return view;
 };
 
-_turbo.createVerticalLayout =  (params = {})  => {
+_turbo.createVertical = _turbo.createVerticalLayout =  (params = {})  => {
 	params.layout = params.orientation = 'vertical';
 	_.defaults(params, {
 		height: 'size',
@@ -61,7 +61,7 @@ _turbo.createVerticalLayout =  (params = {})  => {
 	return view;
 };
 
-_turbo.createHorizontalLayout =  (params = {})  => {
+_turbo.createHorizontal = _turbo.createHorizontalLayout =  (params = {})  => {
 	params.layout = params.orientation = 'horizontal';
 	_.defaults(params, {
 		height: 'size',
