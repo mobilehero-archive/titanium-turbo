@@ -10,7 +10,7 @@ const _turbo = {
 	DEBUG_MODE: false,
 	TRACE_MODE: false,
 	VERBOSE_MODE: false,
-	DEBUG_UI: false,
+	DEBUG_UI_MODE: false,
 	version: Alloy.version,
 };
 
@@ -42,7 +42,7 @@ _turbo.createAbsolute = _turbo.createAbsoluteLayout =  (params = {})  => {
 	_.defaults(params, {
 		height: 'size',
 	});
-	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE) {
 		params.backgroundColor = params.debugColor;
 	}
 	const view = Ti.UI.createView( params );
@@ -54,7 +54,7 @@ _turbo.createVertical = _turbo.createVerticalLayout =  (params = {})  => {
 	_.defaults(params, {
 		height: 'size',
 	});
-	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
 	const view = _turbo.createView( params );
@@ -66,7 +66,7 @@ _turbo.createHorizontal = _turbo.createHorizontalLayout =  (params = {})  => {
 	_.defaults(params, {
 		height: 'size',
 	});
-	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
 	const view = _turbo.createView( params );
@@ -101,7 +101,7 @@ const processFontParameters =  params => {
 };
 
 _turbo.createLabel =  (params = {})  => {
-	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
 
@@ -116,7 +116,7 @@ _turbo.createLabel =  (params = {})  => {
 };
 
 _turbo.createView =  (params = {})  => {
-	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
 	const view = Ti.UI.createView( params );
@@ -124,7 +124,7 @@ _turbo.createView =  (params = {})  => {
 };
 
 _turbo.createWindow =  (params = {})  => {
-	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
 	// if ( OS_ANDROID ) {
@@ -177,7 +177,7 @@ _turbo.AUTOFILL_TYPES = {
 };
 
 _turbo.createTextField =  (params = {})  => {
-	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI ) {
+	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
 	
