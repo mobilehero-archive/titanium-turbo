@@ -656,6 +656,7 @@ exports.open = function(name, params) {
 				view.open();
 				return resolve();
 			}
+			turbo.trace(`📌  you are here → Alloy.open() calling view.open()`);
 			view.open();
 			return;
 		} else {
