@@ -26,6 +26,8 @@ _turbo.verbose = (...args) => {
 	_turbo.VERBOSE_MODE && console.debug(...args);
 };
 
+_turbo.openLoadingScreen = () => {};
+_turbo.closeLoadingScreen = () => {};
 
 _turbo.createStack = _turbo.createStackLayout = (params = {}) => {
 	const orientation = params.orientation || params.layout || 'vertical';

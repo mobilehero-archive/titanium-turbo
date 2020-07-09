@@ -1003,7 +1003,6 @@ exports.validateNodeName = function(node, names) {
 	var ret = null;
 	if (!_.isArray(names)) { names = [names]; }
 
-	console.debug(`fullname: ${JSON.stringify(fullname, null, 2)}`);
 	// Is the node name in the given list of valid names?
 	ret = _.find(names, function(name) { return name === fullname; });
 	if (ret) { return ret; }
