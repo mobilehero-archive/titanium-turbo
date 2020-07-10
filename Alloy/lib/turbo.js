@@ -1,5 +1,6 @@
 const { observable } = require('@titanium/observer');
 const Alloy = require('/alloy');
+const _ = Alloy._;
 
 const fs = require('fs');
 fs.readFileSync = _.wrap(fs.readFileSync, (func, filename, options) => {
