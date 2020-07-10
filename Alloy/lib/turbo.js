@@ -1,6 +1,19 @@
 const { observable } = require('@titanium/observer');
 const Alloy = require('/alloy');
 
+const fs = require('fs');
+fs.readFileSync = _.wrap(fs.readFileSync, (func, filename, options) => {
+	if (_.isString(filename)) {
+		if (!filename.startsWith('/')) {
+			filename = path.join(Ti.Filesystem.resourcesDirectory, filename);
+		}
+	} else {
+		throw new Error(`TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received ${filename}`);
+	}
+	return func(filename, options);
+});
+
+
 const _turbo = { 
 	data: {},
 	globals: {},
