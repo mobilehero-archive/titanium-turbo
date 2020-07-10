@@ -7,11 +7,13 @@ var Alloy = require('/alloy');
 var _ = Alloy._;
 var Backbone = Alloy.Backbone;
 var turbo = require('/turbo');
+var JSONC = require('@titanium/jsonc');
 
 global.Alloy = Alloy;
 global._ = _;
 global.Backbone = Backbone;
 global.turbo = turbo;
+global.JSONC = JSONC;
 
 Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	

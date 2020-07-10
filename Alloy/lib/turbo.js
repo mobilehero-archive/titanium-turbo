@@ -1,6 +1,7 @@
 const { observable } = require('@titanium/observer');
 const Alloy = require('/alloy');
 const _ = Alloy._;
+const path = require('path');
 
 const fs = require('fs');
 if ( !fs.patched ) {
