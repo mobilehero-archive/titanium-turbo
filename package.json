@@ -60,7 +60,7 @@
 	},
 	"main": "./Alloy/alloy",
 	"engines": {
-		"node": ">=10"
+		"node": ">=12"
 	},
 	"devDependencies": {
 		"@seadub/danger-plugin-dependencies": "^0.1.0",
