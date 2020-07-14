@@ -35,7 +35,6 @@ const initMainController = () => {
 // Open root window if a new UI session has started. Can happen more than once in app's lifetime.
 // Event can only be fired if "tiapp.xml" property "run-in-background" is set true.
 Ti.UI.addEventListener('sessionbegin', () => initMainController);
-});
 
 // Open the root window immediately if an active UI session exists on startup.
 // Note: The Ti.UI.hasSession property was added as of Titanium 9.1.0.
