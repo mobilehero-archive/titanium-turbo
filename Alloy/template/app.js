@@ -20,7 +20,7 @@ Ti.UI.VISIBILITY_HIDDEN = 'hidden';
 Ti.UI.VISIBILITY_VISIBLE = 'visible';	
 
 __MAPMARKER_ALLOY_JS__
-// }
+
 
 Alloy.main = Alloy.main || Alloy.CFG.main || Titanium.App.Properties.getString('app.main','index');
 

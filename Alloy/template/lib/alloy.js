@@ -504,7 +504,7 @@ exports.cleanUpController = function(controller) {
  * @param {Object} [args] Arguments to pass to the controller.
  * @return {Alloy.Controller} Alloy controller object.
  */
-exports.createController = function(name, args) {
+exports.createController = function(name, args = {}) {
 	if (_.isNil(name)) {
 		throw new Error('Parameter "name" is required for Alloy.createController');
 	}
@@ -543,13 +543,13 @@ exports.createController = function(name, args) {
 	let controller;
 	if (exports.file_registry.includes(`/alloy/controllers/${name}.js`)) {
 		try{
-			controller = new (require(`/alloy/controllers/${name}`))(args);
+			controller = new (require(`/alloy/controllers/${name}`))(_.defaults({}, args, { __resource_name: name, __resource_path: `/alloy/controllers/${name}`  }));
 		} catch (error){
 			console.error(error);
 		}
 		
 	} else if (exports.widget_registry[name]) {
-		controller = new (require(exports.widget_registry[name]))(args);
+		controller = new (require(exports.widget_registry[name]))(_.defaults({}, args, { __resource_name: name, __resource_path: exports.widget_registry[name]  }));
 	} else {
 		console.error('Alloy controller not found: ' + name);
 		throw new Error('Alloy controller not found: ' + name);
@@ -583,7 +583,7 @@ exports.createController = function(name, args) {
 					controller.isOpen = true;
 					exports.Controllers.current = controller;
 					controller.trigger('open', e);
-					turbo.trace(`📌  you are here → Alloy controller ${name} was opened.`);
+					turbo.verbose(`📌  you are here → Alloy controller ${name} was opened.`);
 				});
 
 				view.addEventListener('close', function onClose() {
@@ -595,7 +595,7 @@ exports.createController = function(name, args) {
 					controller = null;
 
 					if (true) {
-						turbo.trace(`📌  you are here → Alloy controller ${name} was cleaned up.`);
+						turbo.verbose(`📌  you are here → Alloy controller ${name} was cleaned up.`);
 					}
 				});
 
@@ -603,7 +603,7 @@ exports.createController = function(name, args) {
 					view && view.removeEventListener('postlayout', postlayout);
 					controller && controller.trigger('postlayout', e);
 					if (true) {
-						turbo.trace(`📌  you are here → Alloy controller ${name} postlayout`);
+						turbo.verbose(`📌  you are here → Alloy controller ${name} postlayout`);
 					}
 				});
 			} else {
@@ -611,7 +611,7 @@ exports.createController = function(name, args) {
 					view && view.removeEventListener('postlayout', postlayout);
 					controller && controller.trigger('postlayout', e);
 					if (true) {
-						turbo.trace(`📌  you are here → Alloy controller ${name} postlayout`);
+						turbo.verbose(`📌  you are here → Alloy controller ${name} postlayout`);
 					}
 				});
 			}
@@ -622,14 +622,14 @@ exports.createController = function(name, args) {
 };
 
 exports.open = function(name, params) {
-	turbo.trace(`📌  you are here → Alloy.open(${name})`);
+	turbo.verbose(`📌  you are here → Alloy.open(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		let controller = exports.Controllers[name];
 		let view;
 		if (controller) {
 			if( controller.isOpen ){
 				turbo.debug(`🔹  Controller is already open: ${name}`);
-				turbo.trace(`💡  Resolving promise to open:  ${name}`);
+				turbo.verbose(`💡  Resolving promise to open:  ${name}`);
 				return resolve();
 			}
 			view = controller.getViewEx();
@@ -648,15 +648,15 @@ exports.open = function(name, params) {
 					return resolve({controller, view});
 				});
 			} else {
-				turbo.trace(`💡  view.addEventListener is not a function:  ${name}`);
+				turbo.verbose(`💡  view.addEventListener is not a function:  ${name}`);
 				view.open();
 				return resolve();
 			}
-			turbo.trace(`📌  you are here → Alloy.open() calling view.open()`);
+			turbo.verbose(`📌  you are here → Alloy.open() calling view.open()`);
 			view.open();
 			return;
 		} else {
-			turbo.trace(`💡  view.open is not a function:  ${name}`);
+			turbo.verbose(`💡  view.open is not a function:  ${name}`);
 			return resolve();
 		}
 	});
@@ -664,7 +664,7 @@ exports.open = function(name, params) {
 };
 
 exports.close = function(name) {
-	turbo.trace(`📌  you are here → Alloy.close(${name})`);
+	turbo.verbose(`📌  you are here → Alloy.close(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		const controller = exports.Controllers[name];
 		if (controller) {

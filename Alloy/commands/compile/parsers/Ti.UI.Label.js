@@ -47,6 +47,9 @@ function parse(node, state, args) {
 	if ( node.getAttribute('verticalAlign') === 'center' ) {
 		node.setAttribute('verticalAlign', 'Titanium.UI.TEXT_VERTICAL_ALIGNMENT_CENTER');
 	}
+	if ( node.hasAttribute('value')) {
+		node.setAttribute('text', node.getAttribute('value'));
+	}
 
 	state.extraStyle = _.extend(attributedStringObj, textObj);
 
