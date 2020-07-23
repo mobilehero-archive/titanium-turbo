@@ -583,7 +583,7 @@ exports.createController = function(name, args = {}) {
 					controller.isOpen = true;
 					exports.Controllers.current = controller;
 					controller.trigger('open', e);
-					turbo.verbose(`📌  you are here → Alloy controller ${name} was opened.`);
+					turbo.verbose(`🚀  you are here → view.onOpen: ${name}`);
 				});
 
 				view.addEventListener('close', function onClose() {
@@ -591,28 +591,20 @@ exports.createController = function(name, args = {}) {
 					view = null;
 					controller.trigger('close');
 					exports.cleanUpController(controller);
-
 					controller = null;
-
-					if (true) {
-						turbo.verbose(`📌  you are here → Alloy controller ${name} was cleaned up.`);
-					}
+					turbo.verbose(`🚀  you are here → view.onClose: ${name}`);
 				});
 
-				view.addEventListener('postlayout', function postlayout(e) {
-					view && view.removeEventListener('postlayout', postlayout);
+				view.addEventListener('postlayout', function onPostlayout(e) {
+					view && view.removeEventListener('postlayout', onPostlayout);
 					controller && controller.trigger('postlayout', e);
-					if (true) {
-						turbo.verbose(`📌  you are here → Alloy controller ${name} postlayout`);
-					}
+					turbo.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
 				});
 			} else {
-				view.addEventListener('postlayout', function postlayout(e) {
-					view && view.removeEventListener('postlayout', postlayout);
+				view.addEventListener('postlayout', function onPostlayout(e) {
+					view && view.removeEventListener('postlayout', onPostlayout);
 					controller && controller.trigger('postlayout', e);
-					if (true) {
-						turbo.verbose(`📌  you are here → Alloy controller ${name} postlayout`);
-					}
+					turbo.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
 				});
 			}
 		}
@@ -622,14 +614,14 @@ exports.createController = function(name, args = {}) {
 };
 
 exports.open = function(name, params) {
-	turbo.verbose(`📌  you are here → Alloy.open(${name})`);
+	turbo.verbose(`🚀  you are here → Alloy.open(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		let controller = exports.Controllers[name];
 		let view;
 		if (controller) {
 			if( controller.isOpen ){
-				turbo.debug(`🔹  Controller is already open: ${name}`);
-				turbo.verbose(`💡  Resolving promise to open:  ${name}`);
+				turbo.debug(`🚀  Controller is already open: ${name}`);
+				turbo.verbose(`🚀  Resolving promise to open view:  ${name}`);
 				return resolve();
 			}
 			view = controller.getViewEx();
@@ -644,19 +636,19 @@ exports.open = function(name, params) {
 					view.removeEventListener('open', onOpen);
 					controller.isOpen = true;
 					controller.trigger('open', e);
-					turbo.trace(`💡  Resolving promise to open:  ${name}`);
+					turbo.trace(`🚀  Resolving promise to open view:  ${name}`);
 					return resolve({controller, view});
 				});
 			} else {
-				turbo.verbose(`💡  view.addEventListener is not a function:  ${name}`);
+				turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
 				view.open();
 				return resolve();
 			}
-			turbo.verbose(`📌  you are here → Alloy.open() calling view.open()`);
+			turbo.verbose(`🚀  you are here → Alloy.open() calling view.open()`);
 			view.open();
 			return;
 		} else {
-			turbo.verbose(`💡  view.open is not a function:  ${name}`);
+			turbo.verbose(`🚀  view.open is not a function:  ${name}`);
 			return resolve();
 		}
 	});
@@ -664,7 +656,7 @@ exports.open = function(name, params) {
 };
 
 exports.close = function(name) {
-	turbo.verbose(`📌  you are here → Alloy.close(${name})`);
+	turbo.verbose(`🚀  you are here → Alloy.close(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		const controller = exports.Controllers[name];
 		if (controller) {
@@ -673,17 +665,17 @@ exports.close = function(name) {
 				if (typeof view.addEventListener === 'function') {
 				view.addEventListener('close', function onClose(e) {
 					view.removeEventListener('close', onClose);
-					turbo.trace(`💡  Resolving promise to close:  ${name}`);
+					turbo.trace(`🚀  view.onClose:  ${name}`);
 					resolve();
 				});
 			} else {
-				turbo.trace(`💡  view.addEventListener is not a function:  ${name}`);
+				turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
 				view.close();
 				resolve();
 			}
 			view.close();
 			} else {
-				turbo.trace(`💡  view.close is not a function:  ${name}`);
+				turbo.verbose(`🚀  view.close is not a function:  ${name}`);
 				resolve();
 			}
 		} else {
