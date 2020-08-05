@@ -655,7 +655,7 @@ exports.open = function(name, params) {
 	return promise;
 };
 
-exports.close = function(name) {
+exports.close = async name => {
 	turbo.verbose(`🚀  you are here → Alloy.close(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		const controller = exports.Controllers[name];
@@ -663,22 +663,24 @@ exports.close = function(name) {
 			const view = controller.getView();
 			if (view && typeof view.close === 'function') {
 				if (typeof view.addEventListener === 'function') {
-				view.addEventListener('close', function onClose(e) {
-					view.removeEventListener('close', onClose);
-					turbo.trace(`🚀  view.onClose:  ${name}`);
+					view.addEventListener('close', function onClose(e) {
+						view.removeEventListener('close', onClose);
+						turbo.trace(`🚀  view.onClose:  ${name}`);
+						turbo.verbose(`🚀  Resolving promise to close view:  ${name}`);
+						resolve();
+					});
+					view.close();
+				} else {
+					turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
+					view.close();
 					resolve();
-				});
-			} else {
-				turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
-				view.close();
-				resolve();
-			}
-			view.close();
+				}
 			} else {
 				turbo.verbose(`🚀  view.close is not a function:  ${name}`);
 				resolve();
 			}
 		} else {
+			turbo.verbose(`🚀  view.close cannot find controller:  ${name}`);
 			resolve();
 		}
 	});

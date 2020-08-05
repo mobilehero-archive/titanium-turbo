@@ -7,7 +7,7 @@ var Alloy = require('/alloy');
 var _ = Alloy._;
 var Backbone = Alloy.Backbone;
 var turbo = require('/turbo');
-var JSONC = require('@titanium/jsonc');
+const JSONC = require('@titanium/jsonc');
 
 global.Alloy = Alloy;
 global._ = _;

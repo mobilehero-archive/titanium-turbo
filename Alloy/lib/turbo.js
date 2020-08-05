@@ -18,8 +18,10 @@ if ( !fs.patched ) {
 	fs.patched = true;	
 }
 
-
-
+// Titanium does not use the standard #RRGGBBAA format for color by default
+// Defaulting to #AARRGGBB for now but this will change in near future.
+const color_format = Titanium.App.Properties.getString('color-format', 'AARRGGBB').toUpperCase();
+const rgba = color_format === 'RRGGBBAA';
 
 const _turbo = { 
 	data: {},
@@ -46,6 +48,17 @@ _turbo.verbose = (...args) => {
 	_turbo.VERBOSE_MODE && console.debug(...args);
 };
 
+_turbo.switchColorFormat = color => {
+
+	if( typeof color !== 'string' || ! rgba ){
+		return color;
+	}
+	// console.error(`🦠 before color: ${JSON.stringify(color, null, 2)}`);
+	const converted = color.replace(/(#?)((?:[A-Fa-f0-9][A-Fa-f0-9]){3})([A-Fa-f0-9]{2})/,'$1$3$2').toLowerCase();
+	// console.error(`🦠 after color: ${JSON.stringify(converted, null, 2)}`);
+	return converted;
+}
+
 _turbo.openLoadingScreen = () => {};
 _turbo.closeLoadingScreen = () => {};
 
@@ -67,7 +80,8 @@ _turbo.createAbsolute = _turbo.createAbsoluteLayout =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE) {
 		params.backgroundColor = params.debugColor;
 	}
-	const view = Ti.UI.createView( params );
+
+	const view = _turbo.createView( params );
 	return view;
 };
 
@@ -79,6 +93,7 @@ _turbo.createVertical = _turbo.createVerticalLayout =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
+
 	const view = _turbo.createView( params );
 	return view;
 };
@@ -97,6 +112,7 @@ _turbo.createHorizontal = _turbo.createHorizontalLayout =  (params = {})  => {
 
 _turbo.createImageView = (params = {}) => {
 	params.image = params.image || params.src;
+	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
 	const view = Ti.UI.createImageView( params );
 	return view;
 };
@@ -126,6 +142,8 @@ _turbo.createLabel =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
+	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
+	params.color =_turbo.switchColorFormat(params.color);
 
 	if ( ! _.isNil(params.verticalAlign)) {
 		params.verticalAlign = _.get(_turbo.TEXT_VERTICAL_ALIGNMENTS, params.verticalAlign, params.verticalAlign);
@@ -141,6 +159,7 @@ _turbo.createView =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
+	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
 	const view = Ti.UI.createView( params );
 	return view;
 };
@@ -153,6 +172,7 @@ _turbo.createWindow =  (params = {})  => {
 	// 	delete params.largeTitleEnabled;
 	// 	delete params.largeTitleDisplayMode;
 	// }
+	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
 	const view = Ti.UI.createWindow( params );
 	return view;
 };
@@ -216,7 +236,8 @@ _turbo.createTextField =  (params = {})  => {
 	}
 
 	processFontParameters(params);
-
+	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
+	params.color =_turbo.switchColorFormat(params.color);
 	const view = Ti.UI.createTextField( params );
 	return view;
 };
@@ -236,7 +257,8 @@ _turbo.createIcon =  (params = {})  => {
 
 	delete params.type;
 	delete params.size;
-
+	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
+	params.color =_turbo.switchColorFormat(params.color);
 	const view = Ti.UI.createLabel( params );
 	return view;
 };

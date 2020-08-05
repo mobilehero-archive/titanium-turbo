@@ -4,6 +4,15 @@
 
 # Titanium Turbo
 
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/brentonhouse?label=Follow%20%40brentonhouse%20on%20twitter&style=social)](https://twitter.com/brentonhouse)
+[![LinkedIn Follow](https://img.shields.io/badge/LinkedIn-_Connect_with_%40brentonhouse_-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/brentonhouse/)
+![Github Followers](https://img.shields.io/github/followers/brentonhouse?label=Follow%20%40brentonhouse%20on%20GitHub&style=social)
+
+
+![GitHub stars](https://img.shields.io/github/stars/brentonhouse/titanium-turbo?style=social)
+![GitHub forks](https://img.shields.io/github/forks/brentonhouse/titanium-turbo?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/brentonhouse/titanium-turbo?style=social)
 [![@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png)](https://www.npmjs.com/package/@titanium/turbo)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/titanium-turbo)](https://dependabot.com)
 
@@ -23,7 +32,7 @@
 
 Titanium Turbo is a fork of **`Titanium Alloy`** that adds a lot of enhancements and customizations for rapid development.
 
-This version of Titanium Turbo is based on **`Titanium Alloy 1.14.6`**
+This version of Titanium Turbo is based on **`Titanium Alloy 1.15.0`**
 
 ## 🚀 Getting Started
 
