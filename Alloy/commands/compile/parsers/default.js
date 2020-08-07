@@ -53,22 +53,53 @@ function parse(node, state, args) {
 		args.symbol = CU.generateUniqueId();
 	}
 
+	if (node.nodeName === 'Window') {
 	// find any font attributes and create proper font object
-	if (args.createArgs && (args.createArgs.fontSize || args.createArgs.fontStyle || args.createArgs.fontFamily || args.createArgs.fontWeight || args.createArgs.textStyle)) {
-		args.createArgs.font = args.createArgs.font || {};
-		_.defaults(args.createArgs.font, {
-			fontSize: args.createArgs.font.fontSize || args.createArgs.fontSize,
-			fontStyle: args.createArgs.font.fontStyle || args.createArgs.fontStyle,
-			fontFamily: args.createArgs.font.fontFamily || args.createArgs.fontFamily,
-			fontWeight: args.createArgs.font.fontWeight || args.createArgs.fontWeight,
-			textStyle: args.createArgs.font.textStyle || args.createArgs.textStyle
-		});
+		if (args.createArgs && (args.createArgs.fontSize || args.createArgs.fontStyle || args.createArgs.fontFamily || args.createArgs.fontWeight || args.createArgs.textStyle || args.createArgs.titleColor )) {
+			args.createArgs.titleAttributes = args.createArgs.titleAttributes || {};
+			args.createArgs.titleAttributes.font = args.createArgs.titleAttributes.font || {};
+			_.defaults(args.createArgs.titleAttributes, {
+				font: {
+					fontSize: args.createArgs.titleAttributes.font.fontSize || args.createArgs.fontSize,
+					fontStyle: args.createArgs.titleAttributes.font.fontStyle || args.createArgs.fontStyle,
+					fontFamily: args.createArgs.titleAttributes.font.fontFamily || args.createArgs.fontFamily,
+					fontWeight: args.createArgs.titleAttributes.font.fontWeight || args.createArgs.fontWeight,
+					textStyle: args.createArgs.titleAttributes.font.textStyle || args.createArgs.textStyle					
+				},
+				color: args.createArgs.titleAttributes.color || args.createArgs.titleColor,
+				//TODO: Add support for shadow as well
 
-		delete args.createArgs['fontSize'];
-		delete args.createArgs['fontStyle'];
-		delete args.createArgs['fontFamily'];
-		delete args.createArgs['fontWeight'];
-		delete args.createArgs['textStyle'];
+			});
+
+			delete args.createArgs['fontSize'];
+			delete args.createArgs['fontStyle'];
+			delete args.createArgs['fontFamily'];
+			delete args.createArgs['fontWeight'];
+			delete args.createArgs['textStyle'];
+			delete args.createArgs['titleColor'];
+
+			if ( _.isEmpty(args.createArgs.titleAttributes.font)) {
+				delete args.createArgs.titleAttributes['font'];
+			}
+		}	
+	} else {
+	// find any font attributes and create proper font object
+		if (args.createArgs && (args.createArgs.fontSize || args.createArgs.fontStyle || args.createArgs.fontFamily || args.createArgs.fontWeight || args.createArgs.textStyle)) {
+			args.createArgs.font = args.createArgs.font || {};
+			_.defaults(args.createArgs.font, {
+				fontSize: args.createArgs.font.fontSize || args.createArgs.fontSize,
+				fontStyle: args.createArgs.font.fontStyle || args.createArgs.fontStyle,
+				fontFamily: args.createArgs.font.fontFamily || args.createArgs.fontFamily,
+				fontWeight: args.createArgs.font.fontWeight || args.createArgs.fontWeight,
+				textStyle: args.createArgs.font.textStyle || args.createArgs.textStyle
+			});
+
+			delete args.createArgs['fontSize'];
+			delete args.createArgs['fontStyle'];
+			delete args.createArgs['fontFamily'];
+			delete args.createArgs['fontWeight'];
+			delete args.createArgs['textStyle'];
+		}		
 	}
 
 	if ( args.visibility ) {

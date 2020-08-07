@@ -16,7 +16,9 @@ var STYLE_ALLOY_TYPE = '__ALLOY_TYPE__';
 var STYLE_EXPR_PREFIX = exports.STYLE_EXPR_PREFIX = '__ALLOY_EXPR__--';
 var STYLE_REGEX = /^\s*([\#\.]{0,1})([^\[]+)(?:\[([^\]]+)\])*\s*$/;
 var EXPR_REGEX = new RegExp('^' + STYLE_EXPR_PREFIX + '(.+)');
-var BINDING_SPLIT_REGEX = /(\{[^:}]+\}(?!\}))/;
+// var BINDING_SPLIT_REGEX = /(\{[^:}]+\}(?!\}))/;
+// Find {...} but skip {{...}} and ${...}
+var BINDING_SPLIT_REGEX = /(?<!\$)(\{[^:}]+\}(?!\}))/;
 var BINDING_REFERENCE_REGEX = /^\{([^:}]+)\}$/;
 var VALUES = {
 	ID:     100000,
@@ -406,10 +408,10 @@ exports.processStyle = function(_style, _state) {
 							// keyboard type shortcuts for TextField, TextArea
 							// support shortcuts for keyboard type, return key type, and autocapitalization
 							if (sn === KEYBOARD_PROPERTIES[0] && _.includes(KEYBOARD_TYPES, value.toUpperCase())) {
-								code += prefix + 'Ti.UI.KEYBOARD_' + value.toUpperCase() + ',';
+								code += prefix + 'Ti.UI.KEYBOARD_TYPE_' + value.toUpperCase() + ',';
 							}
 							if (sn === KEYBOARD_PROPERTIES[1] && _.includes(RETURN_KEY_TYPES, value.toUpperCase())) {
-								code += prefix + 'Ti.UI.RETURNKEY_' + value.toUpperCase() + ',';
+								code += prefix + 'Ti.UI.RETURNKEY_TYPE_' + value.toUpperCase() + ',';
 							}
 							if (sn === KEYBOARD_PROPERTIES[2] && _.includes(AUTOCAPITALIZATION_TYPES, value.toUpperCase())) {
 								code += prefix + 'Ti.UI.TEXT_AUTOCAPITALIZATION_' + value.toUpperCase() + ',';

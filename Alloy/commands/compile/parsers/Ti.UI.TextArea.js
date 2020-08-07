@@ -95,13 +95,13 @@ function parse(node, state, args) {
 	// support shortcuts for keyboard type, return key type, and autocapitalization
 	var keyboardType = node.getAttribute('keyboardType');
 	if (_.includes(KEYBOARD_TYPES, keyboardType.toUpperCase())) {
-		node.setAttribute('keyboardType', 'Ti.UI.KEYBOARD_' + keyboardType.toUpperCase());
+		node.setAttribute('keyboardType', 'Ti.UI.KEYBOARD_TYPE_' + keyboardType.toUpperCase());
 	}
 	var returnKey = node.getAttribute('returnKeyType');
 	if (_.includes(RETURN_KEY_TYPES, returnKey.toUpperCase())) {
-		node.setAttribute('returnKeyType', 'Ti.UI.RETURNKEY_' + returnKey.toUpperCase());
+		node.setAttribute('returnKeyType', 'Ti.UI.RETURNKEY_TYPE_' + returnKey.toUpperCase());
 	}
-	var autocapitalization = node.getAttribute('keyboardType');
+	var autocapitalization = node.getAttribute('autocapitalization');
 	if (_.includes(AUTOCAPITALIZATION_TYPES, autocapitalization.toUpperCase())) {
 		node.setAttribute('autocapitalization', 'Ti.UI.TEXT_AUTOCAPITALIZATION_' + autocapitalization.toUpperCase());
 	}

@@ -14,7 +14,8 @@ function parse(node, state, args) {
 		proxyProperties = {};
 
 	_.each(children, function(child, key) {
-		if (child.nodeName === 'RefreshControl') {
+		//TODO: Figure out why child name has not been converted yet
+		if (['RefreshControl', 'refresh-control', 'refreshControl', 'refresh_control'].includes(child.nodeName)) {
 			code += CU.generateNodeExtended(child, state, {
 				parent: { },
 				post: function(node, state, args) {

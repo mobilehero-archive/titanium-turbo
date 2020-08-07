@@ -7,60 +7,37 @@ var Alloy = require('/alloy');
 var _ = Alloy._;
 var Backbone = Alloy.Backbone;
 var turbo = require('/turbo');
+const JSONC = require('@titanium/jsonc');
 
 global.Alloy = Alloy;
 global._ = _;
 global.Backbone = Backbone;
 global.turbo = turbo;
+global.JSONC = JSONC;
 
 Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	
 Ti.UI.VISIBILITY_VISIBLE = 'visible';	
 
-Ti.UI.createStackLayout = (params = {}) => {
-	const orientation = params.orientation || params.layout || 'vertical';
-	params.layout = params.orientation = orientation;
-	_.defaults(params, {
-		height: 'size',
-	});
-	const view = Ti.UI.createView( params );
-	return view;
-}
-
-Ti.UI.createVerticalLayout =  (params = {})  => {
-	params.layout = params.orientation = 'vertical';
-	_.defaults(params, {
-		height: 'size',
-	});
-	const view = Ti.UI.createView( params );
-	return view;
-}
-
-Ti.UI.createHorizontalLayout =  (params = {})  => {
-	params.layout = params.orientation = 'horizontal';
-	_.defaults(params, {
-		height: 'size',
-	});
-	const view = Ti.UI.createView( params );
-	return view;
-}
-
-Ti.UI.createAbsoluteLayout = (params = {}) => {
-	params.layout = params.orientation = 'composite';
-	const view = Ti.UI.createView( params );
-	return view;
-}
-
-const createImageView = Ti.UI.createImageView;
-Ti.UI.createImageView = (params = {}) => {
-	params.image = params.image || params.src;
-	const view = createImageView( params );
-	return view;
-}
-
 __MAPMARKER_ALLOY_JS__
-// }
+
 
 Alloy.main = Alloy.main || Alloy.CFG.main || Titanium.App.Properties.getString('app.main','index');
-Alloy.open(Alloy.main);
 
+const initMainController = () => {
+	if( Alloy.BYPASS_AUTO_OPEN ){
+		Alloy.createController(Alloy.main);
+	} else {
+		Alloy.open(Alloy.main);
+	}
+}
+
+// Open root window if a new UI session has started. Can happen more than once in app's lifetime.
+// Event can only be fired if "tiapp.xml" property "run-in-background" is set true.
+Ti.UI.addEventListener('sessionbegin', () => initMainController);
+
+// Open the root window immediately if an active UI session exists on startup.
+// Note: The Ti.UI.hasSession property was added as of Titanium 9.1.0.
+if ((typeof Ti.UI.hasSession === 'undefined') || Ti.UI.hasSession) {
+	initMainController();
+}

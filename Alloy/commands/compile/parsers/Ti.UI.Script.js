@@ -9,7 +9,7 @@ exports.parse = function(node, state) {
 	var code = '';
 
 	function getSourceCode(src) {
-		if ( src) {
+		if ( src ) {
 			const sourcePath = path.join(compilerConfig.dir.resourcesPlatform, src);
 			if (fs.existsSync(sourcePath)) {
 				return fs.readFileSync(sourcePath, 'utf8');

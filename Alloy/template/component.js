@@ -2,6 +2,7 @@ var Alloy = require('/alloy');
 var _ = Alloy._;
 var Backbone = Alloy.Backbone;
 var turbo = require('/turbo');
+var JSONC = require('@titanium/jsonc');
 
 <%= ES6Mod %>
 <%= WPATH %>

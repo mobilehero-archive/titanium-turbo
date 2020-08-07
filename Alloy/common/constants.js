@@ -159,7 +159,22 @@ var NS_ALLOY = 'Alloy',
 	NS_TI_UI_MOBILEWEB = 'Ti.UI.MobileWeb',
 	NS_TI_UI_WINDOWS = 'Ti.UI.Windows';
 
+const NS_TURBO = 'turbo';
+
 exports.IMPLICIT_NAMESPACES = {
+
+	// Turbo
+	AbsoluteLayout: NS_TURBO,
+	HorizontalLayout: NS_TURBO,
+	Icon: NS_TURBO,
+	ImageVIew: NS_TURBO,
+	Input: NS_TURBO,
+	Label: NS_TURBO,	
+	TextField: NS_TURBO,	
+	VerticalLayout: NS_TURBO,
+	View: NS_TURBO,
+	Window: NS_TURBO,
+
 	// Alloy
 	Collection: NS_ALLOY,
 	Model: NS_ALLOY,

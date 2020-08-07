@@ -1,7 +1,7 @@
 {
 	"name": "@titanium/turbo",
-	"version": "1.14.6-5",
-	"description": "Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.",
+	"version": "1.15.0-6",
+	"description": "Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development.",
 	"author": "Appcelerator, Inc. <info@appcelerator.com>",
 	"maintainers": [
 		{
@@ -25,14 +25,14 @@
 		"@babel/parser": "^7.7.7",
 		"@babel/traverse": "^7.7.4",
 		"@babel/types": "^7.7.4",
-		"@titanium/module-copier": "0.0.25",
+		"@titanium/module-copier": "0.0.28",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
-		"cli-table3": "^0.5.1",
+		"cli-table3": "^0.6.0",
 		"colors": "^1.4.0",
 		"commander": "^2.20.0",
 		"ejs": "2.7.4",
-		"fs-extra": "^8.1.0",
+		"fs-extra": "^9.0.1",
 		"global-paths": "^1.0.0",
 		"jsonlint": "1.6.3",
 		"lodash": "^4.17.19",
@@ -41,7 +41,7 @@
 		"pkginfo": "0.4.1",
 		"resolve": "^1.14.2",
 		"source-map": "^0.7.3",
-		"walk-sync": "^2.0.2",
+		"walk-sync": "^2.2.0",
 		"xml2tss": "0.0.5",
 		"xmldom": "^0.1.27"
 	},
@@ -55,11 +55,12 @@
 		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
 		"prep": "npm install --ignore-scripts && npm run list-files",
 		"prepublishOnly2": "git pull && bump",
-		"test2": "echo \"no tests\" && exit 0"
+		"test2": "echo \"no tests\" && exit 0",
+		"pub:next": "npm publish --tag next"
 	},
 	"main": "./Alloy/alloy",
 	"engines": {
-		"node": ">=8"
+		"node": ">=12"
 	},
 	"devDependencies": {
 		"@seadub/danger-plugin-dependencies": "^0.1.0",
@@ -70,9 +71,6 @@
 		"eslint": "^6.8.0",
 		"jake": "^8.1.1",
 		"mkdirp": "^0.5.1"
-	},
-	"publishConfig": {
-		"tag": "latest"
 	},
 	"keywords": [
 		"appcelerator",
