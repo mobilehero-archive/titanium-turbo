@@ -1,5 +1,6 @@
-var Alloy = require('/alloy');
+// var Alloy = require('/alloy');
 
-global.Alloy = Alloy;
-global._ = Alloy._;
+// global.Alloy = Alloy;
+// global._ = Alloy._;
+global._ = require('lodash');
 global.Backbone = Alloy.Backbone;

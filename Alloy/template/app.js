@@ -4,16 +4,17 @@
  * Copyright (c) 2012 by Appcelerator, Inc.
  */
 var Alloy = require('/alloy');
-var _ = Alloy._;
-var Backbone = Alloy.Backbone;
+// var _ = Alloy._;
+// var Backbone = Alloy.Backbone;
 var turbo = require('/turbo');
-const JSONC = require('@titanium/jsonc');
+// const JSONC = require('@titanium/jsonc');
 
 global.Alloy = Alloy;
-global._ = _;
-global.Backbone = Backbone;
+// global._ = _;
+// global.Backbone = Backbone;
 global.turbo = turbo;
-global.JSONC = JSONC;
+// global.JSONC = JSONC;
+
 
 Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	

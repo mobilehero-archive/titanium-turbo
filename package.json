@@ -1,8 +1,8 @@
 {
 	"name": "@titanium/turbo",
 	"version": "1.15.1-0",
-	"description": "Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development.",
-	"author": "Appcelerator, Inc. <info@appcelerator.com>",
+	"description": "🚀 Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development.",
+	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
 		{
 			"name": "Brenton House",
