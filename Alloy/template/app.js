@@ -1,19 +1,14 @@
 /**
- * Alloy for Titanium by Appcelerator
+ * Turbo for Titanium (Maintained by Axway Development Community)
+ * Alloy for Titanium by Axway
  * This is generated code, DO NOT MODIFY - changes will be lost!
- * Copyright (c) 2012 by Appcelerator, Inc.
+ * Copyright (c) 20202 by Axway, Inc.
  */
-var Alloy = require('/alloy');
-var _ = Alloy._;
-var Backbone = Alloy.Backbone;
-var turbo = require('/turbo');
-const JSONC = require('@titanium/jsonc');
 
-global.Alloy = Alloy;
-global._ = _;
-global.Backbone = Backbone;
-global.turbo = turbo;
-global.JSONC = JSONC;
+var turbo = global.turbo = require('/turbo');
+var Alloy = global.Alloy = require('/alloy');
+var Backbone = global.Backbone = Alloy.Backbone;
+var _ = global._ = Alloy._;
 
 Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	

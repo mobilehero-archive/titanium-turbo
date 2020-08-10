@@ -13,9 +13,6 @@ const path = require('path');
 const U = require('./utils');
 const pkg = require('../package.json');
 
-// patch to remove the warning in node >=0.8
-path.existsSync = fs.existsSync || path.existsSync;
-
 class Turbo {
 
 	constructor({ program }) {
@@ -60,7 +57,13 @@ class Turbo {
 
 	execute() {
 		// Launch command with given arguments and options
-		(require('./commands/' + this.command + '/index'))(this.program.args.slice(1), this.program);	
+		// (require('./commands/' + this.command + '/index'))(this.program.args.slice(1), this.program);	
+		const cmd = require('./commands/' + this.command + '/index');
+		Promise
+			.resolve(cmd(this.program.args.slice(1), this.program))
+			.catch(error => {
+				U.die(error.message, error);
+			});
 	}
 
 	banner() {
@@ -74,7 +77,7 @@ class Turbo {
 
 		if (!this.program.dump) {
 			console.log(logger.stripColors ? str : str.blue);
-			var m = 'Titanium Turbo ' + pkg.version + ' by Axway Developer Community.  A mobile framework for Titanium.\n'.white;
+			var m = 'Titanium Turbo ' + pkg.version + ' by the Axway Developer Community.  A mobile framework for Titanium.\n'.white;
 			console.log(logger.stripColors ? colors.stripColors(m) : m);
 		}
 	}
@@ -83,7 +86,7 @@ class Turbo {
 		try {
 			var commandsPath = path.join(__dirname, 'commands');
 			return _.filter(fs.readdirSync(commandsPath), function(file) {
-				return path.existsSync(path.join(commandsPath, file, 'index.js'));
+				return fs.existsSync(path.join(commandsPath, file, 'index.js'));
 			});
 		} catch (e) {
 			U.die('Error getting command list', e);

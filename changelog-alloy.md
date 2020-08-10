@@ -2,9 +2,22 @@
 
 ### Unreleased items
 
+### Release 1.15.1
+
+## Improvements
+
+* [ALOY-1735](https://jira.appcelerator.org/browse/ALOY-1735) - Create VS Code settings.json file on project creation [#965](https://github.com/appcelerator/alloy/pull/965)
+
+### Bug Fixes
+
+* [ALOY-1736](https://jira.appcelerator.org/browse/ALOY-1736) - Ensure package.json has correct fields [#965](https://github.com/appcelerator/alloy/pull/965)
+
+### Release 1.15.0
+
 ### New Features
 
-* [ALOY-1732](https://jira.appcelerator.org/browse/ALOY-1732) - Add ability to run in the background without UI [#959](https://jira.appcelerator.org/browse/ALOY-1732)
+* [ALOY-1732](https://jira.appcelerator.org/browse/ALOY-1732) - Add ability to run in the background without UI [#959](https://github.com/appcelerator/alloy/pull/959)
+* [ALOY-1733](https://jira.appcelerator.org/browse/ALOY-1733) - Add template for Alloy + webpack usage [#963](https://github.com/appcelerator/alloy/pull/963)
 
 ### Improvements
 
@@ -13,7 +26,8 @@
 
 ### Bug Fixes
 
-* [ALOY-1720](https://jira.appcelerator.org/browse/ALOY-1720) - Version string comparison will break for SDK 10.0.0[#960](https://github.com/appcelerator/alloy/pull/960)
+* [ALOY-1720](https://jira.appcelerator.org/browse/ALOY-1720) - Version string comparison will break for SDK 10.0.0 [#960](https://github.com/appcelerator/alloy/pull/960)
+* [ALOY-1734](https://jira.appcelerator.org/browse/ALOY-1734) - Declare Alloy globals before execution of app.js/alloy.js [#964](https://github.com/appcelerator/alloy/pull/964)
 
 ### Release 1.14.6
 

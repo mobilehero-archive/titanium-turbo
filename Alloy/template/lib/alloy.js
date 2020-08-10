@@ -657,6 +657,8 @@ exports.open = function(name, params) {
 
 exports.close = async name => {
 	turbo.verbose(`🚀  you are here → Alloy.close(${name})`);
+	// console.error(Promise);
+	// console.warn(global.Promise);
 	const promise = new Promise((resolve, reject) => {
 		const controller = exports.Controllers[name];
 		if (controller) {

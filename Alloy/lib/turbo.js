@@ -24,7 +24,6 @@ const color_format = Titanium.App.Properties.getString('color-format', 'AARRGGBB
 const rgba = color_format === 'RRGGBBAA';
 
 const _turbo = { 
-	data: {},
 	globals: {},
 	fonts: {},
 	colors: {},
