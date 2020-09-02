@@ -526,8 +526,11 @@ exports.createController = function(name, args = {}) {
 		
 	} else if (exports.widget_registry[name]) {
 		controller = new (require(exports.widget_registry[name]))(_.defaults({}, args, { __resource_name: name, __resource_path: exports.widget_registry[name]  }));
-		console.error('Error creating controller: ' + name);
-		throw new Error('Error creating controller: ' + name);
+		if( ! controller ){
+			console.error('Error creating controller: ' + name);
+			throw new Error('Error creating controller: ' + name);	
+		}
+
 	} else {
 		console.error('Alloy controller not found: ' + name);
 		throw new Error('Alloy controller not found: ' + name);
