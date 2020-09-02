@@ -469,6 +469,9 @@ exports.createWidget = function(id, name, args) {
 
 
 exports.cleanUpController = function(controller) {
+	if( !controller ){
+		return;
+	}
 	if (controller.resource_name) {
 		// exports.Controllers[controller.resource_name] = null;
 		delete exports.Controllers[controller.resource_name];
@@ -513,33 +516,6 @@ exports.createController = function(name, args = {}) {
 		name = name.substring(1, name.length);
 	}
 
-	// function cleanUpController(controller) {
-	// 	if (controller.resource_name) {
-	// 		// exports.Controllers[controller.resource_name] = null;
-	// 		delete exports.Controllers[controller.resource_name];
-	// 	}
-	// 	if (controller.resource_alias) {
-	// 		// exports.Controllers[controller.resource_alias] = null;
-	// 		delete exports.Controllers[controller.resource_alias];
-	// 	}
-
-	// 	if (controller.__views) {
-	// 		_.each(controller.__views, value => {
-	// 			cleanUpController(value);
-	// 		});
-	// 	}
-
-	// 	if (controller.__iamalloy) {
-	// 		controller.off();
-	// 		controller.destroy();
-	// 	}
-
-	// 	if( exports.Controllers.current === controller){
-	// 		exports.Controllers.current = null;
-	// 	}
-	// 	controller = null;
-	// }
-
 	let controller;
 	if (exports.file_registry.includes(`/alloy/controllers/${name}.js`)) {
 		try{
@@ -550,6 +526,8 @@ exports.createController = function(name, args = {}) {
 		
 	} else if (exports.widget_registry[name]) {
 		controller = new (require(exports.widget_registry[name]))(_.defaults({}, args, { __resource_name: name, __resource_path: exports.widget_registry[name]  }));
+		console.error('Error creating controller: ' + name);
+		throw new Error('Error creating controller: ' + name);
 	} else {
 		console.error('Alloy controller not found: ' + name);
 		throw new Error('Alloy controller not found: ' + name);

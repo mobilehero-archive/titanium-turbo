@@ -2,6 +2,19 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [1.15.0-3] - 2020-09-01
+
+### Updated
+
+- Partial fix fo issue with Titanium and Alloy where relative path require statements were broken on iOS.  [TIMOB-28037]
+- Updated lodash to v4.17.20
+
+
+## [1.15.0-1] - 2020-07-01
+
+### Added
+
+- Added all sorts of new stuff.  Need to update docs with changes later.
 
 ## [1.14.6-5] - 2020-04-04
 
