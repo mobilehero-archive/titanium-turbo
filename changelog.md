@@ -2,7 +2,7 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
-## [1.15.0-2] - 2020-09-01
+## [1.15.1-2] - 2020-09-01
 
 ### Updated
 
@@ -10,7 +10,7 @@ Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and 
 - Updated lodash to v4.17.20
 
 
-## [1.15.0-1] - 2020-07-01
+## [1.15.1-1] - 2020-07-01
 
 ### Added
 
