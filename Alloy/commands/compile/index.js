@@ -513,31 +513,7 @@ module.exports = function(args, program) {
 
 	U.copyFileSync(path.join(alloyRoot, 'template', 'alloy.bootstrap.js'), path.join(paths.resources, titaniumFolder, 'alloy.bootstrap.js'));
 
-	// ALOY-905: workaround TiSDK < 3.2.0 iOS device build bug where it can't reference app.js
-	// in platform-specific folders, so we just copy the platform-specific one to
-	// the Resources folder.
-	if (buildPlatform === 'ios' && tiapp.version.lt('3.2.0')) {
-		U.copyFileSync(path.join(paths.resources, titaniumFolder, 'app.js'), path.join(paths.resources, 'app.js'));
-	}
-
-
-
-	// optimize code
-	logger.info('----- OPTIMIZING -----');
-
-	if (restrictionSkipOptimize) {
-		logger.info('Skipping optimize due to file restriction.');
-	} else {
-		optimizeCompiledCode(alloyConfig, paths);
-	}
-
-	logger.debug('----- post:compile -----');
-
-	// trigger our custom compiler makefile
-	if (compilerMakeFile.isActive) {
-		compilerMakeFile.trigger('post:compile', _.clone(compileConfig));
-	}
-
+	logger.info('----- CREATING FILE INDEXES -----');
 	const index = [];
 	const resourcePath = path.join(paths.resources, titaniumFolder);
 	(function walk(dir) {
@@ -553,6 +529,7 @@ module.exports = function(args, program) {
 		});
 	}(path.join(paths.resources, titaniumFolder)));
 
+	index.push('/alloy/moment.js');
 	index.push('/__file_registry.json');
 	index.push('/__widget_registry.json');
 	fs.writeJsonSync(path.join(resourcePath, '__file_registry.json'), index, { spaces: '\t'});
@@ -581,6 +558,48 @@ module.exports = function(args, program) {
 	});
 
 	fs.writeJsonSync(path.join(resourcePath, '__widget_registry.json'), widget_index, { spaces: '\t'});
+
+
+	// optimize code
+	logger.info('----- OPTIMIZING -----');
+
+	if (restrictionSkipOptimize) {
+		logger.info('Skipping optimize due to file restriction.');
+	} else {
+		optimizeCompiledCode(alloyConfig, paths);
+	}
+
+	logger.debug('----- post:compile -----');
+
+	// trigger our custom compiler makefile
+	if (compilerMakeFile.isActive) {
+		compilerMakeFile.trigger('post:compile', _.clone(compileConfig));
+	}
+
+	// const widget_index = {};
+	// index.forEach( filename => {
+	// 	const regex1 = /\/alloy\/widgets\/(.*)\/controllers(\/)(.*).js/;
+	// 	const regex2 = /\/alloy\/widgets\/(.*)\/controllers\/?(.*)\/widget.js/;
+	// 	if ( regex1.test(filename)) {
+	// 		const widgetShortcut1 = filename.replace(regex1, '$1$2$3');
+	// 		widget_index[widgetShortcut1] = filename;
+	// 		logger.debug('Adding widget shortcut: ' + widgetShortcut1 + ' → ' + filename);
+	// 		if ( regex2.test(filename)) {
+	// 			const widgetShortcut2 = filename.replace(regex2, '$1$2');
+	// 			widget_index[widgetShortcut2] = filename;
+	// 			logger.debug('Adding widget shortcut: ' + widgetShortcut2 + ' → ' + filename);
+	// 		} else {
+	// 			const widgetShortcut3 = filename.replace(regex1, '$3');
+	// 			if ( widget_index[widgetShortcut3] ) {
+	// 				logger.warn('Overriding existing widget shortcut: ' + widgetShortcut3 + 'that was pointed to: ' + widget_index[widgetShortcut3]);
+	// 			}
+	// 			widget_index[widgetShortcut3] = filename;
+	// 			logger.debug('Adding widget shortcut: ' + widgetShortcut3 + ' → ' + filename);
+	// 		}
+	// 	}
+	// });
+
+	// fs.writeJsonSync(path.join(resourcePath, '__widget_registry.json'), widget_index, { spaces: '\t'});
 
 	// write out the log for this build
 	buildLog.write();
@@ -1221,6 +1240,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 			'alloy/backbone.js',
 			'alloy/constants.js',
 			'alloy/underscore.js',
+			'alloy/lodash.js',
 			'alloy/widget.js',
 			'turbo.js'
 		].concat(compileConfig.optimizingExceptions || []);
@@ -1234,7 +1254,8 @@ function optimizeCompiledCode(alloyConfig, paths) {
 			exceptions.push(`${titaniumFolder}/${ex}`);
 		});
 
-		var excludePatterns = otherPlatforms.concat(['.+node_modules']);
+		// var excludePatterns = otherPlatforms.concat(['.+node_modules']);
+		var excludePatterns = otherPlatforms;
 		var rx = new RegExp('^(?!' + excludePatterns.join('|') + ').+\\.js$');
 		return _.filter(walkSync(compileConfig.dir.resources), function(f) {
 			return rx.test(f) && !_.find(exceptions, function(e) {
@@ -1252,6 +1273,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 						// [require('./ast/handle-alloy-globals')],
 						[require('./ast/optimizer-plugin'), compileConfig.alloyConfig],
 						[require('./ast/string-statement-plugin'), compileConfig.alloyConfig],
+						[require('./ast/fix-require'), compileConfig],
 
 
 					]

@@ -269,5 +269,5 @@ _turbo.createInput =  (params = {})  => {
 
 _turbo.noop = () => {};
 
-module.exports = observable(_turbo);
-// module.exports = _turbo;
+// module.exports = observable(_turbo);
+module.exports = _turbo;

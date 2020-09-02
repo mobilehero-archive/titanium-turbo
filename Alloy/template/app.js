@@ -1,8 +1,7 @@
 /**
  * Turbo for Titanium (Maintained by Axway Development Community)
- * Alloy for Titanium by Axway
+ * Alloy for Titanium - Copyright (c) 2020 by Axway, Inc.
  * This is generated code, DO NOT MODIFY - changes will be lost!
- * Copyright (c) 20202 by Axway, Inc.
  */
 
 var turbo = global.turbo = require('/turbo');
