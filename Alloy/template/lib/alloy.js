@@ -528,6 +528,7 @@ exports.createController = function(name, args = {}) {
 			}
 		} catch (error){
 			console.error(error);
+			throw new Error('Error creating controller: ' + name);	
 		}
 		
 	} else if (exports.widget_registry[name]) {
