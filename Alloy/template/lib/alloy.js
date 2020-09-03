@@ -57,6 +57,8 @@ exports.version = '<%= version %>';
 exports._ = _;
 exports.Backbone = Backbone;
 
+const logger = require('@geek/logger');
+
 var DEFAULT_WIDGET = 'widget';
 var TI_VERSION = Ti.version;
 var MW320_CHECK = OS_MOBILEWEB;
@@ -568,7 +570,7 @@ exports.createController = function(name, args = {}) {
 					controller.isOpen = true;
 					exports.Controllers.current = controller;
 					controller.trigger('open', e);
-					turbo.verbose(`🚀  you are here → view.onOpen: ${name}`);
+					logger.verbose(`🚀  you are here → view.onOpen: ${name}`);
 				});
 
 				view.addEventListener('close', function onClose() {
@@ -577,19 +579,19 @@ exports.createController = function(name, args = {}) {
 					controller.trigger('close');
 					exports.cleanUpController(controller);
 					controller = null;
-					turbo.verbose(`🚀  you are here → view.onClose: ${name}`);
+					logger.verbose(`🚀  you are here → view.onClose: ${name}`);
 				});
 
 				view.addEventListener('postlayout', function onPostlayout(e) {
 					view && view.removeEventListener('postlayout', onPostlayout);
 					controller && controller.trigger('postlayout', e);
-					turbo.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
+					logger.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
 				});
 			} else {
 				view.addEventListener('postlayout', function onPostlayout(e) {
 					view && view.removeEventListener('postlayout', onPostlayout);
 					controller && controller.trigger('postlayout', e);
-					turbo.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
+					logger.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
 				});
 			}
 		}
@@ -599,14 +601,14 @@ exports.createController = function(name, args = {}) {
 };
 
 exports.open = function(name, params) {
-	turbo.verbose(`🚀  you are here → Alloy.open(${name})`);
+	logger.verbose(`🚀  you are here → Alloy.open(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		let controller = exports.Controllers[name];
 		let view;
 		if (controller) {
 			if( controller.isOpen ){
-				turbo.debug(`🚀  Controller is already open: ${name}`);
-				turbo.verbose(`🚀  Resolving promise to open view:  ${name}`);
+				logger.debug(`🚀  Controller is already open: ${name}`);
+				logger.verbose(`🚀  Resolving promise to open view:  ${name}`);
 				return resolve();
 			}
 			view = controller.getViewEx();
@@ -621,19 +623,19 @@ exports.open = function(name, params) {
 					view.removeEventListener('open', onOpen);
 					controller.isOpen = true;
 					controller.trigger('open', e);
-					turbo.trace(`🚀  Resolving promise to open view:  ${name}`);
+					logger.track(`🚀  Resolving promise to open view:  ${name}`);
 					return resolve({controller, view});
 				});
 			} else {
-				turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
+				logger.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
 				view.open();
 				return resolve();
 			}
-			turbo.verbose(`🚀  you are here → Alloy.open() calling view.open()`);
+			logger.verbose(`🚀  you are here → Alloy.open() calling view.open()`);
 			view.open();
 			return;
 		} else {
-			turbo.verbose(`🚀  view.open is not a function:  ${name}`);
+			logger.verbose(`🚀  view.open is not a function:  ${name}`);
 			return resolve();
 		}
 	});
@@ -641,7 +643,7 @@ exports.open = function(name, params) {
 };
 
 exports.close = async name => {
-	turbo.verbose(`🚀  you are here → Alloy.close(${name})`);
+	logger.verbose(`🚀  you are here → Alloy.close(${name})`);
 	// console.error(Promise);
 	// console.warn(global.Promise);
 	const promise = new Promise((resolve, reject) => {
@@ -652,22 +654,22 @@ exports.close = async name => {
 				if (typeof view.addEventListener === 'function') {
 					view.addEventListener('close', function onClose(e) {
 						view.removeEventListener('close', onClose);
-						turbo.trace(`🚀  view.onClose:  ${name}`);
-						turbo.verbose(`🚀  Resolving promise to close view:  ${name}`);
+						logger.track(`🚀  view.onClose:  ${name}`);
+						logger.verbose(`🚀  Resolving promise to close view:  ${name}`);
 						resolve();
 					});
 					view.close();
 				} else {
-					turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
+					logger.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
 					view.close();
 					resolve();
 				}
 			} else {
-				turbo.verbose(`🚀  view.close is not a function:  ${name}`);
+				logger.verbose(`🚀  view.close is not a function:  ${name}`);
 				resolve();
 			}
 		} else {
-			turbo.verbose(`🚀  view.close cannot find controller:  ${name}`);
+			logger.verbose(`🚀  view.close cannot find controller:  ${name}`);
 			resolve();
 		}
 	});
