@@ -520,6 +520,10 @@ exports.createController = function(name, args = {}) {
 	if (exports.file_registry.includes(`/alloy/controllers/${name}.js`)) {
 		try{
 			controller = new (require(`/alloy/controllers/${name}`))(_.defaults({}, args, { __resource_name: name, __resource_path: `/alloy/controllers/${name}`  }));
+			if( ! controller ){
+				console.error('Error creating controller: ' + name);
+				throw new Error('Error creating controller: ' + name);	
+			}
 		} catch (error){
 			console.error(error);
 		}
