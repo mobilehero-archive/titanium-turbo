@@ -57,11 +57,13 @@ exports.version = '<%= version %>';
 exports._ = _;
 exports.Backbone = Backbone;
 
-const logger = require('@geek/logger');
+var logger = require('@geek/logger').createLogger('@titanium/turbo',{ meta: { filename: __filename }});
+
+
 
 var DEFAULT_WIDGET = 'widget';
 var TI_VERSION = Ti.version;
-var MW320_CHECK = OS_MOBILEWEB;
+// var MW320_CHECK = OS_MOBILEWEB;
 var IDENTITY_TRANSFORM = OS_ANDROID ? (Ti.UI.createMatrix2D ? Ti.UI.createMatrix2D() : Ti.UI.create2DMatrix()) : undefined;
 var RESET = {
 	bottom: null,
@@ -358,9 +360,9 @@ exports.createStyle = function(controller, opts, defaults) {
 	styleFinal[CONST.CLASS_PROPERTY] = classes;
 	styleFinal[CONST.APINAME_PROPERTY] = apiName;
 
-	if (MW320_CHECK) {
-		delete styleFinal[CONST.APINAME_PROPERTY];
-	}
+	// if (MW320_CHECK) {
+	// 	delete styleFinal[CONST.APINAME_PROPERTY];
+	// }
 
 	return defaults ? _.defaults(styleFinal, defaults) : styleFinal;
 };
@@ -384,9 +386,9 @@ exports.addClass = function(controller, proxy, classes, opts) {
 	// make sure we actually have classes to add
 	if (!classes) {
 		if (opts) {
-			if (MW320_CHECK) {
-				delete opts.apiName;
-			}
+			// if (MW320_CHECK) {
+			// 	delete opts.apiName;
+			// }
 			proxy.applyProperties(opts);
 		}
 		return;
@@ -400,9 +402,9 @@ exports.addClass = function(controller, proxy, classes, opts) {
 		// make sure we actually added classes before processing styles
 		if (beforeLen === newClasses.length) {
 			if (opts) {
-				if (MW320_CHECK) {
-					delete opts.apiName;
-				}
+				// if (MW320_CHECK) {
+				// 	delete opts.apiName;
+				// }
 				proxy.applyProperties(opts);
 			}
 			return;
@@ -420,9 +422,9 @@ exports.removeClass = function(controller, proxy, classes, opts) {
 	// make sure there's classes to remove before processing
 	if (!beforeLen || !classes.length) {
 		if (opts) {
-			if (MW320_CHECK) {
-				delete opts.apiName;
-			}
+			// if (MW320_CHECK) {
+			// 	delete opts.apiName;
+			// }
 			proxy.applyProperties(opts);
 		}
 		return;
@@ -434,9 +436,9 @@ exports.removeClass = function(controller, proxy, classes, opts) {
 		// make sure there was actually a difference before processing
 		if (beforeLen === newClasses.length) {
 			if (opts) {
-				if (MW320_CHECK) {
-					delete opts.apiName;
-				}
+				// if (MW320_CHECK) {
+				// 	delete opts.apiName;
+				// }
 				proxy.applyProperties(opts);
 			}
 			return;
@@ -726,17 +728,6 @@ exports.isTablet = (function() {
 			psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_LARGE ||
 			psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_XLARGE
 		);
-	} else if (OS_MOBILEWEB) {
-		return Math.min(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 400;
-		// } else if (OS_BLACKBERRY) {
-		// 	// Tablets not currently supported by BB TiSDK
-		// 	// https://jira.appcelerator.org/browse/TIMOB-13225
-		// 	return false;
-	} else if (OS_WINDOWS) {
-		// per http://www.extremetech.com/computing/139768-windows-8-smartphones-and-windows-phone-8-tablets
-		// tablets should be >= 1024x768 and phones could be lower, though current phones are running at
-		// the 1280x720 range and higher
-		return Math.max(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 1024;
 	} else {
 		return isTabletFallback();
 	}

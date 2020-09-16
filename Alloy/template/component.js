@@ -4,6 +4,10 @@ var Backbone = Alloy.Backbone;
 var turbo = require('/turbo');
 var JSONC = require('@titanium/jsonc');
 
+var logger = require('@geek/logger').createLogger('app:view',{ meta: { filename: __filename }});
+
+<%= staticCode %>
+
 <%= ES6Mod %>
 <%= WPATH %>
 

@@ -250,7 +250,10 @@ _turbo.createIcon =  (params = {})  => {
 	}
 
 	params.font.fontFamily = params.font.fontFamily || 'FontAwesome-Regular';
-	params.text = _.get(turbo, ['fonts', params.font.fontFamily, params.name], '');
+	params.text = _.get(_turbo, ['fonts', params.font.fontFamily, params.name], '');
+	// if( params.text === ''){
+	// 	console.error('Could not find font name');
+	// }
 	params.textAlign = params.textAlign || Ti.UI.TEXT_ALIGNMENT_CENTER;
 	params.verticalAlign = params.verticalAlign || Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER;
 
@@ -258,6 +261,7 @@ _turbo.createIcon =  (params = {})  => {
 	delete params.size;
 	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
 	params.color =_turbo.switchColorFormat(params.color);
+	// console.error(`🦠 icon params: ${JSON.stringify(params, null, 2)}`);
 	const view = Ti.UI.createLabel( params );
 	return view;
 };

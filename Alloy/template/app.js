@@ -13,16 +13,17 @@ Ti.UI.VISIBILITY_COLLAPSE = 'collapse';
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	
 Ti.UI.VISIBILITY_VISIBLE = 'visible';	
 
-__MAPMARKER_ALLOY_JS__
-
-
 Alloy.main = Alloy.main || Alloy.CFG.main || Titanium.App.Properties.getString('app.main','index');
+
+__MAPMARKER_ALLOY_JS__
 
 const initMainController = () => {
 	if( Alloy.BYPASS_AUTO_OPEN ){
 		Alloy.createController(Alloy.main);
-	} else {
+	} else if( ! Alloy.MANUAL_OPEN ){
 		Alloy.open(Alloy.main);
+	} else {
+		console.warn('You must manually open main controller')
 	}
 }
 

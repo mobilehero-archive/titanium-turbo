@@ -251,7 +251,12 @@ module.exports = function(args, program) {
 	);
 
 	// copy all dependencies from package.json to resourcesPlatform directory
-	require('@titanium/module-copier').executeSync({ projectPath: paths.project,  targetPath: path.join(paths.resources, titaniumFolder), includeOptional: true });
+	if( ! alloyConfig.file ) {
+		logger.info('Copying node_modules to Resources directory');
+		require('@titanium/module-copier').executeSync({ projectPath: paths.project,  targetPath: path.join(paths.resources, titaniumFolder), includeOptional: true });
+	} else {
+		logger.info('Skipping the copying node_modules to Resources directory');
+	}
 
 	if (restrictionPath === null) {
 		// Generate alloy.js from template
@@ -703,6 +708,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 			itemTemplateVariable: CONST.ITEM_TEMPLATE_VAR,
 			controllerPath: (dirname ? path.join(dirname, viewName) : viewName).replace(/\\/g, '/'),
 			preCode: '',
+			staticCode: '',
 			postCode: '',
 			Widget: !manifest ? '' : 'var ' + CONST.WIDGET_OBJECT +
 				" = new (require('/alloy/widget'))('" + manifest.id + "');this.__widgetId='" +
@@ -900,8 +906,9 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 
 			if (isModelElement) {
 				var vCode = CU.generateNode(node, state, undefined, false, true);
-				template.viewCode += vCode.content;
-				template.preCode += vCode.pre;
+				template.viewCode += vCode.content || '';
+				template.preCode += vCode.pre || '';
+				template.staticCode += vCode.staticCode || '';
 
 				// remove the model/collection nodes when done
 				docRoot.removeChild(node);
@@ -924,7 +931,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 				widgetId: manifest ? manifest.id : undefined,
 				filepath: files.VIEW,
 				parentFormFactor: node.hasAttribute('formFactor') ? node.getAttribute('formFactor') : undefined
-			}, defaultId, true, false, state);
+			}, defaultId, true, false, state) || '';
 		});
 	}
 
@@ -938,6 +945,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 		cCode.parentControllerName : CU[CONST.DOCROOT_BASECONTROLLER_PROPERTY] || "'BaseController'";
 	template.__MAPMARKER_CONTROLLER_CODE__ += cCode.controller;
 	template.preCode += cCode.pre;
+	template.staticCode += cCode.staticCode || '';
 	template.ES6Mod += cCode.es6mods;
 
 	// for each model variable in the bindings map...
@@ -995,6 +1003,13 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 	// create generated controller module code for this view/controller or widget
 	var controllerCode = template.__MAPMARKER_CONTROLLER_CODE__;
 	delete template.__MAPMARKER_CONTROLLER_CODE__;
+	const component = fs.readFileSync(path.join(compileConfig.dir.template, 'component.js'));
+
+	// console.error('--------------------------------------')
+	// console.error(`🦠  component: ${component}`);
+	// console.error('--------------------------------------')
+	// console.error(`🦠  template: ${JSON.stringify(template, null, 2)}`);
+	// console.error('--------------------------------------')
 	var code = _.template(fs.readFileSync(path.join(compileConfig.dir.template, 'component.js'), 'utf8'))(template);
 
 	// prep the controller paths based on whether it's an app
@@ -1062,7 +1077,8 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 	logger.info('  created:     "' + relativeStylePath + '"');
 
 	// skip optimize process, as the file is an alloy component
-	restrictionSkipOptimize = (fileRestriction !== null);
+	// restrictionSkipOptimize = (fileRestriction !== null);
+	restrictionSkipOptimize = false;
 
 	// pre-process runtime controllers to save runtime performance
 	var STYLE_PLACEHOLDER = '__STYLE_PLACEHOLDER__';
@@ -1264,8 +1280,12 @@ function optimizeCompiledCode(alloyConfig, paths) {
 		});
 	}
 
+	// const jsFiles = getJsFiles();
+	// console.warn(`🦠  jsFiles: ${JSON.stringify(jsFiles, null, 2)}`);
+
 	while ((files = _.difference(getJsFiles(), lastFiles)).length > 0) {
 		_.each(files, function(file) {
+			// console.error(`🦠  transform_file: ${JSON.stringify(file, null, 2)}`);
 			var options = _.extend(_.clone(sourceMapper.OPTIONS_OUTPUT), {
 					root: compileConfig.dir.resourcesPlatform,
 					plugins: [

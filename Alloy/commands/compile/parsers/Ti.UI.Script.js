@@ -17,13 +17,24 @@ exports.parse = function(node, state) {
 		}	
 	}
 
+	const isStatic = !!args.createArgs.static;
+
 	// get code from any external source
 	code += getSourceCode(args.createArgs.src) || '';
 
 	// get code from text node
 	code += U.XML.getNodeText(node) || '';
 
-	return {
-		code: code.trim() + '\n\n',
-	};
+	if( isStatic ){
+		return {
+			staticCode: code.trim() + '\n\n',
+			code: '',
+		};
+	} else {
+		return {
+			code: code.trim() + '\n\n',
+			staticCode: '',
+		};
+	}
+
 };
