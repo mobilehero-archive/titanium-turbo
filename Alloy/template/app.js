@@ -3,6 +3,7 @@
  * Alloy for Titanium - Copyright (c) 2020 by Axway, Inc.
  * This is generated code, DO NOT MODIFY - changes will be lost!
  */
+console.info(`🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩  Starting Turbo Engine 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 `);
 
 var turbo = global.turbo = require('/turbo');
 var Alloy = global.Alloy = require('/alloy');
