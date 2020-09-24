@@ -4,11 +4,21 @@
  * This is generated code, DO NOT MODIFY - changes will be lost!
  */
 console.info(`🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩  Starting Turbo Engine 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 `);
+var Alloy = global.Alloy = require('/alloy');
+var _ = global._ = Alloy._;
+
+console.info('----------------------------------------------------------------------');
+console.info(`| ID:              ${_.padEnd(Ti.App.id, 50)}|`);
+console.info(`| Name:            ${_.padEnd(Ti.App.name, 50)}|`);
+console.info(`| Version:         ${_.padEnd(Ti.App.version, 50)}|`);
+console.info(`| Turbo Version:   ${_.padEnd(Alloy.version, 50)}|`);
+console.info(`| Deployment Type: ${_.padEnd(Ti.App.deployType, 50)}|`);
+console.info('----------------------------------------------------------------------');
+
 
 var turbo = global.turbo = require('/turbo');
-var Alloy = global.Alloy = require('/alloy');
 var Backbone = global.Backbone = Alloy.Backbone;
-var _ = global._ = Alloy._;
+
 
 Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	
