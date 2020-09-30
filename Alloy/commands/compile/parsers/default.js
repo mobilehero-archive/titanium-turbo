@@ -102,19 +102,38 @@ function parse(node, state, args) {
 		}		
 	}
 
-	if ( args.visibility ) {
-		switch ( args.visibility ) {
+	if ( args.createArgs && args.createArgs.visibility ) {
+
+		switch ( args.createArgs.visibility ) {
 			case CONST.VISIBILITY_COLLAPSE:
-				args.origHeight = args.height;
-				args.origWidth = args.width;
-				args.height = 0;
-				args.width = 0;
+				args.createArgs.expandedHeight = args.createArgs.height;
+				args.createArgs.expandedWidth = args.createArgs.width;
+				args.createArgs.height = 0;
+				args.createArgs.width = 0;
+				if( args.createArgs.collapseMargins ){
+					args.createArgs.expandedTop = args.createArgs.top;
+					args.createArgs.expandedRight = args.createArgs.right;
+					args.createArgs.expandedBottom = args.createArgs.bottom;
+					args.createArgs.expandedLeft = args.createArgs.left;
+				}
+				args.createArgs.visible = false;
 				break;
+			case CONST.VISIBILITY_EXPAND:
+				args.createArgs.expandedHeight = args.createArgs.height;
+				args.createArgs.expandedWidth = args.createArgs.width;
+				if( args.createArgs.collapseMargins ){
+					args.createArgs.expandedTop = args.createArgs.top;
+					args.createArgs.expandedRight = args.createArgs.right;
+					args.createArgs.expandedBottom = args.createArgs.bottom;
+					args.createArgs.expandedLeft = args.createArgs.left;
+				}				
+				args.createArgs.visible = true;
+				break;				
 			case CONST.VISIBILITY_HIDDEN:
-				args.visible = false;
+				args.createArgs.visible = false;
 				break;
 			case CONST.VISIBILITY_VISIBLE:
-				args.visible = true;
+				args.createArgs.visible = true;
 				break;
 		}
 	}

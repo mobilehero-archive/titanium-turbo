@@ -21,6 +21,7 @@ var Backbone = global.Backbone = Alloy.Backbone;
 
 
 Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
+Ti.UI.VISIBILITY_EXPAND = 'expand';	
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	
 Ti.UI.VISIBILITY_VISIBLE = 'visible';	
 

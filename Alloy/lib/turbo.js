@@ -137,6 +137,59 @@ const processFontParameters =  params => {
 	}
 };
 
+_turbo.expandContainer =  e  => {
+
+	if( !e ){
+		return;
+	}
+	const container = e.source || e;
+
+	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
+		container.height = container.expandedHeight || container.height;
+		container.width = container.expandedWidth || container.width;
+		container.top = container.expandedTop || container.top;
+		container.right = container.expandedRight || container.right;
+		container.bottom = container.expandedBottom || container.bottom;
+		container.left = container.expandedLeft || container.left;
+		container.visible = true;
+	}
+}
+
+_turbo.toggleContainer =  e  => {
+
+	if( !e ){
+		return;
+	}
+	const container = e.source || e;
+
+	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
+
+		if( container.visible ){
+			_turbo.collapseContainer(container);
+		} else {
+			_turbo.expandContainer(container);
+		}
+
+	}
+
+}
+
+_turbo.collapseContainer =  e  => {
+	if( !e ){
+		return;
+	}
+	const container = e.source || e;
+	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
+		container.height = container.expandedHeight ? 0 : container.height;
+		container.width = container.expandedWidth ? 0 : container.width;
+		container.top = container.expandedTop ? 0 : container.top;
+		container.right = container.expandedRight ? 0 : container.right;
+		container.bottom = container.expandedBottom ? 0 : container.bottom;
+		container.left = container.expandedLeft ? 0 : container.left;
+		container.visible = false;
+	}
+}
+
 _turbo.createLabel =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
