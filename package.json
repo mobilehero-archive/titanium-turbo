@@ -64,11 +64,11 @@
 	},
 	"devDependencies": {
 		"@seadub/danger-plugin-dependencies": "^0.1.0",
-		"@seadub/danger-plugin-eslint": "^1.0.1",
-		"@seadub/danger-plugin-junit": "^0.1.2",
-		"danger": "^7.1.4",
-		"diff": "^4.0.1",
-		"eslint": "^7.6.0",
+		"@seadub/danger-plugin-eslint": "^2.0.0",
+		"@seadub/danger-plugin-junit": "^0.2.0",
+		"danger": "^10.5.0",
+		"diff": "^4.0.2",
+		"eslint": "^7.10.0",
 		"jake": "^8.1.1",
 		"mkdirp": "^0.5.5"
 	},
