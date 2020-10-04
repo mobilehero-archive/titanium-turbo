@@ -12,6 +12,7 @@ exports.parse = function(node, state) {
 		},
 		extraOptions: {
 			cancel: CU.generateUniqueId(),
+			preferred: CU.generateUniqueId(),
 			destructive: CU.generateUniqueId()
 		}
 	});
