@@ -1,5 +1,6 @@
-var U = require('../../../utils'),
-	CU = require('../compilerUtils');
+const U = require('../../../utils');
+const CU = require('../compilerUtils');
+const _ = require('lodash');
 
 exports.parse = function(node, state) {
 	return require('./base').parse(node, state, parse);
@@ -19,9 +20,26 @@ function parse(node, state, args) {
 		returnCode = '.push("' + nodeText.replace(/"/g, '\\"') + '");';
 	}
 
+	const codePush = state.itemsArray + returnCode;
+
+	let code = codePush;
+
+	const attrName = _.findKey(state.extraOptions, (varName, name) => args.createArgs[name] !== undefined);
+	const attrVarName = state.extraOptions[attrName];
+
+
+	if (attrName) {
+		if (args.createArgs[attrName]) {
+			code = `${attrVarName} = ${codePush} - 1`;
+		} else {
+			code = `${attrVarName} = undefined; ${codePush}`;
+		}
+	}
+
+
 	return {
 		parent: {},
 		styles: state.styles,
-		code: state.itemsArray + returnCode
+		code: `${code};`,
 	};
 }

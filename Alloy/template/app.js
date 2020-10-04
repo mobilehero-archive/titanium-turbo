@@ -3,26 +3,39 @@
  * Alloy for Titanium - Copyright (c) 2020 by Axway, Inc.
  * This is generated code, DO NOT MODIFY - changes will be lost!
  */
-
-var turbo = global.turbo = require('/turbo');
+console.info(`🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩  Starting Turbo Engine 🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 `);
 var Alloy = global.Alloy = require('/alloy');
-var Backbone = global.Backbone = Alloy.Backbone;
 var _ = global._ = Alloy._;
 
+console.info('----------------------------------------------------------------------');
+console.info(`| ID:              ${_.padEnd(Ti.App.id, 50)}|`);
+console.info(`| Name:            ${_.padEnd(Ti.App.name, 50)}|`);
+console.info(`| Version:         ${_.padEnd(Ti.App.version, 50)}|`);
+console.info(`| Turbo Version:   ${_.padEnd(Alloy.version, 50)}|`);
+console.info(`| Deployment Type: ${_.padEnd(Ti.App.deployType, 50)}|`);
+console.info('----------------------------------------------------------------------');
+
+
+var turbo = global.turbo = require('/turbo');
+var Backbone = global.Backbone = Alloy.Backbone;
+
+
 Ti.UI.VISIBILITY_COLLAPSE = 'collapse';	
+Ti.UI.VISIBILITY_EXPAND = 'expand';	
 Ti.UI.VISIBILITY_HIDDEN = 'hidden';	
 Ti.UI.VISIBILITY_VISIBLE = 'visible';	
 
-__MAPMARKER_ALLOY_JS__
-
-
 Alloy.main = Alloy.main || Alloy.CFG.main || Titanium.App.Properties.getString('app.main','index');
+
+__MAPMARKER_ALLOY_JS__
 
 const initMainController = () => {
 	if( Alloy.BYPASS_AUTO_OPEN ){
 		Alloy.createController(Alloy.main);
-	} else {
+	} else if( ! Alloy.MANUAL_OPEN ){
 		Alloy.open(Alloy.main);
+	} else {
+		console.warn('You must manually open main controller')
 	}
 }
 

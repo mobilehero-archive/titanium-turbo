@@ -57,9 +57,12 @@ exports.version = '<%= version %>';
 exports._ = _;
 exports.Backbone = Backbone;
 
+var logger = require('@geek/logger').createLogger('@titanium/turbo',{ meta: { filename: __filename }});
+
+
+
 var DEFAULT_WIDGET = 'widget';
 var TI_VERSION = Ti.version;
-var MW320_CHECK = OS_MOBILEWEB;
 var IDENTITY_TRANSFORM = OS_ANDROID ? (Ti.UI.createMatrix2D ? Ti.UI.createMatrix2D() : Ti.UI.create2DMatrix()) : undefined;
 var RESET = {
 	bottom: null,
@@ -356,10 +359,6 @@ exports.createStyle = function(controller, opts, defaults) {
 	styleFinal[CONST.CLASS_PROPERTY] = classes;
 	styleFinal[CONST.APINAME_PROPERTY] = apiName;
 
-	if (MW320_CHECK) {
-		delete styleFinal[CONST.APINAME_PROPERTY];
-	}
-
 	return defaults ? _.defaults(styleFinal, defaults) : styleFinal;
 };
 
@@ -382,9 +381,6 @@ exports.addClass = function(controller, proxy, classes, opts) {
 	// make sure we actually have classes to add
 	if (!classes) {
 		if (opts) {
-			if (MW320_CHECK) {
-				delete opts.apiName;
-			}
 			proxy.applyProperties(opts);
 		}
 		return;
@@ -398,9 +394,6 @@ exports.addClass = function(controller, proxy, classes, opts) {
 		// make sure we actually added classes before processing styles
 		if (beforeLen === newClasses.length) {
 			if (opts) {
-				if (MW320_CHECK) {
-					delete opts.apiName;
-				}
 				proxy.applyProperties(opts);
 			}
 			return;
@@ -418,9 +411,6 @@ exports.removeClass = function(controller, proxy, classes, opts) {
 	// make sure there's classes to remove before processing
 	if (!beforeLen || !classes.length) {
 		if (opts) {
-			if (MW320_CHECK) {
-				delete opts.apiName;
-			}
 			proxy.applyProperties(opts);
 		}
 		return;
@@ -432,9 +422,6 @@ exports.removeClass = function(controller, proxy, classes, opts) {
 		// make sure there was actually a difference before processing
 		if (beforeLen === newClasses.length) {
 			if (opts) {
-				if (MW320_CHECK) {
-					delete opts.apiName;
-				}
 				proxy.applyProperties(opts);
 			}
 			return;
@@ -520,14 +507,22 @@ exports.createController = function(name, args = {}) {
 	if (exports.file_registry.includes(`/alloy/controllers/${name}.js`)) {
 		try{
 			controller = new (require(`/alloy/controllers/${name}`))(_.defaults({}, args, { __resource_name: name, __resource_path: `/alloy/controllers/${name}`  }));
+			if( ! controller ){
+				console.error('Error creating controller: ' + name);
+				throw new Error('Error creating controller: ' + name);	
+			}
 		} catch (error){
 			console.error(error);
+			throw new Error('Error creating controller: ' + name);	
 		}
 		
 	} else if (exports.widget_registry[name]) {
 		controller = new (require(exports.widget_registry[name]))(_.defaults({}, args, { __resource_name: name, __resource_path: exports.widget_registry[name]  }));
-		console.error('Error creating controller: ' + name);
-		throw new Error('Error creating controller: ' + name);
+		if( ! controller ){
+			console.error('Error creating controller: ' + name);
+			throw new Error('Error creating controller: ' + name);	
+		}
+
 	} else {
 		console.error('Alloy controller not found: ' + name);
 		throw new Error('Alloy controller not found: ' + name);
@@ -561,7 +556,7 @@ exports.createController = function(name, args = {}) {
 					controller.isOpen = true;
 					exports.Controllers.current = controller;
 					controller.trigger('open', e);
-					turbo.verbose(`🚀  you are here → view.onOpen: ${name}`);
+					logger.verbose(`🚀  you are here → view.onOpen: ${name}`);
 				});
 
 				view.addEventListener('close', function onClose() {
@@ -570,19 +565,19 @@ exports.createController = function(name, args = {}) {
 					controller.trigger('close');
 					exports.cleanUpController(controller);
 					controller = null;
-					turbo.verbose(`🚀  you are here → view.onClose: ${name}`);
+					logger.verbose(`🚀  you are here → view.onClose: ${name}`);
 				});
 
 				view.addEventListener('postlayout', function onPostlayout(e) {
 					view && view.removeEventListener('postlayout', onPostlayout);
 					controller && controller.trigger('postlayout', e);
-					turbo.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
+					logger.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
 				});
 			} else {
 				view.addEventListener('postlayout', function onPostlayout(e) {
 					view && view.removeEventListener('postlayout', onPostlayout);
 					controller && controller.trigger('postlayout', e);
-					turbo.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
+					logger.verbose(`🚀  you are here → view.onPostlayout: ${name}`);
 				});
 			}
 		}
@@ -592,14 +587,14 @@ exports.createController = function(name, args = {}) {
 };
 
 exports.open = function(name, params) {
-	turbo.verbose(`🚀  you are here → Alloy.open(${name})`);
+	logger.verbose(`🚀  you are here → Alloy.open(${name})`);
 	const promise = new Promise((resolve, reject) => {
 		let controller = exports.Controllers[name];
 		let view;
 		if (controller) {
 			if( controller.isOpen ){
-				turbo.debug(`🚀  Controller is already open: ${name}`);
-				turbo.verbose(`🚀  Resolving promise to open view:  ${name}`);
+				logger.debug(`🚀  Controller is already open: ${name}`);
+				logger.verbose(`🚀  Resolving promise to open view:  ${name}`);
 				return resolve();
 			}
 			view = controller.getViewEx();
@@ -614,19 +609,19 @@ exports.open = function(name, params) {
 					view.removeEventListener('open', onOpen);
 					controller.isOpen = true;
 					controller.trigger('open', e);
-					turbo.trace(`🚀  Resolving promise to open view:  ${name}`);
+					logger.track(`🚀  Resolving promise to open view:  ${name}`);
 					return resolve({controller, view});
 				});
 			} else {
-				turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
+				logger.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
 				view.open();
 				return resolve();
 			}
-			turbo.verbose(`🚀  you are here → Alloy.open() calling view.open()`);
+			logger.verbose(`🚀  you are here → Alloy.open() calling view.open()`);
 			view.open();
 			return;
 		} else {
-			turbo.verbose(`🚀  view.open is not a function:  ${name}`);
+			logger.verbose(`🚀  view.open is not a function:  ${name}`);
 			return resolve();
 		}
 	});
@@ -634,7 +629,7 @@ exports.open = function(name, params) {
 };
 
 exports.close = async name => {
-	turbo.verbose(`🚀  you are here → Alloy.close(${name})`);
+	logger.verbose(`🚀  you are here → Alloy.close(${name})`);
 	// console.error(Promise);
 	// console.warn(global.Promise);
 	const promise = new Promise((resolve, reject) => {
@@ -645,22 +640,22 @@ exports.close = async name => {
 				if (typeof view.addEventListener === 'function') {
 					view.addEventListener('close', function onClose(e) {
 						view.removeEventListener('close', onClose);
-						turbo.trace(`🚀  view.onClose:  ${name}`);
-						turbo.verbose(`🚀  Resolving promise to close view:  ${name}`);
+						logger.track(`🚀  view.onClose:  ${name}`);
+						logger.verbose(`🚀  Resolving promise to close view:  ${name}`);
 						resolve();
 					});
 					view.close();
 				} else {
-					turbo.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
+					logger.verbose(`🚀  view.addEventListener is not a function:  ${name}`);
 					view.close();
 					resolve();
 				}
 			} else {
-				turbo.verbose(`🚀  view.close is not a function:  ${name}`);
+				logger.verbose(`🚀  view.close is not a function:  ${name}`);
 				resolve();
 			}
 		} else {
-			turbo.verbose(`🚀  view.close cannot find controller:  ${name}`);
+			logger.verbose(`🚀  view.close cannot find controller:  ${name}`);
 			resolve();
 		}
 	});
@@ -716,17 +711,6 @@ exports.isTablet = (function() {
 			psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_LARGE ||
 			psc === Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_XLARGE
 		);
-	} else if (OS_MOBILEWEB) {
-		return Math.min(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 400;
-		// } else if (OS_BLACKBERRY) {
-		// 	// Tablets not currently supported by BB TiSDK
-		// 	// https://jira.appcelerator.org/browse/TIMOB-13225
-		// 	return false;
-	} else if (OS_WINDOWS) {
-		// per http://www.extremetech.com/computing/139768-windows-8-smartphones-and-windows-phone-8-tablets
-		// tablets should be >= 1024x768 and phones could be lower, though current phones are running at
-		// the 1280x720 range and higher
-		return Math.max(Ti.Platform.displayCaps.platformHeight, Ti.Platform.displayCaps.platformWidth) >= 1024;
 	} else {
 		return isTabletFallback();
 	}

@@ -2,7 +2,7 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
-## [1.15.0-2] - 2020-09-01
+## [1.15.1-6] - 2020-09-01
 
 ### Updated
 
@@ -10,7 +10,7 @@ Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and 
 - Updated lodash to v4.17.20
 
 
-## [1.15.0-1] - 2020-07-01
+## [1.15.1-1] - 2020-07-01
 
 ### Added
 
@@ -26,7 +26,7 @@ Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and 
 
 ### Added
 
-- Added initial support for Alloy now being able to be required `require('Turbo')` - more awesomeness to come!
+- Added initial support for Alloy now being able to be require `require('turbo')` - more awesomeness to come!
 
 ## [1.14.6-2] - 2012-02-28
 

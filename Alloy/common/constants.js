@@ -49,6 +49,7 @@ exports.SUPPORTED_BACKBONE_VERSIONS = ['0.9.2', '1.1.2', '1.3.3', '1.4.0'];
 
 // values for visibility property
 exports.VISIBILITY_COLLAPSE = 'collapse';	
+exports.VISIBILITY_EXPAND = 'expand';	
 exports.VISIBILITY_HIDDEN = 'hidden';	
 exports.VISIBILITY_VISIBLE = 'visible';	
 

@@ -82,23 +82,18 @@ module.exports = function(args, program) {
 			} else {
 				alloyConfig[parts[0]] = parts[1];
 			}
-			// logger.debug(parts[0] + ' = ' + parts[1]);
 			table.push([parts[0],  parts[1]]);
 		});
 	}
 	if (program.platform) {
-		// logger.debug('platform = ' + program.platform);
 		table.push(['platform',  program.platform]);
 		alloyConfig.platform = program.platform;
 	}
 	if (!alloyConfig.deploytype) {
 		alloyConfig.deploytype = 'development';
-		// logger.debug('deploytype = ' + alloyConfig.deploytype);
 		table.push(['deploytype',  alloyConfig.deploytype]);
 	}
-	// logger.debug('project path = ' + paths.project);
 	table.push(['project path',  paths.project]);
-	// logger.debug('app path = ' + paths.app);
 	table.push(['app path',  paths.app]);
 	logger.debug('');
 	logger.debug(table.toString());
@@ -251,7 +246,12 @@ module.exports = function(args, program) {
 	);
 
 	// copy all dependencies from package.json to resourcesPlatform directory
-	require('@titanium/module-copier').executeSync({ projectPath: paths.project,  targetPath: path.join(paths.resources, titaniumFolder), includeOptional: true });
+	if( ! alloyConfig.file ) {
+		logger.info('Copying node_modules to Resources directory');
+		require('@titanium/module-copier').executeSync({ projectPath: paths.project,  targetPath: path.join(paths.resources, titaniumFolder), includeOptional: true });
+	} else {
+		logger.info('Skipping the copying node_modules to Resources directory');
+	}
 
 	if (restrictionPath === null) {
 		// Generate alloy.js from template
@@ -576,31 +576,6 @@ module.exports = function(args, program) {
 		compilerMakeFile.trigger('post:compile', _.clone(compileConfig));
 	}
 
-	// const widget_index = {};
-	// index.forEach( filename => {
-	// 	const regex1 = /\/alloy\/widgets\/(.*)\/controllers(\/)(.*).js/;
-	// 	const regex2 = /\/alloy\/widgets\/(.*)\/controllers\/?(.*)\/widget.js/;
-	// 	if ( regex1.test(filename)) {
-	// 		const widgetShortcut1 = filename.replace(regex1, '$1$2$3');
-	// 		widget_index[widgetShortcut1] = filename;
-	// 		logger.debug('Adding widget shortcut: ' + widgetShortcut1 + ' → ' + filename);
-	// 		if ( regex2.test(filename)) {
-	// 			const widgetShortcut2 = filename.replace(regex2, '$1$2');
-	// 			widget_index[widgetShortcut2] = filename;
-	// 			logger.debug('Adding widget shortcut: ' + widgetShortcut2 + ' → ' + filename);
-	// 		} else {
-	// 			const widgetShortcut3 = filename.replace(regex1, '$3');
-	// 			if ( widget_index[widgetShortcut3] ) {
-	// 				logger.warn('Overriding existing widget shortcut: ' + widgetShortcut3 + 'that was pointed to: ' + widget_index[widgetShortcut3]);
-	// 			}
-	// 			widget_index[widgetShortcut3] = filename;
-	// 			logger.debug('Adding widget shortcut: ' + widgetShortcut3 + ' → ' + filename);
-	// 		}
-	// 	}
-	// });
-
-	// fs.writeJsonSync(path.join(resourcePath, '__widget_registry.json'), widget_index, { spaces: '\t'});
-
 	// write out the log for this build
 	buildLog.write();
 
@@ -703,6 +678,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 			itemTemplateVariable: CONST.ITEM_TEMPLATE_VAR,
 			controllerPath: (dirname ? path.join(dirname, viewName) : viewName).replace(/\\/g, '/'),
 			preCode: '',
+			staticCode: '',
 			postCode: '',
 			Widget: !manifest ? '' : 'var ' + CONST.WIDGET_OBJECT +
 				" = new (require('/alloy/widget'))('" + manifest.id + "');this.__widgetId='" +
@@ -900,8 +876,9 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 
 			if (isModelElement) {
 				var vCode = CU.generateNode(node, state, undefined, false, true);
-				template.viewCode += vCode.content;
-				template.preCode += vCode.pre;
+				template.viewCode += vCode.content || '';
+				template.preCode += vCode.pre || '';
+				template.staticCode += vCode.staticCode || '';
 
 				// remove the model/collection nodes when done
 				docRoot.removeChild(node);
@@ -924,7 +901,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 				widgetId: manifest ? manifest.id : undefined,
 				filepath: files.VIEW,
 				parentFormFactor: node.hasAttribute('formFactor') ? node.getAttribute('formFactor') : undefined
-			}, defaultId, true, false, state);
+			}, defaultId, true, false, state) || '';
 		});
 	}
 
@@ -938,6 +915,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 		cCode.parentControllerName : CU[CONST.DOCROOT_BASECONTROLLER_PROPERTY] || "'BaseController'";
 	template.__MAPMARKER_CONTROLLER_CODE__ += cCode.controller;
 	template.preCode += cCode.pre;
+	template.staticCode += cCode.staticCode || '';
 	template.ES6Mod += cCode.es6mods;
 
 	// for each model variable in the bindings map...
@@ -995,6 +973,8 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 	// create generated controller module code for this view/controller or widget
 	var controllerCode = template.__MAPMARKER_CONTROLLER_CODE__;
 	delete template.__MAPMARKER_CONTROLLER_CODE__;
+	const component = fs.readFileSync(path.join(compileConfig.dir.template, 'component.js'));
+
 	var code = _.template(fs.readFileSync(path.join(compileConfig.dir.template, 'component.js'), 'utf8'))(template);
 
 	// prep the controller paths based on whether it's an app
@@ -1062,7 +1042,7 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 	logger.info('  created:     "' + relativeStylePath + '"');
 
 	// skip optimize process, as the file is an alloy component
-	restrictionSkipOptimize = (fileRestriction !== null);
+	restrictionSkipOptimize = false;
 
 	// pre-process runtime controllers to save runtime performance
 	var STYLE_PLACEHOLDER = '__STYLE_PLACEHOLDER__';

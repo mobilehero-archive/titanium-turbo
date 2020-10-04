@@ -29,34 +29,19 @@ const _turbo = {
 	colors: {},
 	api: {},
 	DEBUG_MODE: false,
-	TRACE_MODE: false,
-	VERBOSE_MODE: false,
 	DEBUG_UI_MODE: false,
 	version: Alloy.version,
 };
-
-_turbo.debug = (...args) => {
-	_turbo.DEBUG_MODE && console.debug(...args);
-};
-
-_turbo.trace = (...args) => {
-	_turbo.TRACE_MODE && console.debug(...args);
-};
-
-_turbo.verbose = (...args) => {
-	_turbo.VERBOSE_MODE && console.debug(...args);
-};
-
 _turbo.switchColorFormat = color => {
 
-	if( typeof color !== 'string' || ! rgba ){
+	if ( typeof color !== 'string' || ! rgba ) {
 		return color;
 	}
 	// console.error(`🦠 before color: ${JSON.stringify(color, null, 2)}`);
-	const converted = color.replace(/(#?)((?:[A-Fa-f0-9][A-Fa-f0-9]){3})([A-Fa-f0-9]{2})/,'$1$3$2').toLowerCase();
+	const converted = color.replace(/(#?)((?:[A-Fa-f0-9][A-Fa-f0-9]){3})([A-Fa-f0-9]{2})/, '$1$3$2').toLowerCase();
 	// console.error(`🦠 after color: ${JSON.stringify(converted, null, 2)}`);
 	return converted;
-}
+};
 
 _turbo.openLoadingScreen = () => {};
 _turbo.closeLoadingScreen = () => {};
@@ -111,7 +96,7 @@ _turbo.createHorizontal = _turbo.createHorizontalLayout =  (params = {})  => {
 
 _turbo.createImageView = (params = {}) => {
 	params.image = params.image || params.src;
-	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
+	params.backgroundColor = _turbo.switchColorFormat(params.backgroundColor);
 	const view = Ti.UI.createImageView( params );
 	return view;
 };
@@ -137,12 +122,65 @@ const processFontParameters =  params => {
 	}
 };
 
+_turbo.expandContainer =  e  => {
+
+	if ( !e ) {
+		return;
+	}
+	const container = e.source || e;
+
+	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
+		container.height = container.expandedHeight || container.height;
+		container.width = container.expandedWidth || container.width;
+		container.top = container.expandedTop || container.top;
+		container.right = container.expandedRight || container.right;
+		container.bottom = container.expandedBottom || container.bottom;
+		container.left = container.expandedLeft || container.left;
+		container.visible = true;
+	}
+};
+
+_turbo.toggleContainer =  e  => {
+
+	if ( !e ) {
+		return;
+	}
+	const container = e.source || e;
+
+	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
+
+		if ( container.visible ) {
+			_turbo.collapseContainer(container);
+		} else {
+			_turbo.expandContainer(container);
+		}
+
+	}
+
+};
+
+_turbo.collapseContainer =  e  => {
+	if ( !e ) {
+		return;
+	}
+	const container = e.source || e;
+	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
+		container.height = container.expandedHeight ? 0 : container.height;
+		container.width = container.expandedWidth ? 0 : container.width;
+		container.top = container.expandedTop ? 0 : container.top;
+		container.right = container.expandedRight ? 0 : container.right;
+		container.bottom = container.expandedBottom ? 0 : container.bottom;
+		container.left = container.expandedLeft ? 0 : container.left;
+		container.visible = false;
+	}
+};
+
 _turbo.createLabel =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
-	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
-	params.color =_turbo.switchColorFormat(params.color);
+	params.backgroundColor = _turbo.switchColorFormat(params.backgroundColor);
+	params.color = _turbo.switchColorFormat(params.color);
 
 	if ( ! _.isNil(params.verticalAlign)) {
 		params.verticalAlign = _.get(_turbo.TEXT_VERTICAL_ALIGNMENTS, params.verticalAlign, params.verticalAlign);
@@ -158,7 +196,7 @@ _turbo.createView =  (params = {})  => {
 	if ( params.debugColor && _turbo.DEBUG_MODE && _turbo.DEBUG_UI_MODE ) {
 		params.backgroundColor = params.debugColor;
 	}
-	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
+	params.backgroundColor = _turbo.switchColorFormat(params.backgroundColor);
 	const view = Ti.UI.createView( params );
 	return view;
 };
@@ -171,7 +209,7 @@ _turbo.createWindow =  (params = {})  => {
 	// 	delete params.largeTitleEnabled;
 	// 	delete params.largeTitleDisplayMode;
 	// }
-	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
+	params.backgroundColor = _turbo.switchColorFormat(params.backgroundColor);
 	const view = Ti.UI.createWindow( params );
 	return view;
 };
@@ -235,8 +273,8 @@ _turbo.createTextField =  (params = {})  => {
 	}
 
 	processFontParameters(params);
-	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
-	params.color =_turbo.switchColorFormat(params.color);
+	params.backgroundColor = _turbo.switchColorFormat(params.backgroundColor);
+	params.color = _turbo.switchColorFormat(params.color);
 	const view = Ti.UI.createTextField( params );
 	return view;
 };
@@ -250,14 +288,18 @@ _turbo.createIcon =  (params = {})  => {
 	}
 
 	params.font.fontFamily = params.font.fontFamily || 'FontAwesome-Regular';
-	params.text = _.get(turbo, ['fonts', params.font.fontFamily, params.name], '');
+	params.text = _.get(_turbo, ['fonts', params.font.fontFamily, params.name], '');
+	// if( params.text === ''){
+	// 	console.error('Could not find font name');
+	// }
 	params.textAlign = params.textAlign || Ti.UI.TEXT_ALIGNMENT_CENTER;
 	params.verticalAlign = params.verticalAlign || Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER;
 
 	delete params.type;
 	delete params.size;
-	params.backgroundColor =_turbo.switchColorFormat(params.backgroundColor);
-	params.color =_turbo.switchColorFormat(params.color);
+	params.backgroundColor = _turbo.switchColorFormat(params.backgroundColor);
+	params.color = _turbo.switchColorFormat(params.color);
+	// console.error(`🦠 icon params: ${JSON.stringify(params, null, 2)}`);
 	const view = Ti.UI.createLabel( params );
 	return view;
 };

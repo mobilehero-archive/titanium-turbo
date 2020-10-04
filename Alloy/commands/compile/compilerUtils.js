@@ -233,7 +233,7 @@ exports.getParserArgs = function(node, state, opts) {
 				}
 			}	
 
-			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG|turbo|\$)\.|L\(.+\)\s*$|WPATH\()/.test(theValue)) {
+			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG|turbo|\$)\.|(?:L\(.+\)|require\(.+\))\s*$|WPATH\()/.test(theValue)) {
 				var match = theValue.match(/^\s*L\([^'"]+\)\s*$/);
 				if (match !== null) {
 					theValue = theValue.replace(/\(/g, '("').replace(/\)/g, '")');
@@ -303,7 +303,8 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 		codeTemplate = 'if (<%= condition %>) {\n<%= content %>}\n',
 		code = {
 			content: '',
-			pre: ''
+			pre: '',
+			staticCode: '',
 		};
 
 	// Check for platform specific considerations
@@ -385,6 +386,11 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 	if (state.modelCode) {
 		code.pre += state.modelCode;
 		delete state.modelCode;
+	}
+	// handle any static code
+	if (state.staticCode) {
+		code.staticCode += state.staticCode;
+		delete state.staticCode;
 	}
 
 	// handle any events from markup
@@ -484,11 +490,17 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 	}
 
 	if (!isModelOrCollection) {
-		return code.condition ? _.template(codeTemplate)(code) : code.content;
+		return code.condition ? _.template(codeTemplate)(code) : code.content || '';
+		const x = code.condition ? _.template(codeTemplate)(code) : code.content || '';
+		console.debug(`🦠  turbo.x: ${JSON.stringify(x, null, 2)}`);
+		console.debug(`🦠  typeof turbo.x: ${typeof x}`);
+		console.error(typeof x);
+		return x;
 	} else {
 		return {
-			content: code.condition ? _.template(codeTemplate)(code) : code.content,
-			pre: code.condition ? _.template(codeTemplate)({content:code.pre}) : code.pre
+			content: code.condition ? _.template(codeTemplate)(code) : code.content || '',
+			pre: code.condition ? _.template(codeTemplate)({content:code.pre}) : code.pre || '',
+			staticCode: code.condition ? _.template(codeTemplate)({content:code.staticCode}) : code.staticCode || '',
 		};
 	}
 };
@@ -975,6 +987,7 @@ exports.loadController = function(file) {
 			parentControllerName: '',
 			controller: '',
 			pre: '',
+			staticCode: '',
 			es6mods: ''
 		},
 		contents;

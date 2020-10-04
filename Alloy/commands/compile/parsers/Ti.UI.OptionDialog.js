@@ -1,5 +1,5 @@
-var _ = require('lodash'),
-	CU = require('../compilerUtils');
+const _ = require('lodash');
+const CU = require('../compilerUtils');
 
 exports.parse = function(node, state) {
 	state = _.extend(state, {
