@@ -24,7 +24,7 @@
 		"@babel/generator": "^7.6.4",
 		"@babel/parser": "^7.7.7",
 		"@babel/traverse": "^7.7.4",
-		"@babel/types": "^7.7.4",
+		"@babel/types": "^7.11.5",
 		"@titanium/module-copier": "0.0.28",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
