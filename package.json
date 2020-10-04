@@ -26,7 +26,7 @@
 		"@babel/traverse": "^7.11.5",
 		"@babel/types": "^7.11.5",
 		"@titanium/module-copier": "0.0.28",
-		"async": "^2.6.3",
+		"async": "^3.2.0",
 		"chmodr": "^1.2.0",
 		"cli-table3": "^0.6.0",
 		"colors": "^1.4.0",
