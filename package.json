@@ -31,7 +31,7 @@
 		"cli-table3": "^0.6.0",
 		"colors": "^1.4.0",
 		"commander": "^2.20.3",
-		"ejs": "2.7.4",
+		"ejs": "3.1.5",
 		"fs-extra": "^9.0.1",
 		"global-paths": "^1.0.0",
 		"jsonlint": "1.6.3",
