@@ -1,5 +1,5 @@
-var U = require('../../../utils'),
-	_ = require('lodash');
+const U = require('../../../utils');
+const _ = require('lodash');
 
 var LOCALE_REGEX = /^\s*(?:L|Ti\.Locale\.getString|Titanium\.Locale\.getString)\(.+\)\s*$/;
 

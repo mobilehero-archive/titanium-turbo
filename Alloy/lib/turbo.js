@@ -34,19 +34,6 @@ const _turbo = {
 	DEBUG_UI_MODE: false,
 	version: Alloy.version,
 };
-
-// _turbo.debug = (...args) => {
-// 	_turbo.DEBUG_MODE && console.debug(...args);
-// };
-
-// _turbo.trace = (...args) => {
-// 	_turbo.TRACE_MODE && console.debug(...args);
-// };
-
-// _turbo.verbose = (...args) => {
-// 	_turbo.VERBOSE_MODE && console.debug(...args);
-// };
-
 _turbo.switchColorFormat = color => {
 
 	if( typeof color !== 'string' || ! rgba ){

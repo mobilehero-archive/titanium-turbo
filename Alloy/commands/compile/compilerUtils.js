@@ -233,7 +233,7 @@ exports.getParserArgs = function(node, state, opts) {
 				}
 			}	
 
-			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG|turbo|\$)\.|L\(.+\)\s*$|WPATH\()/.test(theValue)) {
+			if (/(^|\+)\s*(?:(?:Ti|Titanium|Alloy.Globals|Alloy.CFG|turbo|\$)\.|(?:L\(.+\)|require\(.+\))\s*$|WPATH\()/.test(theValue)) {
 				var match = theValue.match(/^\s*L\([^'"]+\)\s*$/);
 				if (match !== null) {
 					theValue = theValue.replace(/\(/g, '("').replace(/\)/g, '")');
