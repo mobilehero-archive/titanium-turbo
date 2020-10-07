@@ -36,7 +36,7 @@
 		"global-paths": "^1.0.0",
 		"jsonlint": "1.6.3",
 		"lodash": "^4.17.20",
-		"moment": "^2.29.0",
+		"moment": "^2.29.1",
 		"node.extend": "^2.0.2",
 		"pkginfo": "0.4.1",
 		"resolve": "^1.17.0",
