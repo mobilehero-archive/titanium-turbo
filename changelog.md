@@ -2,6 +2,12 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [2.0.0] - 2020-10-07
+
+### Added 
+
+- Changing versioning to move independent of versions of Titanium Alloy.  Will avoid having to publish as a pre-release on npm.
+
 ## [1.15.1-6] - 2020-09-01
 
 ### Updated
