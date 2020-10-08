@@ -122,7 +122,7 @@ const processFontParameters =  params => {
 	}
 };
 
-_turbo.expandContainer =  e  => {
+_turbo.expand = _turbo.expandContainer =  e  => {
 
 	if ( !e ) {
 		return;
@@ -159,7 +159,7 @@ _turbo.toggleContainer =  e  => {
 
 };
 
-_turbo.collapseContainer =  e  => {
+_turbo.collapse = _turbo.collapseContainer =  e  => {
 	if ( !e ) {
 		return;
 	}
