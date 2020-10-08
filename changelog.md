@@ -2,6 +2,14 @@
 
 Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [2.0.2] - 2020-10-08
+
+### Added 
+
+- Added `turbo.collapse` as alias for `turbo.collapseContainer`
+- Added `turbo.expand` as alias for `turbo.expandContainer`
+
+
 ## [2.0.0] - 2020-10-07
 
 ### Added 
