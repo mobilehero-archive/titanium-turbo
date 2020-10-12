@@ -43,7 +43,14 @@ function parse(node, state, args) {
 				};
 
 				// generate the tab code
-				code += CU.generateNodeExtended(child, state, ext);
+				const generated_code = CU.generateNodeExtended(child, state, ext);
+
+				if(typeof generated_code === 'object'){
+					code += generated_code.content;
+				} else {
+					code += generated_code;
+				}
+
 			} else if (theNode === 'Ti.Android.ActionBar') {
 				// don't create the actionbar until after the tabgroup
 				ext.parent.symbol = args.symbol;
@@ -75,11 +82,23 @@ function parse(node, state, args) {
 
 	// create the actionbar, if necessary
 	if (actionBarDefer) {
-		code += CU.generateNodeExtended.apply(this, actionBarDefer);
+		const generated_code = CU.generateNodeExtended.apply(this, actionBarDefer);
+
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
 	}
 	// create the menu last, if necessary
 	if (menuDefer) {
-		code += CU.generateNodeExtended.apply(this, menuDefer);
+		const generated_code = CU.generateNodeExtended.apply(this, menuDefer);
+		
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
 	}
 
 	// Update the parsing state

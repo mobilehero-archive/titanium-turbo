@@ -20,13 +20,20 @@ function parse(node, state, args) {
 	_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
 		var childArgs = CU.getParserArgs(child, state);
 
-		code += CU.generateNodeExtended(child, state, {
+		const generated_code =  CU.generateNodeExtended(child, state, {
 			parent: {},
 			post: function(node, state, args) {
 				children.push(state.parent.symbol);
 
 			}
 		});
+
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
+		
 	});
 
 	if (children) {

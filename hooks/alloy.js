@@ -76,6 +76,8 @@ exports.init = function (logger, config, cli, appc) {
 					_version: pkginfo.version
 				});
 			} catch (e) {
+				// console.error(e);
+				// logger.error(e);
 				logger.error(__('Alloy compiler failed'));
 				e.toString().split('\n').forEach(function (line) {
 					if (line) { logger.error(line); }
@@ -173,6 +175,8 @@ exports.init = function (logger, config, cli, appc) {
 				// handle the completion of alloy, success or otherwise
 				child.on('exit', function (code) {
 					if (code) {
+						// console.error(code);
+						// logger.error(`🦠  error code: ${JSON.stringify(code, null, 2)}`);
 						logger.error(__('Alloy compiler failed'));
 						process.exit(1);
 					} else {

@@ -20,12 +20,18 @@ function parse(node, state, args) {
 			var child = children[i];
 
 			// generate the code for the subview
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					return (state && state.parent && state.parent.symbol) ? arrayName + '.push(' + state.parent.symbol + ');\n' : '';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
 		}
 	}
 
@@ -44,7 +50,7 @@ function parse(node, state, args) {
 		var itemCode = '';
 
 		_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
-			itemCode += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				local: true,
 				model: localModel,
@@ -52,6 +58,13 @@ function parse(node, state, args) {
 					return 'views.push(' + state.parent.symbol + ');\n';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				itemCode += generated_code.content;
+			} else {
+				itemCode += generated_code;
+			}
+
 		});
 
 		if (state.parentFormFactor || node.hasAttribute('formFactor')) {

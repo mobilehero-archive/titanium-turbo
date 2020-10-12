@@ -13,6 +13,8 @@ var U = require('../../utils'),
 	XMLSerializer = require('xmldom').XMLSerializer,
 	CONST = require('../../common/constants');
 
+const JSONC = require('@titanium/jsonc');
+
 ///////////////////////////////////////
 ////////// private variables //////////
 ///////////////////////////////////////
@@ -295,17 +297,17 @@ exports.generateNodeExtended = function(node, state, newState) {
 };
 
 exports.generateNode = function(node, state, defaultId, isTopLevel = false, isModelOrCollection = false, masterState = {}) {
-	if (node.nodeType != 1) return '';
+	const code = {
+		content: '',
+		pre: '',
+		staticCode: '',
+	};
+	if (node.nodeType != 1) return code;
 	if (!exports.isNodeForCurrentPlatform(node)) {
-		return '';
+		return code;
 	}
-	var args = exports.getParserArgs(node, state, { defaultId: defaultId }),
-		codeTemplate = 'if (<%= condition %>) {\n<%= content %>}\n',
-		code = {
-			content: '',
-			pre: '',
-			staticCode: '',
-		};
+	const args = exports.getParserArgs(node, state, { defaultId: defaultId });
+	const codeTemplate = 'if (<%= condition %>) {\n<%= content %>}\n';
 
 	// Check for platform specific considerations
 	var conditionType = compilerConfig && compilerConfig.alloyConfig && compilerConfig.alloyConfig.platform ? 'compile' : 'runtime';
@@ -390,6 +392,7 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 	// handle any static code
 	if (state.staticCode) {
 		code.staticCode += state.staticCode;
+		logger.debug(`🦠  code.staticCode: ${JSON.stringify(code.staticCode, null, 2)}`);
 		delete state.staticCode;
 	}
 
@@ -462,9 +465,11 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 			// zzz();
 
 
+
 			// add the generated code to the view code and post-controller code respectively
 			code.content += _.template(immediateTemplate)(eventObj);
 			postCode = _.template(deferTemplate)(eventObj);
+			logger.error(`🦠  postCode: ${JSON.stringify(postCode, null, 2)}`);
 			exports.postCode += state.condition ? _.template(codeTemplate)({
 				condition: state.condition,
 				content: postCode
@@ -484,23 +489,27 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 					// propagate the form factor down through the hierarchy
 					newState.parentFormFactor = (node.getAttribute('formFactor') || state.parentFormFactor);
 				}
-				code.content += exports.generateNode(parent.childNodes.item(i), newState);
+				const generated_code = exports.generateNode(parent.childNodes.item(i), newState);
+				code.content += generated_code.content;
+				code.staticCode += generated_code.staticCode;
 			}
 		});
 	}
 
 	if (!isModelOrCollection) {
-		return code.condition ? _.template(codeTemplate)(code) : code.content || '';
-		const x = code.condition ? _.template(codeTemplate)(code) : code.content || '';
-		console.debug(`🦠  turbo.x: ${JSON.stringify(x, null, 2)}`);
-		console.debug(`🦠  typeof turbo.x: ${typeof x}`);
-		console.error(typeof x);
-		return x;
+		// return code.condition ? _.template(codeTemplate)(code) : code.content || '';
+		const templated_code = code.condition ? _.template(codeTemplate)(code) : code.content || '';
+		return {
+			content: templated_code,
+			// staticCode: code.condition ? _.template(codeTemplate)({content:code.staticCode, condition: code.condition }) : code.staticCode || '',
+			staticCode: code.staticCode || '',
+		}
 	} else {
 		return {
 			content: code.condition ? _.template(codeTemplate)(code) : code.content || '',
 			pre: code.condition ? _.template(codeTemplate)({content:code.pre}) : code.pre || '',
-			staticCode: code.condition ? _.template(codeTemplate)({content:code.staticCode}) : code.staticCode || '',
+			// staticCode: code.condition ? _.template(codeTemplate)({content:code.staticCode, condition: code.condition }) : code.staticCode || '',
+			staticCode: code.staticCode || '',
 		};
 	}
 };

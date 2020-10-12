@@ -23,12 +23,18 @@ function parse(node, state, args) {
 		_.each(U.XML.getElementsFromNodes(node.childNodes), function(child, index) {
 			if (CU.validateNodeName(child, VALID)) {
 				// generate code for the DashboardItem
-				code += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {},
 					post: function(node, state, args) {
 						return arrayName + '.push(' + state.parent.symbol + ');\n';
 					}
 				});
+
+				if(typeof generated_code === 'object'){
+					code += generated_code.content;
+				} else {
+					code += generated_code;
+				}
 
 				// When we are done processing the DashboardItem, remove it from the
 				// markup. That way we can just pass back the current DashboardView state as
@@ -56,7 +62,7 @@ function parse(node, state, args) {
 
 		_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
 			// generate the repeated element
-			itemCode += CU.generateNode(child, {
+			const generated_code = CU.generateNode(child, {
 				parent: {},
 				local: true,
 				model: localModel,
@@ -64,6 +70,13 @@ function parse(node, state, args) {
 					return localArray + '.push(' + state.parent.symbol + ');\n';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				itemCode += generated_code.content;
+			} else {
+				itemCode += generated_code;
+			}
+
 
 			// remove it from the XML
 			node.removeChild(child);

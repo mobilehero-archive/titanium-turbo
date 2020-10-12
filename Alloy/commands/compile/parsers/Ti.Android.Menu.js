@@ -43,13 +43,20 @@ function parse(node, state, args) {
 		}
 
 		// generate code for the MenuItem
-		code += CU.generateNodeExtended(child, state, {
+		const generated_code = CU.generateNodeExtended(child, state, {
 			androidMenu: true,
 			parent: {
 				node: node,
 				symbol: eventObject + '.menu'
 			}
 		});
+		
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
+
 	});
 
 	// ALOY-784, support Activity properties as attributes of <Menu>

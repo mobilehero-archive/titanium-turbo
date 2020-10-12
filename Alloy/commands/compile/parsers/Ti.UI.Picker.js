@@ -114,12 +114,19 @@ function parse(node, state, args) {
 		}
 
 		// generate the code for each column/row and add it to the array
-		code += CU.generateNodeExtended(child, state, {
+		const generated_code = CU.generateNodeExtended(child, state, {
 			parent: {},
 			post: function(node, state, a) {
 				return arrayName + '.push(' + state.parent.symbol + ');\n';
 			}
 		});
+
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
+		
 	}
 
 	// add the array of columns/rows to the Picker, if necessary

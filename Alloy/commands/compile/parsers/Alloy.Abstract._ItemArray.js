@@ -56,12 +56,19 @@ function parse(node, state, args) {
 		// This ItemArray processes all types
 		if (def.children[0] === 'ALL') {
 			if (!isCollectionBound) {
-				code += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {},
 					post: function(node, s, args) {
 						return state.itemsArray + '.push(' + s.parent.symbol + ');';
 					}
 				});
+
+				if(typeof generated_code === 'object'){
+					code += generated_code.content;
+				} else {
+					code += generated_code;
+				}
+				
 			}
 
 		// Make sure the children match the parent
@@ -76,7 +83,7 @@ function parse(node, state, args) {
 		var itemsVar = CU.generateUniqueId();
 
 		_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
-			itemCode += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				local: true,
 				model: localModel,
@@ -84,6 +91,13 @@ function parse(node, state, args) {
 					return itemsVar + '.push(' + state.parent.symbol + ');\n';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				itemCode += generated_code.content;
+			} else {
+				itemCode += generated_code;
+			}
+
 		});
 
 		if (state.parentFormFactor || node.hasAttribute('formFactor')) {

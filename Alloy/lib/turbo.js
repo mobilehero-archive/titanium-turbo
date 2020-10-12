@@ -122,7 +122,7 @@ const processFontParameters =  params => {
 	}
 };
 
-_turbo.expandContainer =  e  => {
+_turbo.expand = _turbo.expandContainer =  e  => {
 
 	if ( !e ) {
 		return;
@@ -130,12 +130,15 @@ _turbo.expandContainer =  e  => {
 	const container = e.source || e;
 
 	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
-		container.height = container.expandedHeight || container.height;
-		container.width = container.expandedWidth || container.width;
-		container.top = container.expandedTop || container.top;
-		container.right = container.expandedRight || container.right;
-		container.bottom = container.expandedBottom || container.bottom;
-		container.left = container.expandedLeft || container.left;
+		container.height = !_.isNil(container.expandedHeight) ? container.expandedHeight : container.height;
+		container.width = !_.isNil(container.expandedWidth) ? container.expandedWidth : container.width;
+		if( container.collapseMargins ){
+			container.top = !_.isNil(container.expandedTop) ?  container.expandedTop : container.top;
+			container.right = !_.isNil(container.expandedRight) ?  container.expandedRight : container.right;
+			container.bottom = !_.isNil(container.expandedBottom) ?  container.expandedBottom : container.bottom;
+			container.left = !_.isNil(container.expandedLeft) ?  container.expandedLeft : container.left;			
+		}
+
 		container.visible = true;
 	}
 };
@@ -159,18 +162,22 @@ _turbo.toggleContainer =  e  => {
 
 };
 
-_turbo.collapseContainer =  e  => {
+_turbo.collapse = _turbo.collapseContainer =  e  => {
 	if ( !e ) {
 		return;
 	}
 	const container = e.source || e;
 	if ( container.expandedHeight || container.expandedWidth || container.expandedTop || container.expandedRight || container.expandedBottom || container.expandedLeft) {
-		container.height = container.expandedHeight ? 0 : container.height;
-		container.width = container.expandedWidth ? 0 : container.width;
-		container.top = container.expandedTop ? 0 : container.top;
-		container.right = container.expandedRight ? 0 : container.right;
-		container.bottom = container.expandedBottom ? 0 : container.bottom;
-		container.left = container.expandedLeft ? 0 : container.left;
+		container.height = !_.isNil(container.expandedHeight) ? 0 : container.height;
+		container.width = !_.isNil(container.expandedWidth) ? 0 : container.width;
+
+		if( container.collapseMargins ){
+			container.top = !_.isNil(container.expandedTop) ?  0 : container.top;
+			container.right = !_.isNil(container.expandedRight) ?  0 : container.right;
+			container.bottom = !_.isNil(container.expandedBottom) ?  0 : container.bottom;
+			container.left = !_.isNil(container.expandedLeft) ?  0 : container.left;			
+		}
+
 		container.visible = false;
 	}
 };

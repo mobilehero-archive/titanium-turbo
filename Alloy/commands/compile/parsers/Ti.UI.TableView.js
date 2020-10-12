@@ -100,7 +100,7 @@ function parse(node, state, args) {
 
 		// generate code for proxy property assignments
 		if (isProxyProperty) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, _state, _args) {
 					if (_args.formFactor) {
@@ -116,23 +116,40 @@ function parse(node, state, args) {
 				}
 			});
 
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 		// generate code for search bar
 		} else if (isSearchBar) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					proxyProperties.search = state.parent.symbol;
 				}
 			});
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
 
 		// generate code for refreshControl
 		} else if (isRefreshControl) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					proxyProperties.refreshControl = state.parent.symbol;
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
 
 		// are there UI elements yet to process?
 		} else if (hasUiNodes || !isControllerNode) {
@@ -141,7 +158,7 @@ function parse(node, state, args) {
 			if (isDataBound) {
 				localModel = localModel || CU.generateUniqueId();
 				var dataName = args.createArgs.dataName || '$model';
-				itemCode += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {},
 					local: true,
 					model: localModel,
@@ -152,29 +169,51 @@ function parse(node, state, args) {
 					}
 				});
 
+				if(typeof generated_code === 'object'){
+					itemCode += generated_code.content;
+				} else {
+					itemCode += generated_code;
+				}
+
+
+
 			// standard row/section processing
 			} else {
 				if (!arrayName) {
 					arrayName = CU.generateUniqueId();
 					code += 'var ' + arrayName + '=[];';
 				}
-				code += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {},
 					post: function(node, state, args) {
 						controllerSymbol = state.controller;
 						return arrayName + '.push(' + state.parent.symbol + ');';
 					}
 				});
+
+				if(typeof generated_code === 'object'){
+					code += generated_code.content;
+				} else {
+					code += generated_code;
+				}
+
 			}
 
 		// if there's no UI nodes inside, just generate it
 		} else if (!hasUiNodes && isControllerNode) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					controllerSymbol = state.controller;
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 		}
 
 		// fill in proxy property templates, if present

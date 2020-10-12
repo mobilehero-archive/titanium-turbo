@@ -94,7 +94,7 @@ function parse(node, state, args) {
 	_.each(children, function(child) {
 		if (!CU.isNodeForCurrentPlatform(child)) { return; }
 		var childArgs = CU.getParserArgs(child);
-		code += CU.generateNodeExtended(child, state, {
+		const generated_code = CU.generateNodeExtended(child, state, {
 			parent: {},
 			post: function(node, state, args) {
 				if (state.parent.symbol) {
@@ -102,6 +102,13 @@ function parse(node, state, args) {
 				}
 			}
 		});
+
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
+		
 	});
 
 	// add extra createArgs if present

@@ -73,7 +73,7 @@ function parse(node, state, args) {
 				child.nodeName = name;
 			}
 
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				local: true,
 				isViewTemplate: true,
@@ -82,6 +82,13 @@ function parse(node, state, args) {
 					return childTemplates + '.push(' + symbol + ');';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+			
 		});
 
 		argsObject.childTemplates = childTemplates;

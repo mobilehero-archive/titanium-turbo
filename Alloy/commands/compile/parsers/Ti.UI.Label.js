@@ -14,12 +14,19 @@ function parse(node, state, args) {
 
 	_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
 		if (CU.validateNodeName(child, 'Ti.UI.AttributedString')) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					attributedStringsymbol = state.parent.symbol;
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+			
 
 			node.removeChild(child);
 		}

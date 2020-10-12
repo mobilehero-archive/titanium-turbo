@@ -15,9 +15,9 @@ function parse(node, state, args) {
 	var returnCode = '';
 
 	if (U.isLocaleAlias(nodeText)) {
-		returnCode = '.push(' + nodeText + ');';
+		returnCode = '.push(' + nodeText + ')';
 	} else {
-		returnCode = '.push("' + nodeText.replace(/"/g, '\\"') + '");';
+		returnCode = '.push("' + nodeText.replace(/"/g, '\\"') + '")';
 	}
 
 	const codePush = state.itemsArray + returnCode;
@@ -31,6 +31,7 @@ function parse(node, state, args) {
 	if (attrName) {
 		if (args.createArgs[attrName]) {
 			code = `${attrVarName} = ${codePush} - 1`;
+			// code = `${attrVarName} = ${codePush}`;
 		} else {
 			code = `${attrVarName} = undefined; ${codePush}`;
 		}
