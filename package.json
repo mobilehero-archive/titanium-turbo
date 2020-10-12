@@ -37,7 +37,7 @@
 		"global-paths": "^1.0.0",
 		"jsonlint": "1.6.3",
 		"lodash": "^4.17.20",
-		"moment": "^2.29.0",
+		"moment": "^2.29.1",
 		"node.extend": "^2.0.2",
 		"pkginfo": "0.4.1",
 		"resolve": "^1.17.0",
@@ -69,7 +69,7 @@
 		"@seadub/danger-plugin-junit": "^0.2.0",
 		"danger": "^10.5.0",
 		"diff": "^4.0.2",
-		"eslint": "^7.10.0",
+		"eslint": "^7.11.0",
 		"jake": "^8.1.1",
 		"mkdirp": "^0.5.5"
 	},
