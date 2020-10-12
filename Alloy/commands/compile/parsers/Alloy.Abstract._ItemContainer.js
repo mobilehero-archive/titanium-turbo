@@ -48,7 +48,14 @@ function parse(node, state, args) {
 				itemsArray: CU.generateUniqueId()
 			};
 
-			code += CU.generateNodeExtended(child, state, childState);
+			const generated_code = CU.generateNodeExtended(child, state, childState);
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 			var prop = _.find(def.children, function(c) { return c.name === theNode; }).property;
 			extras.push([prop, childState.itemsArray]);
 

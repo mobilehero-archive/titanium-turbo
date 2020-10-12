@@ -39,13 +39,19 @@ function parse(node, state, args) {
 				}
 			}
 			// generate code for the Annotation
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					return arrayName + '.push(' + state.parent.symbol + ');\n';
 				}
 			});
 
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+			
 			// When we are done processing the Annotation, remove it from the
 			// markup. That way we can just pass back the current Map state as
 			// the returned state and it can continue to process any other children

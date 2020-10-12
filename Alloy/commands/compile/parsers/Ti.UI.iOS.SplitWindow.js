@@ -31,13 +31,19 @@ function parse(node, state, args) {
 		var childArgs = CU.getParserArgs(child);
 		if (theNode) {
 			var subParentSymbol;
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					subParentSymbol = state.parent.symbol;
 					subParents.push(subParentSymbol);
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
 
 			// TODO: workaround for TIMOB-13068
 			if (theNode === 'Ti.UI.TabGroup') {

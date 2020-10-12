@@ -99,6 +99,7 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for defining the primary entry point for the application (defaults to `index`).  Currently search order: `Alloy.main` → `Alloy.CFG.main` → Titanium Property: `app.main`. [[ALOY-1549]](https://jira.appcelerator.org/browse/ALOY-1549)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Added support for `<style>` tag in XML views.  Also supports the `src` attribute (like the `<script>` tag) which allows users to reference a widget-wide `app.tss` file! [[ALOY-1729]](https://jira.appcelerator.org/browse/ALOY-1729)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 * [x] Partial workaround for Titanium and Alloy issue where relative path require statements are broken.  This only fixes static paths.  Fix for dynamic paths will be coming in upcoming release of `Turbo`.  [[TIMOB-28037]](https://jira.appcelerator.org/browse/TIMOB-28037)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
+* [x] Added support for static script blocks in Alloy `<script static="true" />`  [[ALOY-1742]](https://jira.appcelerator.org/browse/ALOY-1742)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 
 
 ## 🔗 Related Links

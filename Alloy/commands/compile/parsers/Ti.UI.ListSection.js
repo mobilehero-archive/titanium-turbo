@@ -65,12 +65,19 @@ function parse(node, state, args) {
 
 		// generate code for proxy property assignments
 		if (isProxyProperty) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					proxyProperties[U.proxyPropertyNameFromFullname(theNode)] = state.parent.symbol;
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 
 		// process all ListItems
 		} else if (theNode === 'Ti.UI.ListItem') {
@@ -79,7 +86,7 @@ function parse(node, state, args) {
 			if (isDataBound) {
 				localModel = args.createArgs.modelName || '__currentModel';
 				var dataName = args.createArgs.dataName || '$model';
-				itemCode += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {},
 					local: true,
 					model: localModel,
@@ -90,32 +97,52 @@ function parse(node, state, args) {
 					}
 				});
 
+				if(typeof generated_code === 'object'){
+					itemCode += generated_code.content;
+				} else {
+					itemCode += generated_code;
+				}
+
 			// generate static items
 			} else {
 				if (!itemsArray) {
 					itemsArray = CU.generateUniqueId();
 					code += 'var ' + itemsArray + '=[];';
 				}
-				code += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {},
 					post: function(node, state, args) {
 						controllerSymbol = state.controller;
 						return itemsArray + '.push(' + state.parent.symbol + ');';
 					}
 				});
+
+				if(typeof generated_code === 'object'){
+					code += generated_code.content;
+				} else {
+					code += generated_code;
+				}
+
 			}
 
 		// if there's no UI nodes inside, just generate it
 		} else if (!hasUiNodes && isControllerNode) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					controllerSymbol = state.controller;
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 		}
 
-		// fill in poxy property templates, if present
+		// fill in proxy property templates, if present
 		if (isControllerNode) {
 			_.each(proxyProperties, function(v, k) {
 				proxyProperties[k] = _.template(v)({

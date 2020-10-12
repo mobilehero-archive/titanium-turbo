@@ -25,6 +25,7 @@
 		"@babel/parser": "^7.11.5",
 		"@babel/traverse": "^7.11.5",
 		"@babel/types": "^7.11.5",
+		"@titanium/jsonc": "0.0.10",
 		"@titanium/module-copier": "0.0.28",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",

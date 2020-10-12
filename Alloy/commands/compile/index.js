@@ -895,13 +895,17 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 
 			// generate the code for this node
 			var fullname = CU.getNodeFullname(node);
-			template.viewCode += CU.generateNode(node, {
+			const generated_code =  CU.generateNode(node, {
 				parent:{},
 				styles:state.styles,
 				widgetId: manifest ? manifest.id : undefined,
 				filepath: files.VIEW,
 				parentFormFactor: node.hasAttribute('formFactor') ? node.getAttribute('formFactor') : undefined
 			}, defaultId, true, false, state) || '';
+
+			template.viewCode += generated_code.content;
+			template.staticCode += generated_code.staticCode;
+
 		});
 	}
 

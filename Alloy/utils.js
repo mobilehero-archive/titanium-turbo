@@ -529,6 +529,7 @@ exports.ensureDir = function(p) {
 };
 
 exports.die = function(msg, e) {
+	logger.error(`🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥🟥`);
 	if (e) {
 		logger.error(exports.createErrorOutput(msg, e));
 	} else {

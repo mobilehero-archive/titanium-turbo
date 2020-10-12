@@ -115,6 +115,20 @@ function parse(node, state, args) {
 					args.createArgs.expandedRight = args.createArgs.right;
 					args.createArgs.expandedBottom = args.createArgs.bottom;
 					args.createArgs.expandedLeft = args.createArgs.left;
+
+					if( !_.isNil(args.createArgs.top)){
+						args.createArgs.top = 0;
+					}
+					if( !_.isNil(args.createArgs.right)){
+						args.createArgs.right = 0;
+					}
+					if( !_.isNil(args.createArgs.bottom)){
+						args.createArgs.bottom = 0;
+					}
+					if( !_.isNil(args.createArgs.left)){
+						args.createArgs.left = 0;
+					}
+
 				}
 				args.createArgs.visible = false;
 				break;
@@ -175,7 +189,7 @@ function parse(node, state, args) {
 			code += 'var ' + childTemplates + '=[];';
 
 			_.each(children, function(child) {
-				code += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {},
 					local: true,
 					isViewTemplate: true,
@@ -183,6 +197,13 @@ function parse(node, state, args) {
 						return childTemplates + '.push(' + state.item.symbol + ');';
 					}
 				});
+
+				if(typeof generated_code === 'object'){
+					code += generated_code.content;
+				} else {
+					code += generated_code;
+				}
+
 			});
 
 			code += 'return ' + childTemplates + ';';
@@ -236,7 +257,7 @@ function parse(node, state, args) {
 			var itemCode = '';
 
 			_.each(U.XML.getElementsFromNodes(node.childNodes), function(child) {
-				itemCode += CU.generateNodeExtended(child, state, {
+				const generated_code = CU.generateNodeExtended(child, state, {
 					parent: {
 						node: node,
 						symbol: args.symbol
@@ -245,6 +266,13 @@ function parse(node, state, args) {
 					model: localModel,
 					dataName: dataName,
 				});
+
+				if(typeof generated_code === 'object'){
+					itemCode += generated_code.content;
+				} else {
+					itemCode += generated_code;
+				}
+
 			});
 
 			var pre = 'var children = ' + args.symbol + '.children;' +

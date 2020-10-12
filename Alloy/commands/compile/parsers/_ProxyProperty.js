@@ -40,12 +40,19 @@ function parse(node, state, args) {
 		}
 
 		// generate proxy property
-		code += CU.generateNodeExtended(child, state, {
+		const generated_code = CU.generateNodeExtended(child, state, {
 			parent: {},
 			post: function(node, state, args) {
 				proxy = state.parent ? state.parent.symbol : state.item.symbol;
 			}
 		});
+
+		if( typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
+
 	});
 
 	var ret = {

@@ -73,13 +73,20 @@ function parse(node, state, args) {
 
 		// generate the node
 		if (theNode !== 'Alloy.Abstract.Templates') {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					parentSymbol = state.parent.symbol;
 					controllerSymbol = state.controller;
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 		}
 
 		// manually handle controller node proxy properties
@@ -129,11 +136,18 @@ function parse(node, state, args) {
 						templateObject = CU.generateUniqueId();
 						code += 'var ' + templateObject + '={};';
 					}
-					code += CU.generateNodeExtended(template, state, {
+					const generated_code = CU.generateNodeExtended(template, state, {
 						parent: {},
 						local: true,
 						templateObject: templateObject
 					});
+
+					if(typeof generated_code === 'object'){
+						code += generated_code.content;
+					} else {
+						code += generated_code;
+					}
+					
 				}
 			});
 			node.removeChild(child);

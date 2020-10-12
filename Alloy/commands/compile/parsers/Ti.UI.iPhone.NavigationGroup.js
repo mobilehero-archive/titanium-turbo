@@ -34,12 +34,19 @@ function parse(node, state, args) {
 
 	// generate the code for the Window first
 	if (theNode) {
-		code += CU.generateNodeExtended(child, state, {
+		const generated_code = CU.generateNodeExtended(child, state, {
 			parent: {},
 			post: function(node, state, args) {
 				windowSymbol = state.parent.symbol;
 			}
 		});
+
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
+		
 	} else {
 		err.unshift('Invalid NavigationGroup child "' + childArgs.fullname + '"');
 		U.die(err);

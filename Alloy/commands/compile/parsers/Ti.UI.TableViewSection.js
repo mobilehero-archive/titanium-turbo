@@ -48,13 +48,19 @@ function parse(node, state, args) {
 		if (isControllerNode) {
 
 			// generate the controller node
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					parentSymbol = state.parent.symbol;
 					controllerSymbol = state.controller;
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
 
 			// set up any proxy properties at the top-level of the controller
 			var inspect = CU.inspectRequireNode(child);
@@ -74,21 +80,33 @@ function parse(node, state, args) {
 
 		// generate code for proxy property assignments
 		if (isProxyProperty) {
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					proxyProperties[U.proxyPropertyNameFromFullname(theNode)] = state.parent.symbol;
 				}
 			});
 
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 		// generate code for the static row
 		} else if (!isControllerNode) {
-			rowCode += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, args) {
 					return '<%= sectionSymbol %>.add(' + state.parent.symbol + ');';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				rowCode += generated_code.content;
+			} else {
+				rowCode += generated_code;
+			}
 		}
 	});
 

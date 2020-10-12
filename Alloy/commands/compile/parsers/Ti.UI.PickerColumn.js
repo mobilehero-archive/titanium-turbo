@@ -42,23 +42,37 @@ function parse(node, state, args) {
 		// generate data binding code
 		if (isDataBound) {
 			localModel = localModel || CU.generateUniqueId();
-			rowCode += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				model: localModel,
 				post: function(node, state, args) {
 					return 'rows.push(' + state.parent.symbol + ');\n';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				rowCode += generated_code.content;
+			} else {
+				rowCode += generated_code;
+			}
+
 		// standard row processing
 		} else {
 
 			// generate the code for each row and add it to the array
-			code += CU.generateNodeExtended(child, state, {
+			const generated_code = CU.generateNodeExtended(child, state, {
 				parent: {},
 				post: function(node, state, a) {
 					return args.symbol + '.addRow(' + state.parent.symbol + ');\n';
 				}
 			});
+
+			if(typeof generated_code === 'object'){
+				code += generated_code.content;
+			} else {
+				code += generated_code;
+			}
+
 		}
 	});
 

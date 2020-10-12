@@ -22,7 +22,7 @@ function parse(node, state, args) {
 			actions = state.itemsArray;
 		}
 
-		code += CU.generateNodeExtended(child, state, {
+		const generated_code = CU.generateNodeExtended(child, state, {
 			parent: {},
 			post: function(node, state, args) {
 				if (child.nodeName === 'Preview') {
@@ -30,6 +30,12 @@ function parse(node, state, args) {
 				}
 			}
 		});
+
+		if(typeof generated_code === 'object'){
+			code += generated_code.content;
+		} else {
+			code += generated_code;
+		}
 
 	});
 

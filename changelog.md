@@ -1,6 +1,13 @@
 # Titanium Turbo - Release Notes
 
-Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and customizations for rapid development.
+Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and customizations for rapid development.
+
+## [2.0.3] - 2020-10-12
+
+### Added 
+
+- Added support for static code blocks in view XML using `<script static="true">`.  Have code run just once
+
 
 ## [2.0.2] - 2020-10-08
 
@@ -20,7 +27,7 @@ Titanium Turbo is a variation of Titanium Alloy that adds some enhancements and 
 
 ### Updated
 
-- Partial fix fo issue with Titanium and Alloy where relative path require statements were broken on iOS.  [TIMOB-28037]
+- Partial fix for issue with Titanium and Alloy where relative path require statements were broken on iOS.  [TIMOB-28037]
 - Updated lodash to v4.17.20
 
 
