@@ -63,7 +63,7 @@ const logger = require('@geek/logger').createLogger('@titanium/turbo',{ meta: { 
 const DEFAULT_WIDGET = 'widget';
 const TI_VERSION = Ti.version;
 const IDENTITY_TRANSFORM = OS_ANDROID ? (Ti.UI.createMatrix2D ? Ti.UI.createMatrix2D() : Ti.UI.create2DMatrix()) : undefined;
-const RESET = {
+let RESET = {
 	bottom: null,
 	left: null,
 	right: null,
