@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.0.6",
+	"version": "2.0.7",
 	"description": "🚀 Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development.",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -25,7 +25,7 @@
 		"@babel/parser": "^7.11.5",
 		"@babel/traverse": "^7.11.5",
 		"@babel/types": "^7.11.5",
-		"@titanium/jsonc": "0.0.10",
+		"@geek/jsonc": "0.0.12",
 		"@titanium/module-copier": "0.0.28",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",

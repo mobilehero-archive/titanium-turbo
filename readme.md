@@ -1,13 +1,8 @@
 <p align="center">
-  <img src="https://cdn.secure-api.org/images/turbo-title_400.png" width="50%" /><br>
+  <img src="https://cdn.secure-api.org/images/rocket-launch.gif" width="70%" />
 </p>
 
 # Titanium Turbo
-
-
-[![Twitter Follow](https://img.shields.io/twitter/follow/brentonhouse?label=Follow%20%40brentonhouse%20on%20twitter&style=social)](https://twitter.com/brentonhouse)
-[![LinkedIn Follow](https://img.shields.io/badge/LinkedIn-_Connect_with_%40brentonhouse_-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/brentonhouse/)
-![Github Followers](https://img.shields.io/github/followers/brentonhouse?label=Follow%20%40brentonhouse%20on%20GitHub&style=social)
 
 
 ![GitHub stars](https://img.shields.io/github/stars/brentonhouse/titanium-turbo?style=social)
@@ -17,18 +12,24 @@
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/titanium-turbo)](https://dependabot.com)
 
 > _**Turbo is not an official Axway product.**  
-> It is an experiment by [Brenton House](https://brenton.house) using open-source projects.  You are welcome to try it out and [leave feedback](https://github.com/brentonhouse/titanium-turbo/issues)!_
+> It is a project managed by [Brenton House](https://brenton.house) using open-source modules, libraries, and tools.  You are welcome to try it out and [leave feedback](https://github.com/brentonhouse/titanium-turbo/issues)!_
 
 
-* [📝 Description](#-description)
-* [🚀 Getting Started](#-getting-started)
-* [✨Features](#features)
-* [🔗 Related Links](#-related-links)
-* [📚Learn More](#learn-more)
-* [📣 Feedback](#-feedback)
-* [©️ Legal](#️-legal)
+* [📓  &nbsp; Description](#--description)
+* [🚀  &nbsp; Getting Started](#--getting-started)
+	* [Simple Method](#simple-method)
+	* [Manual Method](#manual-method)
+* [✨  &nbsp; Features](#--features)
+* [🎓  Learn More](#-learn-more)
+	* [📚  &nbsp;  Related projects](#--related-projects)
+		* [🎟️  &nbsp; Modules for Titanium Mobile](#️--modules-for-titanium-mobile)
+		* [🎟️  &nbsp; Modules for Node.js and Titanium Mobile](#️--modules-for-nodejs-and-titanium-mobile)
+		* [📦  &nbsp; Project Starter Kits](#--project-starter-kits)
+* [📣  &nbsp; Feedback](#--feedback)
+* [Follow Brenton House](#follow-brenton-house)
+* [©️  &nbsp; Legal](#️--legal)
 
-## 📝 Description
+## 📓  &nbsp; Description
 
 Titanium Turbo is a fork of **`Titanium Alloy`** that adds a lot of enhancements and customizations for rapid development.
 
@@ -36,24 +37,54 @@ Titanium Turbo is a fork of **`Titanium Alloy`** that adds a lot of enhancements
 
 This version of Titanium Turbo is based on **`Titanium Alloy 1.15.1`**
 
-## 🚀 Getting Started
+## 🚀  &nbsp; Getting Started
 
-1. Create new Titanium Alloy project
-2. Install `Titanium Turbo` in root of project
+### Simple Method
+
+
+<image align="left" src="https://cdn.secure-api.org/images/01_circled_100.png" height="30" width="30" />
+
+Create new Titanium Turbo project
+
+```
+npx @geek/mobile app:create my-new-app
+```
+
+<image align="left" src="https://cdn.secure-api.org/images/02_circled_100.png" height="30" width="30" />
+
+Build or Run app as you would normally.
+
+
+### Manual Method
+
+<image align="left" src="https://cdn.secure-api.org/images/01_circled_100.png" height="30" width="30" />
+
+Create new Titanium Alloy project
+
+<image align="left" src="https://cdn.secure-api.org/images/02_circled_100.png" height="30" width="30" />
+
+
+Install `Titanium Turbo` in root of project
 
 ```
 npm install --save-dev @titanium/turbo
 ```
 
-3. Install `Titanium Turbo Plugin` in root of project
+<image align="left" src="https://cdn.secure-api.org/images/03_circled_100.png" height="30" width="30" />
+
+
+Install `Titanium Turbo Plugin` in root of project
 
 ```
 npm install --save-dev @titanium/plugin-turbo
 ```
 
-4. Build or Run app as you would normally.
+<image align="left" src="https://cdn.secure-api.org/images/04_circled_100.png" height="30" width="30" />
 
-## ✨Features
+
+Build or Run app as you would normally.
+
+## ✨  &nbsp; Features
 
 > See `changelog.md` for history of changes
 
@@ -102,27 +133,104 @@ npm install --save-dev @titanium/plugin-turbo
 * [x] Added support for static script blocks in Alloy `<script static="true" />`  [[ALOY-1742]](https://jira.appcelerator.org/browse/ALOY-1742)  ![Exclusive Turbo Feature](https://img.shields.io/badge/turbo-exclusive-blue.png) 
 
 
-## 🔗 Related Links
 
-⭐  [Geek Mobile Toolkit](https://www.npmjs.com/package/@geek/mobile) - Toolkit for creating, building, and managing mobile app projects.   
-⭐  [Titanium Turbo Template (Default)](https://www.npmjs.com/package/@titanium/template-turbo-default) - Template for default Turbo app.  Based on the basic Alloy Template + some extra goodies.   
-⭐  [Titanium Turbo Template (Next)](https://www.npmjs.com/package/@titanium/template-turbo-next) - Template for Titanium Turbo app (with extras).  Based on the default Turbo Template + some extras.   
-⭐  [Titanium Turbo Template (Fully Loaded)](https://www.npmjs.com/package/@titanium/template-turbo-fully-loaded) - Template for Titanium Turbo app with all the bells and whistles!    
-⭐  [Titanium Mobile](https://www.npmjs.com/package/titanium) - Open-source tool for building powerful, cross-platform native apps with JavaScript.   
-⭐  [Alloy](https://www.npmjs.com/package/alloy) - MVC framework built on top of Titanium Mobile.   
-⭐  [Appcelerator](https://www.npmjs.com/package/appcelerator) - Installer for the Appcelerator Platform tool   
+## 🎓  Learn More
 
-## 📚Learn More
+⭐  &nbsp; [Axway Developer Blog](https://devblog.axway.com)   
+⭐  &nbsp; [Axway Developer YouTube Channel](https://youtube.com/axwaydev)   
+⭐  &nbsp; [Axway Developer Portal](https://developer.axway.com)   
+⭐  &nbsp; [AMPLIFY Titanium GitHub Repo](https://github.com/appcelerator/titanium_mobile)   
+⭐  &nbsp; [Titanium Alloy GitHub Repo](https://github.com/appcelerator/alloy)   
+⭐  &nbsp; [Titanium Turbo GitHub Repo](https://github.com/brentonhouse/titanium-turbo)   
 
-⭐  [Axway Developer Blog](https://devblog.axway.com)   
-⭐  [Axway Developer YouTube Channel](https://youtube.com/axwaydev)   
-⭐  [Axway Developer Portal](https://developer.axway.com)   
 
-## 📣 Feedback
+### 📚  &nbsp;  Related projects
+
+⭐  &nbsp; [Geek Mobile Toolkit](https://www.npmjs.com/package/@geek/mobile) - Toolkit for creating, building, and managing mobile app projects.   
+⭐  &nbsp; [Titanium Mobile](https://www.npmjs.com/package/titanium) - Open-source tool for building powerful, cross-platform native apps with JavaScript.   
+⭐  &nbsp; [Titanium Alloy](https://www.npmjs.com/package/alloy) - MVC framework built on top of Titanium Mobile.   
+⭐  &nbsp; [Appcelerator](https://www.npmjs.com/package/appcelerator) - Installer for the Appcelerator Platform tool   
+
+#### 🎟️  &nbsp; Modules for Titanium Mobile
+
+⭐  &nbsp; [@titanium/applesignin](https://www.npmjs.com/package/@titanium/applesignin) -Native modules that allows you to use the iOS 13+ Apple Sign In API with Axway Titanium native mobile apps.   
+
+⭐  &nbsp; [@titanium/authentication](https://www.npmjs.com/package/@titanium/authentication) - Titanium native mobile authentication manager   
+
+⭐  &nbsp; [@titanium/authentication-oauth](https://www.npmjs.com/package/@titanium/authentication-oauth) - Titanium native mobile OAuth plugin for authentication manager   
+
+⭐  &nbsp; [@titanium/calendar-picker](https://www.npmjs.com/package/@titanium/calendar-picker) - Turbo widget that allows you to pick dates from a calendar with Axway Titanium.   
+
+⭐  &nbsp; [@titanium/coremotion](https://www.npmjs.com/package/@titanium/coremotion) - Native modules that allows you to use iOS CoreMotion framework with Axway Titanium native mobile apps.   
+
+⭐  &nbsp; [@titanium/deeply](https://www.npmjs.com/package/@titanium/deeply) - Native modules that allows you to capture Android deep links with Axway Titanium.   
+
+⭐  &nbsp; [@titanium/essentials](https://www.npmjs.com/package/@titanium/essentials) - Essential Toolkit for Titanium Turbo Native Mobile Apps   
+
+⭐  &nbsp; [@titanium/icloud](https://www.npmjs.com/package/@titanium/icloud) - Native module that allows you to use the Apple iCloud framework with Axway Titanium native mobile apps.   
+
+⭐  &nbsp; [@titanium/identity](https://www.npmjs.com/package/@titanium/identity) - Native modules to add Fingerprint/FaceId/keychain access to Titanium native mobile apps   
+
+⭐  &nbsp; [@titanium/facebook](https://www.npmjs.com/package/@titanium/facebook) - Native modules that allows you to use Facebook SDK with Axway Titanium native mobile apps.   
+
+⭐  &nbsp; [@titanium/googlesignin](https://www.npmjs.com/package/@titanium/googlesignin) - Native modules that allows you to use the Google Sign-in SDK with Axway Titanium native mobile apps.   
+
+⭐  &nbsp; [@titanium/lottie](https://www.npmjs.com/package/@titanium/lottie) - Native modules that allows you to use Airbnb Lottie animations with Axway Titanium native mobile apps.   
+
+⭐  &nbsp; [@titanium/observer](https://www.npmjs.com/package/@titanium/observer) - Repackaging of nx-js/observer-util for Titanium Native Mobile   
+
+⭐  &nbsp; [@titanium/permissions](https://www.npmjs.com/package/@titanium/permissions) - Titanium native mobile widget for permission requests   [![@titanium/permissions](https://img.shields.io/npm/v/@titanium/permissions.png)](https://www.npmjs.com/package/@titanium/permissions)    
+
+⭐  &nbsp; [@titanium/please](https://www.npmjs.com/package/@titanium/please) - Titanium native mobile module for politely requesting data  [![@titanium/please](https://img.shields.io/npm/v/@titanium/please.png)](https://www.npmjs.com/package/@titanium/please)     
+
+⭐  &nbsp; [@titanium/polyfill](https://www.npmjs.com/package/@titanium/polyfill) - Titanium native mobile polyfills necessary to use packages that depend on Node.js modules   [![@titanium/polyfill](https://img.shields.io/npm/v/@titanium/polyfill.png)](https://www.npmjs.com/package/@titanium/polyfill)    
+
+⭐  &nbsp; [@titanium/turbo](https://www.npmjs.com/package/@titanium/turbo) - 🚀 Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development. [![@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png)](https://www.npmjs.com/package/@titanium/turbo)    
+
+⭐  &nbsp; [@titanium/updater](https://www.npmjs.com/package/@titanium/updater) - Titanium native mobile widget to check for app updates  [![@titanium/updater](https://img.shields.io/npm/v/@titanium/updater.png)](https://www.npmjs.com/package/@titanium/updater)     
+
+⭐  &nbsp; [@titanium/webdialog](https://www.npmjs.com/package/@titanium/webdialog) - Native modules that allows you to use native SFSafariViewController (iOS) and Chrome Pages (Android) with Axway Titanium native mobile apps.   [![@titanium/webdialog](https://img.shields.io/npm/v/@titanium/webdialog.png)](https://www.npmjs.com/package/@titanium/webdialog) 
+
+
+#### 🎟️  &nbsp; Modules for Node.js and Titanium Mobile
+
+| project  	|  description 	|  npm	|
+|---	|---  |---	|
+| [@geek/cache](https://www.npmjs.com/package/@geek/cache)  	| Caching module for Node.js and Axway Titanium  	| [![@geek/cache](https://img.shields.io/npm/v/@geek/cache.png)](https://www.npmjs.com/package/@geek/cache)      |
+| [@geek/jsonc](https://www.npmjs.com/package/@geek/cache)  	| JSONC and JSON utilities for JavaScript with Node.js and Axway Titanium.  	| [![@geek/jsonc](https://img.shields.io/npm/v/@geek/jsonc.png)](https://www.npmjs.com/package/@geek/jsonc)      |
+|  [@geek/jwt](https://www.npmjs.com/package/@geek/jwt) 	| JWT parser for JavaScript Node.js and Titanium native mobile  |  [![@geek/jwt](https://img.shields.io/npm/v/@geek/jwt.png)](https://www.npmjs.com/package/@geek/jwt)     |
+|  [@geek/logger](https://www.npmjs.com/package/@geek/logger) 	| Logging module for Node.js and Axway Titanium  |   [![@geek/logger](https://img.shields.io/npm/v/@geek/logger.png)](https://www.npmjs.com/package/@geek/logger)        |
+| [@geek/mobile](https://www.npmjs.com/package/@geek/mobile)  	| Toolkit for creating, building, and managing mobile app projects.  	| [![@geek/mobile](https://img.shields.io/npm/v/@geek/mobile.png)](https://www.npmjs.com/package/@geek/mobile)    	|
+|  [@geek/retry](https://www.npmjs.com/package/@geek/retry) 	| Retry JavaScript functions and promises in Node.js and Axway Titanium  |   [![@geek/retry](https://img.shields.io/npm/v/@geek/retry.png)](https://www.npmjs.com/package/@geek/retry)        |
+
+
+#### 📦  &nbsp; Project Starter Kits
+
+| project  	|  description 	|  npm	|
+|---	|---  |---	|
+| [Titanium Turbo Template (Default)](https://www.npmjs.com/package/@titanium/template-turbo-default)  	| Template for default Turbo app.  Based on the basic Alloy Template + some extra goodies.  	| [![@titanium/template-turbo-default](https://img.shields.io/npm/v/@titanium/template-turbo-default.png)](https://www.npmjs.com/package/@titanium/template-turbo-default)      |
+| [Titanium Turbo Template (Next)](https://www.npmjs.com/package/@titanium/template-turbo-next)  	| Template for Titanium Turbo app (with extras).  Based on the default Turbo Template + some extras.   	| [![@titanium/template-turbo-next](https://img.shields.io/npm/v/@titanium/template-turbo-next.png)](https://www.npmjs.com/package/@titanium/template-turbo-next)      |
+| [Titanium Turbo Template (Fully Loaded)](https://www.npmjs.com/package/@titanium/template-turbo-fully-loaded)  	| Template for Titanium Turbo app with all the bells and whistles!  	| [![@titanium/template-turbo-fully-loaded](https://img.shields.io/npm/v/@titanium/template-turbo-fully-loaded.png)](https://www.npmjs.com/package/@titanium/template-turbo-fully-loaded)      |
+
+
+
+## 📣  &nbsp; Feedback
 
 Have an idea or a comment?  [Join in the conversation here](https://github.com/brentonhouse/titanium-turbo/issues)! 
 
-## ©️ Legal
+-----
+
+## Follow Brenton House 
+
+> Follow [`Brenton House`](https://brenton.house) for the latest on great modules and libraries!
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/brentonhouse?label=Follow%20%40brentonhouse%20on%20twitter&style=social)](https://twitter.com/brentonhouse)
+[![LinkedIn Follow](https://img.shields.io/badge/LinkedIn-_Connect_with_%40brentonhouse_-blue?logo=linkedin&style=flat-square)](https://www.linkedin.com/in/brentonhouse/)
+![Github Followers](https://img.shields.io/github/followers/brentonhouse?label=Follow%20%40brentonhouse%20on%20GitHub&style=social)
+
+-----
+
+## ©️  &nbsp; Legal
 
 Alloy is developed by Appcelerator and the community and is Copyright © 2012-Present by Appcelerator, Inc. All Rights Reserved.
 

@@ -13,7 +13,7 @@ var U = require('../../utils'),
 	XMLSerializer = require('xmldom').XMLSerializer,
 	CONST = require('../../common/constants');
 
-const JSONC = require('@titanium/jsonc');
+const JSONC = require('@geek/jsonc');
 
 ///////////////////////////////////////
 ////////// private variables //////////
