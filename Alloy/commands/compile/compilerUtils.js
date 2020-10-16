@@ -13,7 +13,7 @@ var U = require('../../utils'),
 	XMLSerializer = require('xmldom').XMLSerializer,
 	CONST = require('../../common/constants');
 
-const JSONC = require('@titanium/jsonc');
+const JSONC = require('@geek/jsonc');
 
 ///////////////////////////////////////
 ////////// private variables //////////
@@ -392,7 +392,6 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 	// handle any static code
 	if (state.staticCode) {
 		code.staticCode += state.staticCode;
-		logger.debug(`🦠  code.staticCode: ${JSON.stringify(code.staticCode, null, 2)}`);
 		delete state.staticCode;
 	}
 
@@ -469,7 +468,6 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 			// add the generated code to the view code and post-controller code respectively
 			code.content += _.template(immediateTemplate)(eventObj);
 			postCode = _.template(deferTemplate)(eventObj);
-			logger.error(`🦠  postCode: ${JSON.stringify(postCode, null, 2)}`);
 			exports.postCode += state.condition ? _.template(codeTemplate)({
 				condition: state.condition,
 				content: postCode

@@ -60,7 +60,7 @@ module.exports = function(babel) {
 						case 'JSONC':
 							this.toRequire.push({
 								VARIABLE: 'JSONC',
-								REQUIRECALL: 'require(\'@titanium/jsonc\')'
+								REQUIRECALL: 'require(\'@geek/jsonc\')'
 							});
 							break;								
 					}

@@ -51,20 +51,19 @@ if (Ti.App.Properties.getBool('use-underscore', false)) {
 	_.where = _.filter;
 }
 var Backbone = require('/alloy/backbone');
-var CONST = require('/alloy/constants');
+const CONST = require('/alloy/constants');
 
 exports.version = '<%= version %>';
 exports._ = _;
 exports.Backbone = Backbone;
 
-var logger = require('@geek/logger').createLogger('@titanium/turbo',{ meta: { filename: __filename }});
+const logger = require('@geek/logger').createLogger('@titanium/turbo',{ meta: { filename: __filename }});
 
 
-
-var DEFAULT_WIDGET = 'widget';
-var TI_VERSION = Ti.version;
-var IDENTITY_TRANSFORM = OS_ANDROID ? (Ti.UI.createMatrix2D ? Ti.UI.createMatrix2D() : Ti.UI.create2DMatrix()) : undefined;
-var RESET = {
+const DEFAULT_WIDGET = 'widget';
+const TI_VERSION = Ti.version;
+const IDENTITY_TRANSFORM = OS_ANDROID ? (Ti.UI.createMatrix2D ? Ti.UI.createMatrix2D() : Ti.UI.create2DMatrix()) : undefined;
+let RESET = {
 	bottom: null,
 	left: null,
 	right: null,
@@ -148,10 +147,10 @@ if (OS_IOS) {
 const file_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__file_registry.json');
 exports.file_registry = JSON.parse(file_registry_resource.read().text);
 
-const widget_registry_resource = Ti.Filesystem.getFile(
-	Titanium.Filesystem.resourcesDirectory,
-	'__widget_registry.json',
-);
+const dependency_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__dependency_registry.json');
+exports.dependency_registry = JSON.parse(dependency_registry_resource.read().text);
+
+const widget_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__widget_registry.json');
 exports.widget_registry = JSON.parse(widget_registry_resource.read().text);
 
 function ucfirst(text) {

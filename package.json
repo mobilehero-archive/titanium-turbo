@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.0.3",
+	"version": "2.0.10",
 	"description": "🚀 Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development.",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -20,12 +20,12 @@
 	"preferGlobal": false,
 	"dependencies": {
 		"@babel/code-frame": "^7.10.4",
-		"@babel/core": "^7.11.6",
-		"@babel/generator": "^7.11.6",
-		"@babel/parser": "^7.11.5",
-		"@babel/traverse": "^7.11.5",
-		"@babel/types": "^7.11.5",
-		"@titanium/jsonc": "0.0.10",
+		"@babel/core": "^7.12.1",
+		"@babel/generator": "^7.12.1",
+		"@babel/parser": "^7.12.1",
+		"@babel/traverse": "^7.12.1",
+		"@babel/types": "^7.12.1",
+		"@geek/jsonc": "0.0.21",
 		"@titanium/module-copier": "0.0.28",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
@@ -44,11 +44,11 @@
 		"source-map": "^0.7.3",
 		"walk-sync": "^2.2.0",
 		"xml2tss": "0.0.5",
-		"xmldom": "^0.1.27"
+		"xmldom": "^0.1.31"
 	},
 	"license": "Apache-2.0",
 	"bin": {
-		"turbo2": "./bin/alloy"
+		"turbo2": "bin/alloy"
 	},
 	"scripts": {
 		"test": "jake test:all",
@@ -64,7 +64,7 @@
 		"node": ">=12"
 	},
 	"devDependencies": {
-		"@seadub/danger-plugin-dependencies": "^0.1.0",
+		"@seadub/danger-plugin-dependencies": "^1.0.0",
 		"@seadub/danger-plugin-eslint": "^2.0.0",
 		"@seadub/danger-plugin-junit": "^0.2.0",
 		"danger": "^10.5.0",
