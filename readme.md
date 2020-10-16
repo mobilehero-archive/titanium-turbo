@@ -1,19 +1,25 @@
+
 <p align="center">
-  <img src="https://cdn.secure-api.org/images/rocket-launch.gif" width="70%" />
+	<h1>Titanium Turbo <sup><sup><sub><a name="brenton-house" href="#brenton-house">🚀</a></sub></sup></sup></h1>  
+  <img src="https://cdn.secure-api.org/images/rocket-launch.gif" width="50%" />
 </p>
 
-# Titanium Turbo
-
-
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20Titanium%20Turbo%20on%20GitHub!!%20%20Seriously%20fast%20cross-platform%20native%20mobile%20app%20development!&url=https://github.com/brentonhouse/turbo&via=🚀%20Titanium%20Turbo&hashtags=axwaydev)
 ![GitHub stars](https://img.shields.io/github/stars/brentonhouse/titanium-turbo?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/brentonhouse/titanium-turbo?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/brentonhouse/titanium-turbo?style=social)
 [![@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png)](https://www.npmjs.com/package/@titanium/turbo)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/titanium-turbo)](https://dependabot.com)
+![GitHub PRs](https://img.shields.io/badge/PRs-welcome-blue.svg)
+![GitHub license](https://img.shields.io/badge/license-Apache_2.0-blue.svg)
+[![GitHub contributors](https://img.shields.io/github/contributors/brentonhouse/titanium-turbo.svg)](https://github.com/brentonhouse/titanium-turbo/graphs/contributors/)
+[![npm](https://img.shields.io/npm/dm/@titanium/turbo.svg)]()
+
 
 > _**Turbo is not an official Axway product.**  
-> It is a project managed by [Brenton House](https://brenton.house) using open-source modules, libraries, and tools.  You are welcome to try it out and [leave feedback](https://github.com/brentonhouse/titanium-turbo/issues)!_
+> `Turbo` is a project managed by [Brenton House](https://brenton.house) using open-source modules, libraries, and tools.  Try it out and [let us know what you think](https://github.com/brentonhouse/titanium-turbo/issues)!_
 
+-----------
 
 * [📓  &nbsp; Description](#--description)
 * [🚀  &nbsp; Getting Started](#--getting-started)
@@ -28,6 +34,8 @@
 * [📣  &nbsp; Feedback](#--feedback)
 * [Follow Brenton House](#follow-brenton-house)
 * [©️  &nbsp; Legal](#️--legal)
+
+-----------
 
 ## 📓  &nbsp; Description
 
@@ -54,6 +62,7 @@ npx @geek/mobile app:create my-new-app
 
 Build or Run app as you would normally.
 
+-----------
 
 ### Manual Method
 
@@ -83,6 +92,8 @@ npm install --save-dev @titanium/plugin-turbo
 
 
 Build or Run app as you would normally.
+
+-----------
 
 ## ✨  &nbsp; Features
 
