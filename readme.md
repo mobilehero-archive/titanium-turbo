@@ -28,8 +28,8 @@ The awesome framework for turbo charging your Titanium cross-platform native mob
 [![npm](https://img.shields.io/npm/dm/@titanium/turbo.svg)]()
 
 
-> _**Disclaimer:  Turbo is not an official Axway product.**  
-> `Turbo` is a project managed by [Brenton House](https://brenton.house) using open-source modules, libraries, and tools.  Try it out and [let us know what you think](https://github.com/brentonhouse/titanium-turbo/issues)!_
+> _**ℹ️ Disclaimer:**    
+> This project is not an official Axway product.  It is managed by [Brenton House](https://brenton.house) using open-source modules, libraries, and tools.  Try it out and [let us know what you think](https://github.com/brentonhouse/titanium-turbo/issues)!_
 
 -----------
   

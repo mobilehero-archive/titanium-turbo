@@ -16,9 +16,6 @@ module.exports = ({ types: t }) => {
 			registry = require(path.join(config.dir.resourcesPlatform, '__file_registry.json' ));
 			filepath = file.opts.filename;
 			if( filepath.startsWith(config.dir.resourcesPlatform)){
-				if( ! config.dir.resourcesPlatform ){
-					debugger;
-				}
 				filename = filepath.substring(config.dir.resourcesPlatform.length);
 				dirname = path.dirname(filename);
 			}
@@ -33,9 +30,6 @@ module.exports = ({ types: t }) => {
 				if( ! filepath && state.filename ){
 					filepath = state.filename;
 					if( filepath.startsWith(config.dir.resourcesPlatform)){
-						if( ! config.dir.resourcesPlatform ){
-							debugger;
-						}
 						filename = filepath.substring(config.dir.resourcesPlatform.length);
 						dirname = path.dirname(filename);
 					}
@@ -44,10 +38,6 @@ module.exports = ({ types: t }) => {
 				let targetPath = _path.node.arguments[0];
 
 				if ( t.isIdentifier(callee.node, { name: 'require' }) ) {
-
-					if( ! targetPath ){
-						debugger;
-					}
 
 					if( dirname ){
 						if ( t.isStringLiteral(first)) {

@@ -13,7 +13,10 @@ exports.parse = function(node, state) {
 			const sourcePath = path.join(compilerConfig.dir.resourcesPlatform, src);
 			if (fs.existsSync(sourcePath)) {
 				return fs.readFileSync(sourcePath, 'utf8');
-			} 
+			} else {
+				// debugger;
+				console.error(`Could not find referenced script file: ${sourcePath}`)
+			}
 		}	
 	}
 
