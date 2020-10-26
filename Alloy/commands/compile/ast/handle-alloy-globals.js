@@ -1,4 +1,4 @@
-const ALLOY_GLOBALS_TO_CHECK = [ 'Alloy', '_', 'Backbone', 'turbo', 'JSONC' ];
+const ALLOY_GLOBALS_TO_CHECK = [ 'Alloy', '_', 'Backbone', 'turbo'];
 const template = require('@babel/template').default;
 
 const buildRequire = template(`
@@ -57,12 +57,12 @@ module.exports = function(babel) {
 								REQUIRECALL: 'require(\'/turbo\')'
 							});
 							break;								
-						case 'JSONC':
-							this.toRequire.push({
-								VARIABLE: 'JSONC',
-								REQUIRECALL: 'require(\'@geek/jsonc\')'
-							});
-							break;								
+						// case 'JSONC':
+						// 	this.toRequire.push({
+						// 		VARIABLE: 'JSONC',
+						// 		REQUIRECALL: 'require(\'@geek/jsonc\')'
+						// 	});
+						// 	break;								
 					}
 
 				}
