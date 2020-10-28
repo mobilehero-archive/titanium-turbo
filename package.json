@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.1.3",
+	"version": "2.1.4",
 	"description": "🚀 Turbo is the awesome framework for turbo charging your Titanium cross-platform native mobile app development!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -28,7 +28,7 @@
 		"@geek/jsonc": "^1.0.1",
 		"@geek/logger": "^1.0.17",
 		"@titanium/essentials": "^1.0.22",
-		"@titanium/module-copier": "^1.0.4",
+		"@titanium/module-copier": "^1.0.6",
 		"@titanium/polyfill": "^1.0.1",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
@@ -92,10 +92,10 @@
 		"brenton-house"
 	],
 	"titaniumDependencies": {
-		"@geek/jsonc": "^1.0.1",
-		"@geek/logger": "^1.0.17",
-		"@titanium/essentials": "^1.0.22",
-		"@titanium/polyfill": "^1.0.1"
+		"@geek/jsonc": "latest",
+		"@geek/logger": "latest",
+		"@titanium/essentials": "latest",
+		"@titanium/polyfill": "latest"
 	},
 	"titanium": {
 		"type": "turbo",
