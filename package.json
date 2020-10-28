@@ -1,7 +1,7 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.0.10",
-	"description": "🚀 Turbo is a version of Titanium Alloy that adds some enhancements and customizations for rapid development.",
+	"version": "2.0.15",
+	"description": "🚀 Turbo is the awesome framework for turbo charging your Titanium cross-platform native mobile app development!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
 		{

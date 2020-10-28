@@ -753,11 +753,32 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 		return;
 	}
 
-	_.each(['COMPONENT', 'RUNTIME_STYLE'], function(fileType) {
+	// Moving this call up in the stack as the files need to be in the directories before parsing view xml
+	if( manifest ){
+		CU.copyWidgetResources(
+			[path.join(dir, CONST.DIR.ASSETS), path.join(dir, CONST.DIR.LIB)],
+			path.join(compileConfig.dir.resources, titaniumFolder),
+			manifest.id,
+			{
+				filter: new RegExp('^(?:' + otherPlatforms.join('|') + ')[\\/\\\\]'),
+				exceptions: otherPlatforms,
+				titaniumFolder: titaniumFolder,
+				theme: theme
+			}
+		);		
+	}
+
+	for( const fileType of ['COMPONENT', 'RUNTIME_STYLE'] ) {
 		files[fileType] = path.join(compileConfig.dir.resources, 'alloy', CONST.DIR[fileType]);
 		if (dirname) { files[fileType] = path.join(files[fileType], dirname); }
 		files[fileType] = path.join(files[fileType], viewName + '.js');
-	});
+	};
+
+	// _.each(['COMPONENT', 'RUNTIME_STYLE'], function(fileType) {
+	// 	files[fileType] = path.join(compileConfig.dir.resources, 'alloy', CONST.DIR[fileType]);
+	// 	if (dirname) { files[fileType] = path.join(files[fileType], dirname); }
+	// 	files[fileType] = path.join(files[fileType], viewName + '.js');
+	// });
 
 	// we are processing a view, not just a controller
 	if (!noView) {
@@ -1025,17 +1046,17 @@ function parseAlloyComponent(view, dir, manifest, noView, fileRestriction) {
 		CU.mergeI18N(path.join(dir, 'i18n'), path.join(compileConfig.dir.project, 'i18n'), { override: false });
 		widgetIds.push(manifest.id);
 
-		CU.copyWidgetResources(
-			[path.join(dir, CONST.DIR.ASSETS), path.join(dir, CONST.DIR.LIB)],
-			path.join(compileConfig.dir.resources, titaniumFolder),
-			manifest.id,
-			{
-				filter: new RegExp('^(?:' + otherPlatforms.join('|') + ')[\\/\\\\]'),
-				exceptions: otherPlatforms,
-				titaniumFolder: titaniumFolder,
-				theme: theme
-			}
-		);
+		// CU.copyWidgetResources(
+		// 	[path.join(dir, CONST.DIR.ASSETS), path.join(dir, CONST.DIR.LIB)],
+		// 	path.join(compileConfig.dir.resources, titaniumFolder),
+		// 	manifest.id,
+		// 	{
+		// 		filter: new RegExp('^(?:' + otherPlatforms.join('|') + ')[\\/\\\\]'),
+		// 		exceptions: otherPlatforms,
+		// 		titaniumFolder: titaniumFolder,
+		// 		theme: theme
+		// 	}
+		// );
 		targetFilepath = path.join(
 			compileConfig.dir.resources, titaniumFolder, 'alloy', CONST.DIR.WIDGET, manifest.id,
 			widgetDir, viewName + '.js'

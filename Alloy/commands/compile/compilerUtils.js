@@ -350,6 +350,8 @@ exports.generateNode = function(node, state, defaultId, isTopLevel = false, isMo
 	var parserRequire = 'default';
 	if (_.includes(fs.readdirSync(parsersDir), args.fullname + '.js')) {
 		parserRequire = args.fullname + '.js';
+	} else if( args.fullname.startsWith('turbo.') && _.includes(fs.readdirSync(parsersDir), 'Ti.UI.' + args.fullname.substring(6) + '.js')){
+		parserRequire = 'Ti.UI.' + args.fullname.substring(6) + '.js';
 	}
 
 	if ( ['Ti.UI.Script', 'Ti.UI.Style'].includes(args.fullname)) {
