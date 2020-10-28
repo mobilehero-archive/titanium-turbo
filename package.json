@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"description": "🚀 Turbo is the awesome framework for turbo charging your Titanium cross-platform native mobile app development!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -28,7 +28,7 @@
 		"@geek/jsonc": "^1.0.1",
 		"@geek/logger": "^1.0.17",
 		"@titanium/essentials": "^1.0.22",
-		"@titanium/module-copier": "^1.0.3",
+		"@titanium/module-copier": "^1.0.4",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
 		"cli-table3": "^0.6.0",
@@ -57,7 +57,7 @@
 		"lint": "eslint .",
 		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
 		"prep": "npm install --ignore-scripts && npm run list-files",
-		"prepublishOnly": "git pull && bump release-tag",
+		"prepublishOnly": "git pull && bump release",
 		"test2": "echo \"no tests\" && exit 0",
 		"pub:next": "npm publish --tag next"
 	},
