@@ -12,3 +12,10 @@ TEST-*.xml
 
 .github
 .dependabot
+
+samples
+test
+templates
+
+platforms/ios/project
+platforms/android/project

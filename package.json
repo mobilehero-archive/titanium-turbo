@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"description": "🚀 Turbo is the awesome framework for turbo charging your Titanium cross-platform native mobile app development!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -29,6 +29,7 @@
 		"@geek/logger": "^1.0.17",
 		"@titanium/essentials": "^1.0.22",
 		"@titanium/module-copier": "^1.0.4",
+		"@titanium/polyfill": "^1.0.1",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
 		"cli-table3": "^0.6.0",
@@ -55,8 +56,8 @@
 	"scripts": {
 		"test": "jake test:all",
 		"lint": "eslint .",
-		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-		"prep": "npm install --ignore-scripts && npm run list-files",
+		"list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+		"prep": "npm install --ignore-scripts && npm run list",
 		"prepublishOnly": "git pull && bump release",
 		"test2": "echo \"no tests\" && exit 0",
 		"pub:next": "npm publish --tag next"
@@ -93,7 +94,8 @@
 	"titaniumDependencies": {
 		"@geek/jsonc": "^1.0.1",
 		"@geek/logger": "^1.0.17",
-		"@titanium/essentials": "^1.0.22"
+		"@titanium/essentials": "^1.0.22",
+		"@titanium/polyfill": "^1.0.1"
 	},
 	"titanium": {
 		"type": "turbo",
