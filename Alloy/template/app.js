@@ -29,6 +29,8 @@ Ti.UI.VISIBILITY_VISIBLE = 'visible';
 
 Alloy.main = Alloy.main || Alloy.CFG.main || Titanium.App.Properties.getString('app.main','index');
 
+require('@titanium/essentials');
+
 __MAPMARKER_ALLOY_JS__
 
 const initMainController = () => {

@@ -238,12 +238,12 @@ module.exports = function(args, program) {
 	);
 
 	// Copy lodash.js
-	U.copyFileSync(
-		path.join(
-			alloyRoot, 'lib', 'alloy', 'lodash', 'lodash.js'
-		),
-		path.join(paths.resources, titaniumFolder, 'node_modules', 'lodash.js')
-	);
+	// U.copyFileSync(
+	// 	path.join(
+	// 		alloyRoot, 'lib', 'alloy', 'lodash', 'lodash.js'
+	// 	),
+	// 	path.join(paths.resources, titaniumFolder, 'node_modules', 'lodash.js')
+	// );
 
 	// copy all dependencies from package.json to resourcesPlatform directory
 	if( ! alloyConfig.file ) {
@@ -532,7 +532,7 @@ module.exports = function(args, program) {
 	index.push('/alloy/moment.js');
 	index.push('/__file_registry.json');
 	index.push('/__widget_registry.json');
-	index.push('/__dependency_registry.json');
+	// index.push('/__dependency_registry.json');
 	fs.writeJsonSync(path.join(resourcePath, '__file_registry.json'), index, { spaces: '\t'});
 
 	const widget_index = {};
@@ -561,24 +561,24 @@ module.exports = function(args, program) {
 	fs.writeJsonSync(path.join(resourcePath, '__widget_registry.json'), widget_index, { spaces: '\t'});
 
 
-	logger.info('----- CREATING DEPENDENCY INDEXES -----');
-	const dependency_index = [];
-	const package_lock_path = path.join(paths.project, 'package-lock.json');
-	if( fs.existsSync(package_lock_path)){
-		const pkg_lock = fs.readJsonSync(package_lock_path) || {};
-		// logger.debug(`🦠  pkg_lock: ${JSON.stringify(pkg_lock, null, 2)}`);
-		const dependencies = pkg_lock.dependencies || {};
-		for( const key in dependencies){
-			if( !dependencies[key].dev ){
-				dependency_index.push({
-					name: key,
-					version: dependencies[key].version,
-				});
-			}
-		}
-	}
+	// logger.info('----- CREATING DEPENDENCY INDEXES -----');
+	// const dependency_index = [];
+	// const package_lock_path = path.join(paths.project, 'package-lock.json');
+	// if( fs.existsSync(package_lock_path)){
+	// 	const pkg_lock = fs.readJsonSync(package_lock_path) || {};
+	// 	// logger.debug(`🦠  pkg_lock: ${JSON.stringify(pkg_lock, null, 2)}`);
+	// 	const dependencies = pkg_lock.dependencies || {};
+	// 	for( const key in dependencies){
+	// 		if( !dependencies[key].dev ){
+	// 			dependency_index.push({
+	// 				name: key,
+	// 				version: dependencies[key].version,
+	// 			});
+	// 		}
+	// 	}
+	// }
 	// logger.debug(`🦠  dependency_index: ${JSON.stringify(dependency_index, null, 2)}`);
-	fs.writeJsonSync(path.join(resourcePath, '__dependency_registry.json'), dependency_index, { spaces: '\t'});
+	// fs.writeJsonSync(path.join(resourcePath, '__dependency_registry.json'), dependency_index, { spaces: '\t'});
 
 	// optimize code
 	logger.info('----- OPTIMIZING -----');
@@ -1258,7 +1258,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 		}
 
 		var exceptions = [
-			'app.js',
+			// 'app.js',
 			'alloy/CFG.js',
 			'alloy/controllers/',
 			'alloy/styles/',
@@ -1267,7 +1267,7 @@ function optimizeCompiledCode(alloyConfig, paths) {
 			'alloy/underscore.js',
 			'alloy/lodash.js',
 			'alloy/widget.js',
-			'turbo.js'
+			// 'turbo.js'
 		].concat(compileConfig.optimizingExceptions || []);
 
 		// widget controllers are already optimized. It should be listed in exceptions.

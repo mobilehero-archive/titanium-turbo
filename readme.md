@@ -66,13 +66,24 @@ This version of Titanium Turbo is based on **`Titanium Alloy 1.15.1`**
 
 Create new Titanium Turbo project
 
-```
+```bash
 npx @geek/mobile app:create my-new-app
 ```
 
 <image align="left" src="https://cdn.secure-api.org/images/02_circled_100.png" height="30" width="30" />
 
-Build or Run app as you would normally.
+Build and run your app!
+
+```bash
+npm run ios
+```
+
+> or...
+
+```bash
+npm run android
+```
+
 
 -----------
 
@@ -80,30 +91,70 @@ Build or Run app as you would normally.
 
 <image align="left" src="https://cdn.secure-api.org/images/01_circled_100.png" height="30" width="30" />
 
-Create new Titanium Alloy project
+Install Axway AMPLIFY Titanium and Alloy CLI
+
+```bash
+npm install -g titanium alloy
+```
+
 
 <image align="left" src="https://cdn.secure-api.org/images/02_circled_100.png" height="30" width="30" />
+
+Create new Titanium project
+
+```bash
+ti create --type app --platforms all --name my-new-app
+```
+
+<image align="left" src="https://cdn.secure-api.org/images/03_circled_100.png" height="30" width="30" />
+
+Add Titanium Alloy to project
+
+```bash
+cd my-new-app
+alloy new
+```
+
+<image align="left" src="https://cdn.secure-api.org/images/04_circled_100.png" height="30" width="30" />
+
+Create default `package.json` file
+
+```bash
+npm init -y
+```
+
+<image align="left" src="https://cdn.secure-api.org/images/05_circled_100.png" height="30" width="30" />
 
 
 Install `Titanium Turbo` in root of project
 
-```
-npm install --save-dev @titanium/turbo
+```bash
+npm install @titanium/turbo
 ```
 
-<image align="left" src="https://cdn.secure-api.org/images/03_circled_100.png" height="30" width="30" />
+<image align="left" src="https://cdn.secure-api.org/images/06_circled_100.png" height="30" width="30" />
 
 
 Install `Titanium Turbo Plugin` in root of project
 
 ```
-npm install --save-dev @titanium/plugin-turbo
+npm install @titanium/plugin-turbo
 ```
 
-<image align="left" src="https://cdn.secure-api.org/images/04_circled_100.png" height="30" width="30" />
+<image align="left" src="https://cdn.secure-api.org/images/07_circled_100.png" height="30" width="30" />
 
 
-Build or Run app as you would normally.
+Build and run your app!
+
+```bash
+ti build --platform ios --log-level trace
+```
+
+> or...
+
+```bash
+ti build --platform android --log-level trace
+```
 
 -----------
 

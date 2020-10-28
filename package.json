@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.0.15",
+	"version": "2.1.0",
 	"description": "🚀 Turbo is the awesome framework for turbo charging your Titanium cross-platform native mobile app development!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -20,13 +20,15 @@
 	"preferGlobal": false,
 	"dependencies": {
 		"@babel/code-frame": "^7.10.4",
-		"@babel/core": "^7.12.1",
+		"@babel/core": "^7.12.3",
 		"@babel/generator": "^7.12.1",
-		"@babel/parser": "^7.12.1",
+		"@babel/parser": "^7.12.3",
 		"@babel/traverse": "^7.12.1",
 		"@babel/types": "^7.12.1",
-		"@geek/jsonc": "0.0.21",
-		"@titanium/module-copier": "0.0.28",
+		"@geek/jsonc": "^1.0.1",
+		"@geek/logger": "^1.0.17",
+		"@titanium/essentials": "^1.0.22",
+		"@titanium/module-copier": "^1.0.2",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
 		"cli-table3": "^0.6.0",
@@ -40,7 +42,7 @@
 		"moment": "^2.29.1",
 		"node.extend": "^2.0.2",
 		"pkginfo": "0.4.1",
-		"resolve": "^1.17.0",
+		"resolve": "^1.18.1",
 		"source-map": "^0.7.3",
 		"walk-sync": "^2.2.0",
 		"xml2tss": "0.0.5",
@@ -55,11 +57,11 @@
 		"lint": "eslint .",
 		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
 		"prep": "npm install --ignore-scripts && npm run list-files",
-		"prepublishOnly2": "git pull && bump",
+		"prepublishOnly": "git pull && bump release-tag",
 		"test2": "echo \"no tests\" && exit 0",
 		"pub:next": "npm publish --tag next"
 	},
-	"main": "./Alloy/alloy",
+	"main": "turbo/turbo.js",
 	"engines": {
 		"node": ">=12"
 	},
@@ -69,7 +71,7 @@
 		"@seadub/danger-plugin-junit": "^0.2.0",
 		"danger": "^10.5.0",
 		"diff": "^4.0.2",
-		"eslint": "^7.11.0",
+		"eslint": "^7.12.1",
 		"jake": "^8.1.1",
 		"mkdirp": "^0.5.5"
 	},
@@ -88,7 +90,17 @@
 		"turbo",
 		"brenton-house"
 	],
+	"titaniumDependencies": {
+		"@geek/jsonc": "^1.0.1",
+		"@geek/logger": "^1.0.17",
+		"@titanium/essentials": "^1.0.22"
+	},
 	"titanium": {
-		"ignore": true
+		"type": "turbo",
+		"dependencies": "titaniumDependencies",
+		"aliases": {
+			"lodash": "./turbo/lodash.js",
+			"moment": "/alloy/moment.js"
+		}
 	}
 }

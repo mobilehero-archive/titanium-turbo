@@ -147,8 +147,11 @@ if (OS_IOS) {
 const file_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__file_registry.json');
 exports.file_registry = JSON.parse(file_registry_resource.read().text);
 
-const dependency_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__dependency_registry.json');
-exports.dependency_registry = JSON.parse(dependency_registry_resource.read().text);
+// const dependency_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__dependency_registry.json');
+// exports.dependency_registry = JSON.parse(dependency_registry_resource.read().text);
+
+const package_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__package_registry.json');
+exports.package_registry = JSON.parse(package_registry_resource.read().text);
 
 const widget_registry_resource = Ti.Filesystem.getFile(Titanium.Filesystem.resourcesDirectory, '__widget_registry.json');
 exports.widget_registry = JSON.parse(widget_registry_resource.read().text);
