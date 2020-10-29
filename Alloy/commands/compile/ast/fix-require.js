@@ -4,7 +4,6 @@ let file_registry = [];
 let package_registry = [];
 const _ = require('lodash');
 const logger = console;
-// const require_regex = /^((?:@[^/]*\/[^/\n\r]*)|(?:[^/\n\r]*))/g;
 const require_regex = /^((?:@[^/]*\/[^/\n\r]*)|(?:[^/\n\r]*))(.*)/;
 
 const findModuleFile = ({ original, directory, extra }) => {
