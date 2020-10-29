@@ -179,13 +179,13 @@ module.exports = function(args, program) {
 	logger.debug('');
 
 	// wipe the controllers, models, and widgets
-	logger.debug('----- CLEANING RESOURCES -----');
-	var orphanage = new Orphanage(paths.project, buildPlatform, {
-		theme: theme,
-		adapters: compileConfig.adapters
-	});
-	orphanage.clean();
-	logger.debug('');
+	// logger.debug('----- CLEANING RESOURCES -----');
+	// var orphanage = new Orphanage(paths.project, buildPlatform, {
+	// 	theme: theme,
+	// 	adapters: compileConfig.adapters
+	// });
+	// orphanage.clean();
+	// logger.debug('');
 
 	// process project makefiles
 	compilerMakeFile = new CompilerMakeFile();
