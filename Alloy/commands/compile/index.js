@@ -420,7 +420,7 @@ module.exports = function(args, program) {
 	});
 	logger.debug('');
 
-	_.forEach(['babel.config.js', '.babelrc.js', '.babelrc'], filename => {
+	_.forEach(['babel.config.json', 'babel.config.js', '.babelrc.js', '.babelrc'], filename => {
 		if (fs.existsSync(path.join(paths.project, filename))) {
 			logger.info(`Copying ${filename} to ${path.join(paths.resources, titaniumFolder, filename)}`);
 			U.copyFileSync(path.join(paths.project, filename), path.join(paths.resources, titaniumFolder, filename));

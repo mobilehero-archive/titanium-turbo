@@ -56,6 +56,7 @@ module.exports = ({ types: t }) => {
 			if( filepath && filepath.startsWith(config.dir.resourcesPlatform)){
 				filename = filepath.substring(config.dir.resourcesPlatform.length);
 				dirname = path.dirname(filename);
+				logger.debug(`🦠 fix-require: ${filename}`);
 			}
 
 		},

@@ -135,6 +135,7 @@ exports.generateCodeAndSourceMap = function(generator, compileConfig) {
 		// we produce our own source maps and we want the lines to stay as we mapped them
 		options.retainLines = true;
 	}
+	options.filename = outfile;
 	var outputResult = babel.transformFromAstSync(ast, genMap.code, options);
 
 	// produce the source map and embed the original source (so the template source can be passed along)

@@ -2,6 +2,24 @@
 
 Titanium Turbo is a fork of Titanium Alloy that adds some enhancements and customizations for rapid development.
 
+## [2.1.6] - 2020-10-29
+
+### Updated
+
+- Fixed issue where babel was not picking up files to ignore.  Turbo now supports `babel.config.json` in root of project.
+
+## [2.1.5] - 2020-10-28
+
+### Added
+
+- `Turbo` now includes the following packages by default so it is not necessary to add these to your mobile projects:
+  - `@titanium/essentials`
+  - `@titanium/polyfill`
+  - `@geek/logger`
+  - `@geek/jsonc`
+- `Turbo` now supports defining module aliases in your package.json file.
+- `Turbo` will now resolve ALL static require statements at compile-time!  This not only makes things faster at runtime but also solves many existing issues with both LiveView and TiShadow (neither of which support node_module package resolution).
+
 ## [2.0.3] - 2020-10-12
 
 ### Added 
