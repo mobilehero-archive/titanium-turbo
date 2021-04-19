@@ -44,7 +44,7 @@
 		"source-map": "^0.7.3",
 		"walk-sync": "^2.2.0",
 		"xml2tss": "0.0.5",
-		"xmldom": "^0.1.31"
+		"xmldom": "^0.6.0"
 	},
 	"license": "Apache-2.0",
 	"bin": {
