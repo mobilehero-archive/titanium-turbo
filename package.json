@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.2.19",
+	"version": "2.2.20",
 	"description": "🚀 Axway Amplify - Turbo is the awesome framework for turbo charging your Appcelerator Titanium cross-platform native mobile app development!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -20,32 +20,31 @@
 	"preferGlobal": false,
 	"dependencies": {
 		"@babel/code-frame": "^7.16.7",
-		"@babel/core": "^7.12.1",
-		"@babel/generator": "^7.12.1",
-		"@babel/parser": "^7.15.3",
+		"@babel/core": "^7.16.7",
+		"@babel/generator": "^7.16.7",
+		"@babel/parser": "^7.16.7",
 		"@babel/traverse": "^7.16.7",
 		"@babel/types": "^7.16.7",
 		"@geek/jsonc": "1.0.4",
-		"@titanium/essentials": "^1.0.31",
-		"@titanium/module-copier": "1.0.9",
-		"async": "^2.6.3",
+		"@titanium/essentials": "^1.0.34",
+		"@titanium/module-copier": "1.0.12",
+		"@xmldom/xmldom": "^0.8.0",
+		"async": "^3.2.2",
 		"chmodr": "^1.2.0",
 		"cli-table3": "^0.6.0",
 		"colors": "^1.4.0",
-		"commander": "^2.20.3",
+		"commander": "^8.3.0",
 		"ejs": "3.1.6",
 		"fs-extra": "^10.0.0",
 		"global-paths": "^1.0.0",
-		"jsonlint": "1.6.3",
 		"lodash": "^4.17.21",
 		"moment": "^2.29.1",
 		"node.extend": "^2.0.2",
 		"pkginfo": "0.4.1",
 		"resolve": "^1.21.0",
 		"source-map": "^0.7.3",
-		"walk-sync": "^2.2.0",
-		"xml2tss": "0.0.5",
-		"xmldom": "^0.6.0"
+		"walk-sync": "^3.0.0",
+		"xml2tss": "0.0.5"
 	},
 	"license": "Apache-2.0",
 	"bin": {
@@ -67,13 +66,13 @@
 	"homepage": "https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de",
 	"devDependencies": {
 		"@seadub/danger-plugin-dependencies": "^1.0.0",
-		"@seadub/danger-plugin-eslint": "^2.0.0",
+		"@seadub/danger-plugin-eslint": "^3.0.1",
 		"@seadub/danger-plugin-junit": "^0.3.0",
 		"danger": "^10.7.1",
 		"diff": "^5.0.0",
-		"eslint": "^7.11.0",
-		"jake": "^8.1.1",
-		"mkdirp": "^0.5.5"
+		"eslint": "^8.6.0",
+		"jake": "^10.8.2",
+		"mkdirp": "^1.0.4"
 	},
 	"keywords": [
 		"appcelerator",
