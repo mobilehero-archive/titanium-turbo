@@ -36,7 +36,7 @@
 		"fs-extra": "^9.0.1",
 		"global-paths": "^1.0.0",
 		"jsonlint": "1.6.3",
-		"lodash": "^4.17.20",
+		"lodash": "^4.17.21",
 		"moment": "^2.29.1",
 		"node.extend": "^2.0.2",
 		"pkginfo": "0.4.1",
