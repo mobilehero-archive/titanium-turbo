@@ -71,7 +71,7 @@
 		"@seadub/danger-plugin-junit": "^0.3.0",
 		"danger": "^10.7.1",
 		"diff": "^5.0.0",
-		"eslint": "^7.11.0",
+		"eslint": "^8.6.0",
 		"jake": "^8.1.1",
 		"mkdirp": "^0.5.5"
 	},
