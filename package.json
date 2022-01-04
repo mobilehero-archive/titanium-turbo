@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.2.8",
+	"version": "2.2.9",
 	"description": "🚀 Axway Amplify - Turbo is the awesome framework for turbo charging your Appcelerator Titanium cross-platform native mobile app development!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
@@ -86,6 +86,7 @@
 		"android",
 		"appc-client",
 		"turbo",
+		"axway-amplify",
 		"brenton-house"
 	],
 	"titanium": {
