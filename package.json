@@ -26,7 +26,7 @@
 		"@babel/traverse": "^7.16.7",
 		"@babel/types": "^7.12.1",
 		"@geek/jsonc": "0.0.21",
-		"@titanium/module-copier": "0.0.28",
+		"@titanium/module-copier": "1.0.9",
 		"async": "^2.6.3",
 		"chmodr": "^1.2.0",
 		"cli-table3": "^0.6.0",
