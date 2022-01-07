@@ -1,7 +1,7 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.2.22",
-	"description": "🚀 Axway Amplify - Turbo is the awesome framework for turbo charging your Appcelerator Titanium cross-platform native mobile app development!",
+	"version": "2.2.23",
+	"description": "🚀 Axway Amplify tool to use Turbo for turbo charging your Appcelerator Titanium SDK Framework!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
 		{
@@ -11,11 +11,11 @@
 		}
 	],
 	"bugs": {
-		"url": "https://github.com/brentonhouse/titanium-turbo/issues"
+		"url": "https://github.com/mobilehero-archive/titanium-turbo/issues"
 	},
 	"repository": {
 		"type": "git",
-		"url": "github:brentonhouse/titanium-turbo"
+		"url": "github:mobilehero-archive/titanium-turbo"
 	},
 	"preferGlobal": false,
 	"dependencies": {
@@ -25,9 +25,16 @@
 		"@babel/parser": "^7.16.7",
 		"@babel/traverse": "^7.16.7",
 		"@babel/types": "^7.16.7",
-		"@geek/jsonc": "1.0.4",
-		"@titanium/essentials": "^1.0.34",
-		"@titanium/module-copier": "1.0.12",
+		"@geek/cache": "^1.0.2",
+		"@geek/config": "^0.2.4",
+		"@geek/dotenv": "^0.0.9",
+		"@geek/jsonc": "^1.0.4",
+		"@geek/jwt": "^1.0.1",
+		"@geek/logger": "^1.0.18",
+		"@geek/retry": "^1.0.0",
+		"@geek/spawn": "^0.0.3",
+		"@titanium/essentials": "^1.0.36",
+		"@titanium/module-copier": "1.0.13",
 		"@xmldom/xmldom": "^0.8.0",
 		"async": "^3.2.2",
 		"chmodr": "^1.2.0",
@@ -51,14 +58,14 @@
 		"turbo2": "bin/alloy"
 	},
 	"scripts": {
-		"test": "npm run prep",
 		"test2": "jake test:all",
-		"lint": "eslint .",
-		"list-files": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
-		"prep": "npm install --ignore-scripts && npm run list-files",
+		"pub:next": "npm publish --tag next",
+		"lint": "eslint . --fix",
+		"list": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+		"prep": "npm install --ignore-scripts",
+		"test": "npm run prep",
 		"prepublishOnly": "git pull && npm test && bump insane",
-		"prepublishOnly2": "git pull && npm test && npm audit fix && bump insane",
-		"pub:next": "npm publish --tag next"
+		"prepublishOnly2": "git pull && npm test && npm audit fix && bump insane"
 	},
 	"main": "./Alloy/alloy",
 	"engines": {
@@ -66,10 +73,11 @@
 	},
 	"homepage": "https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de",
 	"devDependencies": {
+		"@geek/eslint-config": "^1.0.3",
 		"@seadub/danger-plugin-dependencies": "^1.0.0",
 		"@seadub/danger-plugin-eslint": "^3.0.1",
 		"@seadub/danger-plugin-junit": "^0.3.0",
-		"danger": "^10.7.1",
+		"danger": "^10.8.0",
 		"diff": "^5.0.0",
 		"eslint": "^8.6.0",
 		"jake": "^10.8.2",
