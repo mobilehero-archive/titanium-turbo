@@ -1,4 +1,4 @@
-var colors = require('colors'),
+var colors = require('@titanium/colors'),
 	fs = require('fs'),
 	walkSync = require('walk-sync'),
 	path = require('path'),

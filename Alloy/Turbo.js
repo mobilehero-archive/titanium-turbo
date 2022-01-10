@@ -5,7 +5,7 @@
  */
 
 const _ = require('lodash');
-const colors = require('colors');
+const colors = require('@titanium/colors');
 const CONST = require('./common/constants');
 const fs = require('fs');
 const logger = require('./logger');

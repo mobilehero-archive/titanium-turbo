@@ -1,10 +1,14 @@
 [//]: # (header-start)
 
 <a href="https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de">
-	<h1 align="center">
-	🪦 RIP Axway Amplify Titanium (2010 - 2022)
-	</h1>
+<h1 align="center">
+	Axway Amplify End-of-Life Announcement
+</h1>
+<h2 align="center">
+	👇 &nbsp; See notes below  &nbsp; 👇
+</h2>	
 </a>
+
 <a href="https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de">
 	<p align="center">
 		<img src="https://cdn.secure-api.org/images/RIP-Axway-Amplify-Titanium.png" alt="RIP Axway Amplify Titanium (2010 - 2022)" width="80%" />
@@ -15,12 +19,25 @@
 		🪦 &nbsp; RIP Axway Amplify Titanium (2010 - 2022)
 	</p>
 </a>
-<p>&nbsp;</p>
 <a href="https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de">
-	<h2 align="center">
-		🛑 This project is no longer being maintained 🛑
-	</h2>
+	<p align="center">
+		🪦 &nbsp; RIP Axway Amplify Cloud Services (2012 - 2022)
+	</p>
 </a>
+<hr>
+<a href="https://brenton.house/saying-goodbye-to-axway-amplify-titanium-31a44f3671de">
+	<h4 align="center">
+🛑 &nbsp;&nbsp; All products affected by the announcements will not be supported by Axway effective their EOL dates in 2022.
+</h4>
+
+<h4 align="center">
+Some Open-Source versions of Axway products will live on after End-of-Life (EOL) Axway Amplify product announcements.  However, some products are closed-source and will NOT continue after the shut down in 2022.  
+	</h4>
+</a>
+<p>&nbsp;</p>
+
+> 👉 &nbsp;&nbsp; Stay tuned for more info as plans are being made to save the Titanium project and move it under the control of a independent group of developers.
+
 <p>&nbsp;</p>
 <hr>
 <p>&nbsp;</p>
@@ -47,20 +64,15 @@ The awesome framework for turbo charging your Titanium cross-platform native mob
 
 -----------
 
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Check%20out%20Titanium%20Turbo%20on%20GitHub!!%20%20Seriously%20fast%20cross-platform%20native%20mobile%20app%20development!&url=https://github.com/brentonhouse/turbo&via=🚀%20Titanium%20Turbo&hashtags=axwaydev)
-![GitHub stars](https://img.shields.io/github/stars/brentonhouse/titanium-turbo?style=social)
-![GitHub forks](https://img.shields.io/github/forks/brentonhouse/titanium-turbo?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/brentonhouse/titanium-turbo?style=social)
-[![@titanium/turbo](https://img.shields.io/npm/v/@titanium/turbo.png)](https://www.npmjs.com/package/@titanium/turbo)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=brentonhouse/titanium-turbo)](https://dependabot.com)
-![GitHub PRs](https://img.shields.io/badge/PRs-welcome-blue.svg)
-![GitHub license](https://img.shields.io/badge/license-Apache_2.0-blue.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/brentonhouse/titanium-turbo.svg)](https://github.com/brentonhouse/titanium-turbo/graphs/contributors/)
-[![npm](https://img.shields.io/npm/dm/@titanium/turbo.svg)]()
+[![@titanium/turbo version](https://img.shields.io/npm/v/@titanium/turbo.png)](https://www.npmjs.com/package/@titanium/turbo)
+[![@titanium/turbo downloads](https://img.shields.io/npm/dm/@titanium/turbo.svg)](https://www.npmjs.com/package/@titanium/turbo)
+[![@titanium/turbo dependencies](https://img.shields.io/librariesio/release/npm/@titanium/turbo.svg)](https://www.npmjs.com/package/@titanium/turbo)
 
 
-> _**ℹ️ Disclaimer:**    
-> This project is not an official Axway product.  It is managed by [Brenton House](https://brenton.house) using open-source modules, libraries, and tools.  Try it out and [let us know what you think](https://github.com/brentonhouse/titanium-turbo/issues)!_
+
+
+> _**ℹ️ &nbsp; Disclaimer:**    
+> This project is not an official Axway product.  It is managed by the open-source community using open-source modules, libraries, and tools.  Try it out and [let us know what you think](https://github.com/mobilehero-archive/titanium-turbo/issues)!_
 
 -----------
   
