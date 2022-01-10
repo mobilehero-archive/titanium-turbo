@@ -1,5 +1,5 @@
 var logger = require('../../logger'),
-	colors = require('colors');
+	colors = require('@titanium/colors');
 
 function CompilerMakeFile() {
 	var handlers = {};

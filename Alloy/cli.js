@@ -6,7 +6,7 @@
 const program = require('commander');
 const path = require('path');
 const fs = require('fs');
-const colors = require('colors');
+const colors = require('@titanium/colors');
 
 // patch to remove the warning in node >=0.8
 path.existsSync = fs.existsSync || path.existsSync;

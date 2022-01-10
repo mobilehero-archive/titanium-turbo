@@ -1,5 +1,5 @@
 var U = require('../../utils'),
-	colors = require('colors'),
+	colors = require('@titanium/colors'),
 	path = require('path'),
 	os = require('os'),
 	fs = require('fs-extra'),

@@ -1,4 +1,4 @@
-var colors = require('colors'),
+var colors = require('@titanium/colors'),
 	U = require('./utils');
 
 exports.TRACE = 4;
