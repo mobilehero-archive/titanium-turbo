@@ -1,6 +1,6 @@
 {
 	"name": "@titanium/turbo",
-	"version": "2.2.63",
+	"version": "2.2.64",
 	"description": "🚀 Axway Amplify tool to use Turbo for turbo charging your Appcelerator Titanium SDK Framework!",
 	"author": "Axway, Inc. <info@axway.com>",
 	"maintainers": [
