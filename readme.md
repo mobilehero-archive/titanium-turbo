@@ -1,8 +1,7 @@
 [//]: # (header-start)
 
-
 <h1 align="center">
-	<a href="https://blog.axway.com/mobile-apps/prepare-your-apps-for-appcelerator-end-of-support">
+	<a href="https://blog.axway.com/mobile-apps/changes-to-application-development-services">
 		Preparing for end of Axway
 	</a>	
 </h1>
@@ -32,13 +31,12 @@
 </p>
 
 <hr>
-<a href="https://blog.axway.com/mobile-apps/prepare-your-apps-for-appcelerator-end-of-support">
-	<h4 align="center">
-🛑 &nbsp;&nbsp; <a href="https://blog.axway.com/mobile-apps/prepare-your-apps-for-appcelerator-end-of-support">Axway has already shut down support</a> for most of their Amplify products related to mobile and cloud. 
+<h4 align="center">
+🛑 &nbsp;&nbsp; <a href="https://blog.axway.com/mobile-apps/prepare-your-apps-for-appcelerator-end-of-support">Axway support for Amplify products has ended</a> for most products related to mobile and cloud. 
 </h4>
 
 <h4 align="center">
-A few of the open-source versions of Axway Amplify products will live on after Axway Amplify End-of-Life (EOL) announcements.  However, all closed-source projects and most open-source projects are now dead.  
+A few of the open-source versions of Axway Amplify products will live on after <a href="">Axway Amplify End-of-Life</a> (EOL) announcements.  However, all closed-source projects and most open-source projects are now dead.  
 	</h4>
 
 <p>&nbsp;</p>
